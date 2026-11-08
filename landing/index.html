@@ -127,14 +127,15 @@ section{padding:128px 0;position:relative}
 @media (max-width:860px){.nav ul{display:none}}
 
 /* Hero */
-.hero{min-height:100svh;padding:140px 0 300px;background:var(--abismo);color:var(--niebla);overflow:hidden;text-align:center}
-.hero > .wrap{position:relative;z-index:2}
-.hero h1{font-size:clamp(3rem,7.4vw,6rem);font-weight:300;letter-spacing:-.05em;line-height:.98;margin:26px auto 26px;max-width:12ch}
+/* Hero fits one screen: headline and spacing scale with viewport height so the sponsor strip stays above the fold */
+.hero{position:relative;min-height:100svh;padding:clamp(64px,7svh,80px) 0 clamp(120px,17svh,170px);display:flex;flex-direction:column;justify-content:center;background:var(--abismo);color:var(--niebla);overflow:hidden;text-align:center}
+.hero > .wrap{position:relative;z-index:2;width:100%}
+.hero h1{font-size:clamp(2.4rem,min(7.4vw,8.4svh),6rem);font-weight:300;letter-spacing:-.05em;line-height:.98;margin:clamp(14px,2.6svh,26px) auto;max-width:12ch}
 .hero h1 em{font-style:normal;color:var(--lima)}
-.hero .lead{margin:0 auto 36px;color:var(--pizarra);font-size:1.15rem;text-shadow:0 0 14px var(--abismo),0 0 4px var(--abismo)}
+.hero .lead{margin:0 auto clamp(20px,4svh,36px);color:var(--pizarra);font-size:1.15rem;text-shadow:0 0 14px var(--abismo),0 0 4px var(--abismo)}
 .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
 .horizon{position:absolute;left:0;right:0;bottom:0;height:520px;z-index:1;pointer-events:none}
-.horizon img{position:absolute;left:50%;top:-24%;transform:translateX(-50%);width:min(1200px,170vw);max-width:none;mix-blend-mode:screen;opacity:.9}
+.horizon img{position:absolute;left:50%;top:-34%;transform:translateX(-50%);width:min(1020px,144.5vw);max-width:none;mix-blend-mode:screen;opacity:.9}
 .horizon::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,11,24,0) 0%,rgba(4,11,24,0) 55%,var(--abismo) 96%);pointer-events:none}
 .hero-backers{position:absolute;left:0;right:0;bottom:34px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px}
 .hero-backers p{font-size:.8rem;color:var(--pizarra)}
@@ -142,7 +143,7 @@ section{padding:128px 0;position:relative}
 .hero-backers li{display:flex;align-items:center;padding:0 22px;height:26px}
 .hero-backers li+li{border-left:1px solid var(--line-dark)}
 .hero-backers img{height:22px;width:auto;filter:brightness(0) invert(1);opacity:.7}
-@media (max-width:700px){.hero{padding-bottom:280px}.horizon{height:400px}.hero-backers li{padding:0 12px}.hero-backers img{height:15px}.hero-backers li:nth-child(n+5){display:none}}
+@media (max-width:700px){.hero{padding:80px 0 150px}.hero .lead{font-size:1rem}.horizon{height:400px}.hero-backers li{padding:0 12px}.hero-backers img{height:15px}.hero-backers li:nth-child(n+5){display:none}}
 
 /* Manifesto: words light up on scroll */
 .manifesto{font-family:var(--font-head);font-size:clamp(1.9rem,4.2vw,3.3rem);letter-spacing:-.035em;line-height:1.12;font-weight:400}
