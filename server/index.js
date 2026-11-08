@@ -7,6 +7,7 @@ import * as E from './engine.js';
 import { ask } from './advisor.js';
 import { ALL_RULES, COUNTRIES, TREATIES } from './rules/countries.js';
 import { toEurCents, FX_SOURCE } from './fx.js';
+import * as attachments from './attachments.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SEED = JSON.parse(readFileSync(path.join(__dirname, 'data', 'ana.json'), 'utf8'));
@@ -39,7 +40,7 @@ app.get('/api/state', wrap(() => ({
   countries: COUNTRIES,
   clients: db.clients,
   trips: db.trips,
-  invoices: db.invoices.map((i) => ({ ...i, client: db.clients.find((c) => c.id === i.client_id), eur_cents: E.invoiceEurCents(i), reserve_eur_cents: Math.round(E.invoiceEurCents(i) * i.reserve_rate) })),
+  invoices: db.invoices.map((i) => ({ ...i, client: db.clients.find((c) => c.id === i.client_id), eur_cents: E.invoiceEurCents(i), reserve_eur_cents: Math.round(E.invoiceEurCents(i) * i.reserve_rate), attachments: attachments.list(i.id) })),
   expenses: db.expenses.map((e) => ({ ...e, eur_cents: toEurCents(e.amount_cents, e.currency) })),
   documents: db.documents,
   services: { elevenlabs_key: !!XI_KEY, elevenlabs_agent: !!AGENT_ID },
@@ -84,7 +85,34 @@ app.post('/api/referral', wrap((req) => {
   return { ok: true, referral: r, text: 'Un asesor colaborador te escribirá en menos de 48 h laborables.' };
 }));
 
-app.post('/api/reset', wrap(() => { db = structuredClone(SEED); return { ok: true }; }));
+app.post('/api/reset', wrap(() => { db = structuredClone(SEED); attachments.reset(); return { ok: true }; }));
+
+// ---------------------------------------------------------------------------
+// Invoice photos. Upload = raw image body; file name in X-File-Name (URI-encoded).
+// ---------------------------------------------------------------------------
+const findInvoice = (id) => db.invoices.find((i) => i.id === id);
+
+app.get('/api/invoices/:id/attachments', wrap((req) => {
+  if (!findInvoice(req.params.id)) throw new Error('Factura no encontrada');
+  return attachments.list(req.params.id);
+}));
+
+app.post('/api/invoices/:id/attachments', express.raw({ type: 'image/*', limit: attachments.MAX_BYTES }), wrap((req) => {
+  if (!findInvoice(req.params.id)) throw new Error('Factura no encontrada');
+  const type = String(req.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
+  let name = 'foto';
+  try { name = decodeURIComponent(String(req.headers['x-file-name'] || 'foto')); } catch { /* keep default */ }
+  return attachments.add(req.params.id, Buffer.isBuffer(req.body) ? req.body : null, type, name);
+}));
+
+app.delete('/api/invoices/:id/attachments/:aid', wrap((req) => attachments.remove(req.params.id, req.params.aid)));
+
+app.get('/api/attachments/:aid', (req, res) => {
+  const a = attachments.find(req.params.aid);
+  if (!a) return res.status(404).json({ error: 'Foto no encontrada' });
+  res.set({ 'Content-Type': a.type, 'Cache-Control': 'private, max-age=86400', 'X-Content-Type-Options': 'nosniff' });
+  res.sendFile(a.path);
+});
 
 // ---------------------------------------------------------------------------
 // ElevenLabs server tools (webhooks). Configure the agent with these URLs.
@@ -180,6 +208,14 @@ if (existsSync(dist)) {
   app.get(/^\/(?!api\/).*/, (_req, res) => res.sendFile(path.join(dist, 'index.html')));
 }
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Rumbo API on http://localhost:${PORT}  (demo date ${DEMO_DATE}, ElevenLabs agent: ${AGENT_ID ? 'yes' : 'local mode'})`);
+});
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n[api] El puerto ${PORT} ya está en uso: probablemente hay otro "npm run dev" abierto.`);
+    console.error('[api] Ciérralo (Ctrl+C en su terminal) y vuelve a lanzar "npm run dev".\n');
+    process.exit(1);
+  }
+  throw err;
 });

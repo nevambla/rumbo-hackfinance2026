@@ -95,18 +95,18 @@ export default function Expenses({ state, refresh, notify }) {
       <section className="card">
         <h2>Gastos registrados</h2>
         <div className="table-wrap">
-          <table>
+          <table className="responsive">
             <thead><tr><th>Fecha</th><th>Concepto</th><th>País</th><th>Categoría</th><th className="num">Importe</th><th className="num">En EUR</th><th>Deducible</th></tr></thead>
             <tbody>
               {expenses.map((e) => (
                 <tr key={e.id} className={e.id === flashId ? 'flash' : ''}>
-                  <td className="nowrap">{date(e.date)}</td>
-                  <td>{e.concept}</td>
-                  <td><Country code={e.country} /></td>
-                  <td>{e.category}</td>
-                  <td className="num">{money(e.amount_cents, e.currency)}</td>
-                  <td className="num">{eur(e.eur_cents)}</td>
-                  <td className={e.deductible ? '' : 'warn-text'}>{e.deductible ? 'Sí' : 'Revisar'}</td>
+                  <td data-label="Fecha" className="nowrap">{date(e.date)}</td>
+                  <td className="cell-title">{e.concept}</td>
+                  <td data-label="País"><Country code={e.country} /></td>
+                  <td data-label="Categoría">{e.category}</td>
+                  <td data-label="Importe" className="num">{money(e.amount_cents, e.currency)}</td>
+                  <td data-label="En EUR" className="num">{eur(e.eur_cents)}</td>
+                  <td data-label="Deducible" className={e.deductible ? '' : 'warn-text'}>{e.deductible ? 'Sí' : 'Revisar'}</td>
                 </tr>
               ))}
             </tbody>

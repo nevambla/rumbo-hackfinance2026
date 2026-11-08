@@ -67,14 +67,14 @@ export default function Dashboard({ state, days, residency, alerts, reserve, go 
             <span className="label">Días en {here.name} en {days.year}</span>
             <div className="hero-num">
               <strong>{here.days}</strong>
-              <span>de {here.threshold}</span>
+              <span>días · te quedan <em>{here.days_left}</em></span>
             </div>
             <div className="group">
-              <div className="bar" role="img" aria-label={`${here.days} de ${here.threshold} días; con tu plan ${here.rule_projected_days}`}>
-                <span className="plan" style={{ width: `${Math.min(100, (here.rule_projected_days / needed) * 100)}%`, background: COUNTRY_COLORS[here.country] }} />
-                <span style={{ width: `${Math.min(100, (here.rule_days / needed) * 100)}%`, background: COUNTRY_COLORS[here.country] }} />
+              <div className="meter" style={{ '--t': `${(needed / 365) * 100}%` }} data-t={needed} role="img" aria-label={`${here.days} días de ${needed} para ser residente; con tu plan ${here.rule_projected_days}`}>
+                <span className="plan" style={{ width: `${Math.min(100, (here.rule_projected_days / 365) * 100)}%` }} />
+                <span style={{ width: `${Math.min(100, (here.rule_days / 365) * 100)}%` }} />
               </div>
-              <div className="hero-scale"><span>1 ene</span><span>Residente a partir del día {needed}</span></div>
+              <div className="hero-scale"><span>1 ene</span><span>31 dic</span></div>
             </div>
             <p className="hero-text">
               {here.crosses_projected
@@ -103,7 +103,7 @@ export default function Dashboard({ state, days, residency, alerts, reserve, go 
           <span className="label">Apartado para impuestos</span>
           <div className="big">{eur(reserve.reserved)}</div>
           <p className="small muted">de {eur(reserve.estimated_due)} estimados si tributas en {state.countries[reserve.residency_country].name}</p>
-          <div className="bar"><span style={{ width: `${Math.min(100, (reserve.reserved / reserve.estimated_due) * 100)}%`, background: 'var(--accent)' }} /></div>
+          <div className="bar"><span style={{ width: `${Math.min(100, (reserve.reserved / reserve.estimated_due) * 100)}%`, background: 'var(--cian)' }} /></div>
           <button className="link small" onClick={() => go('aparta')}>Ver facturas <Icon name="arrowRight" size={14} /></button>
         </div>
         <div className="card">
@@ -149,16 +149,16 @@ export default function Dashboard({ state, days, residency, alerts, reserve, go 
       <section className="card">
         <h2>Viajes</h2>
         <div className="table-wrap">
-          <table>
+          <table className="responsive">
             <thead><tr><th>País</th><th>Ciudad</th><th>Desde</th><th>Hasta</th><th>Origen del dato</th></tr></thead>
             <tbody>
               {trips.map((t) => (
                 <tr key={t.id} className={t.start > days.as_of ? 'muted' : ''}>
-                  <td><Country code={t.country} /></td>
-                  <td>{t.city}{t.start <= days.as_of && t.end >= days.as_of ? ' (ahora)' : ''}</td>
-                  <td>{date(t.start < `${days.year}-01-01` ? `${days.year}-01-01` : t.start)}</td>
-                  <td>{date(t.end)}</td>
-                  <td>{t.source}</td>
+                  <td className="cell-title"><Country code={t.country} /> <span className="mobile-only">· {t.city}</span></td>
+                  <td data-label="Ciudad" className="desktop-only">{t.city}{t.start <= days.as_of && t.end >= days.as_of ? ' (ahora)' : ''}</td>
+                  <td data-label="Desde">{date(t.start < `${days.year}-01-01` ? `${days.year}-01-01` : t.start)}</td>
+                  <td data-label="Hasta">{date(t.end)}</td>
+                  <td data-label="Origen">{t.source}</td>
                 </tr>
               ))}
             </tbody>

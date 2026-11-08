@@ -32,17 +32,17 @@ export default function Rules() {
         </div>
         {!data ? <Skeleton lines={8} /> : (
           <div className="table-wrap">
-            <table>
+            <table className="responsive">
               <thead><tr><th>País</th><th>Regla</th><th className="num">Umbral o tipo</th><th>Descripción</th><th>Fuente</th><th>Verificada</th></tr></thead>
               <tbody>
                 {rules.map((r, i) => (
                   <tr key={i}>
-                    <td>{r.country ? <Country code={r.country} short /> : 'Todos'}</td>
-                    <td>{r.name || r.title || RULE_LABEL[r.rule] || r.rule}</td>
-                    <td className="num">{r.rate != null ? `${Math.round(r.rate * 1000) / 10} %` : r.threshold != null ? r.threshold.toLocaleString('es-ES') : r.brackets ? `${r.brackets.length} tramos` : '–'}</td>
-                    <td className="muted">{r.description || r.summary || r.text}</td>
-                    <td><SourceLink href={r.source_url}>Ver</SourceLink></td>
-                    <td className={r.verified_at ? 'ok-text' : 'warn-text'}>{r.verified_at || 'Pendiente'}</td>
+                    <td data-label="País">{r.country ? <Country code={r.country} short /> : 'Todos'}</td>
+                    <td className="cell-title">{r.name || r.title || RULE_LABEL[r.rule] || r.rule}</td>
+                    <td data-label="Umbral o tipo" className="num">{r.rate != null ? `${Math.round(r.rate * 1000) / 10} %` : r.threshold != null ? r.threshold.toLocaleString('es-ES') : r.brackets ? `${r.brackets.length} tramos` : '–'}</td>
+                    <td className="muted cell-block">{r.description || r.summary || r.text}</td>
+                    <td data-label="Fuente"><SourceLink href={r.source_url}>Ver</SourceLink></td>
+                    <td data-label="Verificada" className={r.verified_at ? 'ok-text' : 'warn-text'}>{r.verified_at || 'Pendiente'}</td>
                   </tr>
                 ))}
               </tbody>

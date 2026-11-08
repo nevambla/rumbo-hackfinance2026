@@ -9,7 +9,7 @@
     "server": "node server/index.js",
     "build": "vite build",
     "start": "npm run build && node server/index.js",
-    "test": "node --test server/engine.test.js"
+    "test": "node --test server/engine.test.js server/attachments.test.js"
   },
   "dependencies": {
     "@elevenlabs/react": "^1.21.1",

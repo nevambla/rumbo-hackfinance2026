@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { api } from '../lib/api.js';
 import { eur, money, pct, date } from '../lib/format.js';
 import { Button, Country, Skeleton } from './ui.jsx';
+import InvoicePhotos, { PendingPhotos } from './InvoicePhotos.jsx';
+import { uploadPhoto } from '../lib/images.js';
 
 const REGIME = { domestic: 'IVA nacional', reverse_charge: 'Inversión del sujeto pasivo', not_subject: 'No sujeta a IVA', eu_consumer: 'IVA a consumidor UE', export: 'Exportación de servicios' };
 
@@ -43,6 +45,7 @@ export default function Reserve({ state, reserve, refresh, notify }) {
   const [saving, setSaving] = useState(false);
   const [flashId, setFlashId] = useState(null);
   const [err, setErr] = useState(null);
+  const [pendingPhotos, setPendingPhotos] = useState([]);
 
   const body = () => ({ client_id: form.client_id, concept: form.concept, net_cents: Math.round(Number(form.amount) * 100), currency: form.currency });
 
@@ -67,9 +70,14 @@ export default function Reserve({ state, reserve, refresh, notify }) {
     setSaving(true);
     try {
       const inv = await api.post('/api/invoices', body());
+      let uploaded = 0;
+      for (const f of pendingPhotos) {
+        try { await uploadPhoto(inv.id, f); uploaded++; } catch (x) { notify(x.message, 'error'); }
+      }
+      setPendingPhotos([]);
       await refresh();
       setFlashId(inv.id);
-      notify(`${inv.id} registrada · ${eur(inv.reserve_eur_cents)} apartados`);
+      notify(`${inv.id} registrada · ${eur(inv.reserve_eur_cents)} apartados${uploaded ? ` · ${uploaded} ${uploaded === 1 ? 'foto' : 'fotos'}` : ''}`);
     } catch (x) { notify(x.message, 'error'); }
     setSaving(false);
   };
@@ -118,6 +126,7 @@ export default function Reserve({ state, reserve, refresh, notify }) {
               <div><span className="small muted">Libre para ti</span><strong>{eur(Math.round(preview.reserve_eur_cents / preview.reserve_rate) - preview.reserve_eur_cents)}</strong></div>
             </div>
           )}
+          <PendingPhotos files={pendingPhotos} onChange={setPendingPhotos} />
           {err && <p className="small danger-text">{err}</p>}
           <div className="row wrap">
             <Button variant="primary" type="submit" busy={saving}>Registrar y apartar</Button>
@@ -136,19 +145,20 @@ export default function Reserve({ state, reserve, refresh, notify }) {
           <span className="small muted">Las primeras se apartaron a un tipo más bajo; de ahí la diferencia</span>
         </div>
         <div className="table-wrap">
-          <table>
-            <thead><tr><th>Nº</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th className="num">Neto</th><th className="num">En EUR</th><th className="num">% apartado</th><th className="num">Apartado</th></tr></thead>
+          <table className="responsive">
+            <thead><tr><th>Nº</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th className="num">Neto</th><th className="num">En EUR</th><th className="num">% apartado</th><th className="num">Apartado</th><th>Fotos</th></tr></thead>
             <tbody>
               {invoices.map((i) => (
                 <tr key={i.id} className={i.id === flashId ? 'flash' : ''}>
-                  <td className="nowrap">{i.id}</td>
-                  <td className="nowrap">{date(i.date)}</td>
-                  <td>{i.client?.name}</td>
-                  <td>{i.concept}</td>
-                  <td className="num">{money(i.net_cents, i.currency)}</td>
-                  <td className="num">{eur(i.eur_cents)}</td>
-                  <td className="num">{pct(i.reserve_rate)}</td>
-                  <td className="num">{eur(i.reserve_eur_cents)}</td>
+                  <td className="cell-title nowrap">{i.id} <span className="mobile-only muted">· {date(i.date)}</span></td>
+                  <td data-label="Fecha" className="nowrap desktop-only">{date(i.date)}</td>
+                  <td data-label="Cliente">{i.client?.name}</td>
+                  <td data-label="Concepto">{i.concept}</td>
+                  <td data-label="Neto" className="num">{money(i.net_cents, i.currency)}</td>
+                  <td data-label="En EUR" className="num desktop-only">{eur(i.eur_cents)}</td>
+                  <td data-label="% apartado" className="num">{pct(i.reserve_rate)}</td>
+                  <td data-label="Apartado" className="num">{eur(i.reserve_eur_cents)}</td>
+                  <td data-label="Fotos" className="cell-photos"><InvoicePhotos invoice={i} onChanged={refresh} notify={notify} /></td>
                 </tr>
               ))}
             </tbody>

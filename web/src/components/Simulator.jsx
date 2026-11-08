@@ -66,9 +66,9 @@ function StaySim({ state }) {
               : r.already_crossing ? `Ya ibas a ser residente en ${r.country_name}`
                 : `Seguirías sin ser residente en ${r.country_name}`}
           </p>
-          <div className="bar" role="img" aria-label={`${r.current_days} a ${r.days_after} días`}>
-            <span className="plan" style={{ width: `${Math.min(100, (r.days_after / need) * 100)}%`, background: COUNTRY_COLORS[country] }} />
-            <span style={{ width: `${Math.min(100, (r.current_days / need) * 100)}%`, background: COUNTRY_COLORS[country] }} />
+          <div className="meter" style={{ '--t': `${(need / 365) * 100}%` }} data-t={need} role="img" aria-label={`${r.current_days} a ${r.days_after} días; umbral ${need}`}>
+            <span className="plan" style={{ width: `${Math.min(100, (r.days_after / 365) * 100)}%` }} />
+            <span style={{ width: `${Math.min(100, (r.current_days / 365) * 100)}%` }} />
           </div>
           <div className="kv"><span>Días en {r.country_name}</span><strong>{r.current_days} → {r.days_after} <span className="muted">/ {r.threshold}</span></strong></div>
           <div className="kv"><span>Residencia probable</span><strong><Country code={r.new_residency} /></strong></div>

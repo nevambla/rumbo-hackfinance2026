@@ -65,17 +65,17 @@ export default function Alerts({ alerts, state }) {
       <section className="card">
         <h2>Documentos que vigilamos</h2>
         <div className="table-wrap">
-          <table>
+          <table className="responsive">
             <thead><tr><th>Documento</th><th>País</th><th>Desde</th><th>Hasta</th></tr></thead>
             <tbody>
               {state.documents.map((d) => {
                 const expired = d.valid_until < state.as_of;
                 return (
                   <tr key={d.id} className={expired ? 'muted' : ''}>
-                    <td>{d.name}</td>
-                    <td><Country code={d.country} /></td>
-                    <td>{date(d.valid_from)}</td>
-                    <td>{date(d.valid_until)}{expired && ' (vencido)'}</td>
+                    <td className="cell-title">{d.name}</td>
+                    <td data-label="País"><Country code={d.country} /></td>
+                    <td data-label="Desde">{date(d.valid_from)}</td>
+                    <td data-label="Hasta">{date(d.valid_until)}{expired && ' (vencido)'}</td>
                   </tr>
                 );
               })}

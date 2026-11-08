@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { api } from './lib/api.js';
 import { date, eur } from './lib/format.js';
 import Icon from './components/Icon.jsx';
-import { Skeleton, Toast, Button } from './components/ui.jsx';
+import { Skeleton, Toast, Button, RumboLogo } from './components/ui.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Alerts from './components/Alerts.jsx';
 import Reserve from './components/Reserve.jsx';
@@ -25,17 +25,25 @@ const SECTIONS = [
   { id: 'planes', label: 'Planes', icon: 'briefcase' },
 ];
 
+const TABS = [
+  { id: 'rastrea', label: 'Días', icon: 'pin' },
+  { id: 'avisa', label: 'Avisos', icon: 'bell' },
+  { id: 'asesor', label: 'Asesor', icon: 'mic' },
+  { id: 'aparta', label: 'Facturas', icon: 'wallet' },
+  { id: 'more', label: 'Más', icon: 'menu' },
+];
+
 /** Specific, data-driven headline per section. */
 function headline(id, d) {
   const here = d.days.countries.find((c) => c.country === d.days.current_country);
   const urgent = d.alerts.filter((a) => a.level !== 'info').length;
   const deductible = d.state.expenses.filter((e) => e.deductible).reduce((s, e) => s + e.eur_cents, 0);
   switch (id) {
-    case 'rastrea': return here ? `Te quedan ${here.days_left} días en ${here.name} antes de ser residente` : 'Tus días por país';
-    case 'avisa': return urgent ? `${urgent} ${urgent === 1 ? 'aviso necesita' : 'avisos necesitan'} tu atención` : 'Sin avisos urgentes';
-    case 'aparta': return d.reserve.gap > 0 ? `Te faltan ${eur(d.reserve.gap)} por apartar` : `Llevas ${eur(-d.reserve.gap)} de margen`;
+    case 'rastrea': return here ? <>Te quedan <em>{here.days_left} días</em> en {here.name} antes de ser residente</> : 'Tus días por país';
+    case 'avisa': return urgent ? <><em>{urgent} {urgent === 1 ? 'aviso' : 'avisos'}</em> {urgent === 1 ? 'necesita' : 'necesitan'} tu atención</> : 'Sin avisos urgentes';
+    case 'aparta': return d.reserve.gap > 0 ? <>Te faltan <em>{eur(d.reserve.gap)}</em> por apartar</> : <>Llevas <em>{eur(-d.reserve.gap)}</em> de margen</>;
     case 'asesor': return here ? `Pregunta antes de alargar tu estancia en ${here.name}` : 'Pregunta a tu asesor';
-    case 'gastos': return `${eur(deductible)} en gastos deducibles este año`;
+    case 'gastos': return <><em>{eur(deductible)}</em> en gastos deducibles este año</>;
     case 'simulador': return '¿Dónde te sale mejor pasar los próximos meses?';
     case 'regimenes': return 'Qué puedes aprovechar legalmente y qué debes evitar';
     case 'reglas': return 'Cada cifra sale de una regla con fuente oficial';
@@ -121,8 +129,7 @@ export default function App() {
     <div className="layout">
       <aside className={`sidebar ${menuOpen ? 'open' : ''}`}>
         <div className="brand">
-          <Icon name="compass" size={24} />
-          <strong>Rumbo</strong>
+          <RumboLogo size={28} />
         </div>
         <nav>
           {SECTIONS.map((s) => (
@@ -153,7 +160,7 @@ export default function App() {
             <span className="context">{date(state.as_of)} · {state.countries[here]?.name}</span>
           </div>
           {section !== 'asesor' && (
-            <button className="btn primary cta" onClick={() => go('asesor')}>
+            <button className="btn primary cta topbar-cta" onClick={() => go('asesor')}>
               <Icon name="mic" size={18} /><span className="talk-label">Habla con tu asesor</span>
             </button>
           )}
@@ -179,6 +186,27 @@ export default function App() {
         </footer>
       </main>
       {menuOpen && <div className="scrim" onClick={() => setMenuOpen(false)} />}
+
+      {/* Mobile: bottom tab bar within thumb reach */}
+      <nav className="tabbar" aria-label="Navegación principal">
+        {TABS.map((t) => {
+          const active = t.id === 'more' ? menuOpen || !TABS.some((x) => x.id === section) : section === t.id && !menuOpen;
+          return (
+            <button
+              key={t.id}
+              className={`tab ${t.id === 'asesor' ? 'tab-main' : ''} ${active ? 'active' : ''}`}
+              onClick={() => (t.id === 'more' ? setMenuOpen(!menuOpen) : go(t.id))}
+              aria-current={active && t.id !== 'more' ? 'page' : undefined}
+            >
+              <span className="tab-icon">
+                <Icon name={t.icon} size={t.id === 'asesor' ? 24 : 22} />
+                {t.id === 'avisa' && urgent > 0 && <span className="count dot-count">{urgent}</span>}
+              </span>
+              <span className="tab-label">{t.label}</span>
+            </button>
+          );
+        })}
+      </nav>
       <Toast toast={toast} />
     </div>
   );

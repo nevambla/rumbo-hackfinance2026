@@ -36,7 +36,7 @@ export default function Regimes({ go }) {
                 </div>
                 <span className="small"><Country code={r.country} /></span>
                 <p className="small muted">{r.summary}</p>
-                <p className="small">{r.why}</p>
+                {r.why !== r.summary && <p className="small">{r.why}</p>}
                 <ul className="small muted" style={{ margin: 0, paddingLeft: 18 }}>{r.requirements.map((q) => <li key={q}>{q}</li>)}</ul>
                 <SourceLink href={r.source_url} />
               </article>

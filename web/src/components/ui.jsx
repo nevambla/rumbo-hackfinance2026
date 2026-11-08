@@ -14,6 +14,22 @@ export function Country({ code, short = false }) {
   );
 }
 
+/** Brand logo (same construction as landing/rumbo-logo): "rumb" + compass as the "o". */
+export function RumboLogo({ size = 26 }) {
+  return (
+    <span className="rumbo-logo" role="img" aria-label="rumbo" style={{ '--logo-size': `${size}px` }}>
+      <span aria-hidden="true">rumb</span>
+      <svg viewBox="0 0 46 46" aria-hidden="true">
+        <circle cx="23" cy="23" r="18" fill="none" stroke="currentColor" strokeWidth="8" />
+        <g transform="rotate(40 23 23)">
+          <polygon points="23,10 27,23 19,23" fill="var(--logo-needle)" />
+          <polygon points="19,23 27,23 23,36" fill="#8A9BB0" />
+        </g>
+      </svg>
+    </span>
+  );
+}
+
 export function Spinner() {
   return <span className="spinner" aria-hidden="true" />;
 }
