@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rumbo · Tu copiloto fiscal por voz</title>
+<meta name="description" content="Rumbo cuenta tus días en cada país, te avisa antes de cruzar un umbral fiscal y aparta los impuestos de cada factura. El copiloto fiscal por voz para nómadas digitales.">
+<meta name="theme-color" content="#040B18">
+<link rel="icon" href="assets/brand/rumbo-app-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/rumbo-app-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Brand palette */
+  --abismo:#040B18;      /* main dark background */
+  --pasaporte:#0F1E36;   /* cards on dark */
+  --lima:#C6F432;        /* brand accent, buttons, key figures */
+  --cian:#4FC3D9;        /* secondary accent, charts, progress */
+  --pizarra:#8A9BB0;     /* secondary text on dark, borders, labels */
+  --niebla:#F4F6F8;      /* light backgrounds, text on dark */
+  /* Derived tokens (accessibility on light backgrounds) */
+  --niebla-2:#E6EBF0;
+  --white:#ffffff;
+  --lima-sobre-claro:#9BC414; /* logo needle on light, from brand guide */
+  --accent-ink:#0B6C7F;  /* dark cyan: accent text on light, 5.6:1 */
+  --ink:#040B18;
+  --ink-soft:#4A5A6E;    /* secondary text on light, 6.5:1 */
+  --line:rgba(4,11,24,.12);
+  --line-dark:rgba(244,246,248,.12);
+  --ok:#4FC3D9;
+  --warn:#C6F432;
+  --danger:#FF5C5C;
+  --radius:14px;
+  --maxw:1160px;
+  --font-head:"Space Grotesk",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--ink);background:var(--niebla);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-head);line-height:1.08;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,4.4vw,3.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:600}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--font-head);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
+.dark .eyebrow{color:var(--lima)}
+.lead{font-size:1.15rem;color:var(--ink-soft);max-width:60ch}
+.dark .lead{color:var(--pizarra)}
+section{padding:112px 0;scroll-margin-top:0}
+.dark{background:var(--abismo);color:var(--niebla)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--lima);color:var(--abismo);padding:8px 14px;border-radius:8px;z-index:100;font-weight:600}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--accent-ink);outline-offset:3px;border-radius:6px}
+.dark :focus-visible,.hero :focus-visible,.nav :focus-visible,.plan.pro :focus-visible,.redline :focus-visible,footer :focus-visible{outline-color:var(--lima)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:600;font-size:1rem;padding:14px 22px;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .15s ease,background .2s ease,border-color .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--lima);color:var(--abismo)}
+.btn-primary:hover{background:#d6ff5c}
+.btn-ghost{border-color:var(--line-dark);color:var(--niebla);background:transparent}
+.btn-ghost:hover{border-color:var(--niebla)}
+.btn-dark{background:var(--abismo);color:var(--niebla)}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .25s ease,box-shadow .25s ease}
+.nav.scrolled{background:rgba(4,11,24,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line-dark)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{text-decoration:none;display:inline-flex}
+/* Rumbo logo component (rumbo-logo/rumbo-logo.html) */
+.rumbo-logo{--logo-size:30px;--logo-text:var(--niebla);--logo-needle:var(--lima);display:inline-flex;align-items:baseline;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:var(--logo-size);letter-spacing:-.039em;line-height:1;color:var(--logo-text)}
+.rumbo-logo svg{width:.625em;height:.625em}
+.rumbo-logo--claro{--logo-text:var(--abismo);--logo-needle:var(--lima-sobre-claro)}
+.nav ul{display:flex;gap:28px;list-style:none}
+.nav ul a{color:var(--pizarra);text-decoration:none;font-size:.95rem;font-weight:500}
+.nav ul a:hover{color:var(--niebla)}
+.nav .btn{padding:10px 18px;font-size:.92rem}
+@media (max-width:860px){.nav ul{display:none}}
+
+/* Hero */
+.hero{position:relative;min-height:min(100svh,940px);background:var(--abismo);color:var(--niebla);display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(4,11,24,.0) 0,rgba(4,11,24,.0) 40%),linear-gradient(90deg,var(--abismo) 30%,rgba(4,11,24,0) 70%);pointer-events:none}
+.hero-globe{position:absolute;right:-6vw;top:50%;transform:translateY(-50%);width:min(62vw,820px);aspect-ratio:1;opacity:.95}
+.hero-globe img{width:100%;height:100%;object-fit:cover;mix-blend-mode:screen}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero-copy{max-width:640px}
+.hero h1{font-size:clamp(3rem,7.5vw,5.6rem);font-weight:700;margin:18px 0 22px}
+.hero h1 span{display:block;color:var(--lima)}
+.hero .lead{font-size:1.25rem;margin-bottom:36px;color:var(--pizarra)}
+.hero .eyebrow{color:var(--lima)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:22px;margin-top:44px;color:var(--pizarra);font-size:.9rem}
+.hero-meta b{color:var(--niebla);font-weight:600}
+.flags{display:inline-flex;gap:4px;margin-left:4px}
+.ask-card{position:absolute;z-index:3;right:max(24px,calc((100vw - var(--maxw))/2 + 24px));bottom:64px;width:330px;background:rgba(15,30,54,.82);backdrop-filter:blur(12px);border:1px solid var(--line-dark);border-radius:var(--radius);padding:18px}
+.ask-card p{font-size:.92rem}
+.ask-card .who{font-family:var(--font-head);font-size:.72rem;letter-spacing:.14em;color:var(--pizarra);margin-bottom:6px}
+.ask-card .ans{margin-top:14px;padding-top:14px;border-top:1px solid var(--line-dark)}
+.ask-card .ans .who{color:var(--lima)}
+.wave{display:inline-flex;gap:3px;align-items:center;height:14px;margin-left:8px;vertical-align:middle}
+.wave i{width:3px;background:var(--lima);border-radius:2px;animation:wave 1s ease-in-out infinite}
+.wave i:nth-child(2){animation-delay:.15s}.wave i:nth-child(3){animation-delay:.3s}.wave i:nth-child(4){animation-delay:.45s}
+@keyframes wave{0%,100%{height:4px}50%{height:14px}}
+@media (max-width:1020px){.ask-card{display:none}.hero-globe{opacity:.45;right:-30vw;width:110vw}}
+
+/* Problem: Ana */
+.ana-head{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
+.ana-head p{font-size:1.1rem;color:var(--ink-soft)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stop{background:var(--white);border-radius:var(--radius);padding:22px;border:1px solid var(--line)}
+.stop .city{font-family:var(--font-head);font-weight:700;font-size:1.4rem}
+.stop .when{color:var(--ink-soft);font-size:.9rem;margin:2px 0 18px}
+.daybar{height:8px;border-radius:99px;background:var(--niebla-2);position:relative;overflow:hidden}
+.daybar span{position:absolute;inset:0 auto 0 0;background:var(--abismo);border-radius:99px}
+.daybar::after{content:"";position:absolute;top:-4px;bottom:-4px;left:calc(183/365*100%);width:2px;background:var(--accent-ink)}
+.stop .days{display:flex;justify-content:space-between;font-size:.82rem;color:var(--ink-soft);margin-top:8px}
+.punch{margin-top:64px;font-family:var(--font-head);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.15}
+.punch span{background:linear-gradient(transparent 58%,var(--lima) 58% 92%,transparent 92%);padding:0 .08em}
+.questions{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px;border-top:1px solid var(--line);padding-top:40px}
+.questions .n{font-family:var(--font-head);color:var(--accent-ink);font-weight:700;font-size:.9rem}
+.questions h3{margin:8px 0 10px;font-size:1.35rem}
+.questions p{color:var(--ink-soft);font-size:.97rem}
+@media (max-width:860px){.ana-head,.questions{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}}
+
+/* Three pillars */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.feat{background:var(--pasaporte);border:1px solid var(--line-dark);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column}
+.feat .verb{font-family:var(--font-head);font-size:2.2rem;font-weight:700;color:var(--lima);margin-bottom:14px;letter-spacing:-.03em}
+.feat p{color:var(--pizarra)}
+.feat .chip{margin-top:auto;padding-top:26px}
+.chip span{display:inline-block;font-size:.8rem;border:1px solid var(--line-dark);border-radius:99px;padding:5px 11px;margin:4px 4px 0 0;color:var(--niebla)}
+@media (max-width:860px){.features{grid-template-columns:1fr}}
+
+/* How it works */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;counter-reset:s}
+.flow li{list-style:none;position:relative;background:var(--white);border:1px solid var(--line);padding:26px 24px;min-height:190px}
+.flow li:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.flow li:last-child{border-radius:0 var(--radius) var(--radius) 0;background:var(--abismo);color:var(--niebla);border-color:var(--abismo)}
+.flow li:last-child p{color:var(--pizarra)}
+.flow li+li{border-left:none}
+.flow li::before{counter-increment:s;content:"0" counter(s);font-family:var(--font-head);font-weight:700;color:var(--accent-ink);font-size:.85rem}
+.flow li:last-child::before{color:var(--lima)}
+.flow h3{margin:10px 0 8px}
+.flow p{font-size:.95rem;color:var(--ink-soft)}
+.flow li:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;background:var(--lima);color:var(--abismo);display:grid;place-items:center;font-size:.8rem;font-weight:700;z-index:2}
+.note{margin-top:28px;display:flex;gap:14px;align-items:flex-start;background:var(--niebla-2);border-radius:var(--radius);padding:18px 22px;font-size:1rem}
+.note b{font-family:var(--font-head)}
+@media (max-width:860px){.flow{grid-template-columns:1fr}.flow li,.flow li:first-child,.flow li:last-child{border-radius:0;border-left:1px solid var(--line)}.flow li+li{border-top:none}.flow li:first-child{border-radius:var(--radius) var(--radius) 0 0}.flow li:last-child{border-radius:0 0 var(--radius) var(--radius)}.flow li:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-12px;transform:translateX(-50%) rotate(90deg)}}
+
+/* Demo / simulator */
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px;align-items:stretch}
+.panel{background:var(--pasaporte);border:1px solid var(--line-dark);border-radius:var(--radius);padding:28px}
+.chat{display:flex;flex-direction:column;gap:14px}
+.bubble{max-width:88%;padding:14px 16px;border-radius:16px;font-size:.98rem}
+.bubble small{display:block;font-family:var(--font-head);font-size:.7rem;letter-spacing:.14em;margin-bottom:4px;opacity:.75}
+.bubble.user{background:var(--niebla);color:var(--abismo);border-bottom-left-radius:4px}
+.bubble.bot{align-self:flex-end;background:var(--abismo);border:1px solid var(--line-dark);border-bottom-right-radius:4px}
+.bubble.bot small{color:var(--lima);opacity:1}
+.mic{margin-top:22px;display:flex;align-items:center;gap:14px;color:var(--pizarra);font-size:.9rem}
+.mic button{width:56px;height:56px;border-radius:50%;border:none;background:var(--lima);color:var(--abismo);cursor:pointer;display:grid;place-items:center;flex:none;position:relative}
+.mic button[aria-pressed="true"]::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--lima);animation:pulse 1.2s ease-out infinite}
+@keyframes pulse{from{opacity:1;transform:scale(.9)}to{opacity:0;transform:scale(1.35)}}
+.sim label{display:block;font-family:var(--font-head);font-weight:600;margin-bottom:6px}
+.sim .hint{color:var(--pizarra);font-size:.9rem;margin-bottom:22px}
+.sim input[type=range]{width:100%;accent-color:var(--cian);height:28px}
+.sim-out{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:var(--abismo);border:1px solid var(--line-dark);border-radius:12px;padding:16px}
+.stat .k{font-size:.78rem;color:var(--pizarra);letter-spacing:.06em;text-transform:uppercase}
+.stat .v{font-family:var(--font-head);font-size:1.9rem;font-weight:700;margin-top:2px;color:var(--lima)}
+.status{margin-top:16px;border-radius:12px;padding:14px 16px;font-size:.95rem;display:flex;gap:10px;align-items:center;border:1px solid}
+.status.ok{border-color:rgba(79,195,217,.5);background:rgba(79,195,217,.12)}
+.status.warn{border-color:rgba(198,244,50,.6);background:rgba(198,244,50,.12)}
+.status.bad{border-color:rgba(255,92,92,.6);background:rgba(255,92,92,.14)}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.ok .dot{background:var(--ok)}.warn .dot{background:var(--warn)}.bad .dot{background:var(--danger)}
+.meter{margin-top:18px;height:10px;background:var(--abismo);border-radius:99px;position:relative;overflow:visible;border:1px solid var(--line-dark)}
+.meter span{position:absolute;inset:0 auto 0 0;border-radius:99px;background:var(--cian);transition:width .2s ease,background .2s}
+.meter::after{content:"183";position:absolute;left:calc(183/365*100%);top:-22px;transform:translateX(-50%);font-size:.72rem;color:var(--lima)}
+.meter::before{content:"";position:absolute;left:calc(183/365*100%);top:-6px;bottom:-6px;width:2px;background:var(--lima);z-index:2}
+@media (max-width:860px){.demo-grid{grid-template-columns:1fr}}
+
+/* Extras */
+.extras{display:grid;grid-template-columns:repeat(2,1fr) 1.15fr;grid-template-rows:auto auto;gap:18px;margin-top:56px}
+.extra{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.extra h3{margin-bottom:8px}
+.extra p{color:var(--ink-soft);font-size:.97rem}
+.extra q{display:block;font-family:var(--font-head);font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:10px;quotes:"“" "”"}
+.redline{grid-column:3;grid-row:1 / span 2;background:var(--abismo);color:var(--niebla);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:14px}
+.redline .eyebrow{color:var(--lima)}
+.redline h3{font-size:1.6rem}
+.redline p{color:var(--pizarra)}
+@media (max-width:960px){.extras{grid-template-columns:1fr 1fr}.redline{grid-column:1 / -1;grid-row:auto}}
+@media (max-width:600px){.extras{grid-template-columns:1fr}}
+
+/* Pricing */
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px;align-items:stretch}
+.plan{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column}
+.plan .tier{font-family:var(--font-head);font-weight:600;font-size:.82rem;letter-spacing:.16em;color:var(--ink-soft)}
+.plan .price{font-family:var(--font-head);font-weight:700;font-size:3rem;margin:10px 0 4px;letter-spacing:-.03em}
+.plan .price small{font-size:1rem;font-weight:500;color:var(--ink-soft);letter-spacing:0}
+.plan .desc{color:var(--ink-soft);font-size:.95rem;min-height:3em}
+.plan ul{list-style:none;margin:24px 0 28px;display:grid;gap:10px;font-size:.96rem}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--niebla-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23040B18' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.plan .btn{margin-top:auto;justify-content:center}
+.plan.pro{background:var(--abismo);color:var(--niebla);border-color:var(--abismo);position:relative;transform:translateY(-10px);box-shadow:0 30px 60px -30px rgba(4,11,24,.6)}
+.plan.pro .price{color:var(--lima)}
+.plan.pro .tier,.plan.pro .desc,.plan.pro .price small{color:var(--pizarra)}
+.plan.pro li::before{background-color:var(--lima)}
+.badge{position:absolute;top:-12px;right:24px;background:var(--lima);color:var(--abismo);font-family:var(--font-head);font-weight:700;font-size:.75rem;padding:5px 12px;border-radius:99px;letter-spacing:.06em}
+.btn-outline{border-color:var(--abismo);color:var(--abismo);background:transparent}
+.btn-outline:hover{background:var(--abismo);color:var(--niebla)}
+@media (max-width:860px){.pricing{grid-template-columns:1fr}.plan.pro{transform:none}}
+
+/* Sponsors */
+.sponsors{padding:80px 0;background:var(--niebla-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sponsors-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.sponsors-head h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+.carousel-ctrl{display:flex;gap:8px}
+.carousel-ctrl button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--abismo);background:transparent;color:var(--abismo);cursor:pointer;display:grid;place-items:center;font-size:1rem}
+.carousel-ctrl button:hover{background:var(--abismo);color:var(--niebla)}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:18px;width:max-content;animation:scroll 32s linear infinite}
+.marquee:hover .track,.marquee:focus-within .track,.marquee.paused .track{animation-play-state:paused}
+.track.reverse{animation-direction:reverse}
+@keyframes scroll{to{transform:translateX(calc(-50% - 9px))}}
+.sponsor{flex:none;width:220px;height:110px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);display:grid;place-items:center;padding:22px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.sponsor:hover{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(4,11,24,.45)}
+.sponsor img{max-height:46px;max-width:100%;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.82;transition:filter .2s,opacity .2s}
+.sponsor:hover img,.sponsor:focus-visible img{filter:none;opacity:1}
+.sponsor.wide img{max-height:56px}
+.organizers{margin-top:28px;font-size:.9rem;color:var(--ink-soft);text-align:center}
+@media (prefers-reduced-motion:reduce){
+  .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}
+  .track [aria-hidden="true"]{display:none}
+  .marquee{-webkit-mask-image:none;mask-image:none}
+  .carousel-ctrl{display:none}
+  .wave i,.mic button::after{animation:none}
+  html{scroll-behavior:auto}
+}
+
+/* Final CTA */
+.final{position:relative;overflow:hidden;text-align:center;padding:140px 0}
+.final h2{font-size:clamp(2.6rem,6vw,4.6rem)}
+.final h2 span{color:var(--lima);display:block}
+.final .lead{margin:22px auto 36px}
+.signup{display:flex;gap:10px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.signup input{flex:1 1 240px;padding:14px 18px;border-radius:999px;border:1.5px solid var(--line-dark);background:var(--pasaporte);color:var(--niebla);font:inherit}
+.signup input::placeholder{color:var(--pizarra)}
+.form-msg{min-height:1.5em;margin-top:14px;color:var(--lima);font-size:.95rem}
+.final-globe{position:absolute;left:50%;bottom:-55%;transform:translateX(-50%);width:900px;opacity:.25;pointer-events:none}
+
+footer{background:var(--abismo);color:var(--pizarra);padding:40px 0;font-size:.88rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--niebla)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Rumbo, inicio"><span class="rumbo-logo" role="img" aria-label="rumbo"><span aria-hidden="true">rumb</span><svg viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="18" fill="none" stroke="currentColor" stroke-width="8"/><g transform="rotate(40 23 23)"><polygon points="23,10 27,23 19,23" fill="var(--logo-needle)"/><polygon points="19,23 27,23 23,36" fill="#8A9BB0"/></g></svg></span></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#problema">El problema</a></li>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#precios">Precios</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary" href="#empezar">Empieza gratis</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-globe" aria-hidden="true">
+    <img class="globe-anim" src="assets/globo.gif" data-still="assets/globo-poster.jpg" alt="" fetchpriority="high">
+  </div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">El copiloto fiscal por voz para nómadas digitales</p>
+      <h1>Trabaja desde donde quieras. <span>Tributa sabiendo dónde.</span></h1>
+      <p class="lead">Rumbo cuenta tus días en cada país, te avisa antes de cruzar un umbral fiscal y aparta los impuestos de cada factura. Pregúntale lo que quieras, en voz alta.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#empezar">Empieza gratis <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#demo">Habla con Rumbo</a>
+      </div>
+      <div class="hero-meta">
+        <span><b>5 países</b> en el MVP: ES · PT · MX · CO · TH</span>
+        <span><b>+70 idiomas</b> por voz</span>
+        <span><b>0 €</b> para empezar</span>
+      </div>
+    </div>
+  </div>
+  <aside class="ask-card" aria-label="Ejemplo de conversación">
+    <p class="who">ANA</p>
+    <p>Me han ofrecido quedarme dos meses más en Lisboa. ¿Me afecta?</p>
+    <div class="ans">
+      <p class="who">RUMBO <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span></p>
+      <p>Llevas 140 días en Portugal. Con dos meses más pasarías de 183 y serías residente fiscal allí.</p>
+    </div>
+  </aside>
+</section>
+
+<!-- PROBLEM -->
+<section id="problema">
+  <div class="wrap">
+    <div class="ana-head reveal">
+      <div>
+        <p class="eyebrow">Conoce a Ana</p>
+        <h2>Diseñadora freelance, clientes en tres países y cuatro ciudades en un año.</h2>
+      </div>
+      <p>Cada trimestre cambia de base. Cada país cuenta sus días, aplica su IVA y tiene su propio visado. Nadie se lo suma por ella.</p>
+    </div>
+    <div class="timeline reveal" role="list" aria-label="El 2026 de Ana">
+      <div class="stop" role="listitem"><div class="city">Madrid</div><div class="when">Ene – Mar</div><div class="daybar"><span style="width:calc(90/365*100%)"></span></div><div class="days"><span>90 días</span><span>de 183</span></div></div>
+      <div class="stop" role="listitem"><div class="city">Lisboa</div><div class="when">Abr – Jun</div><div class="daybar"><span style="width:calc(91/365*100%)"></span></div><div class="days"><span>91 días</span><span>de 183</span></div></div>
+      <div class="stop" role="listitem"><div class="city">Medellín</div><div class="when">Jul – Sep</div><div class="daybar"><span style="width:calc(92/365*100%)"></span></div><div class="days"><span>92 días</span><span>de 183</span></div></div>
+      <div class="stop" role="listitem"><div class="city">Bangkok</div><div class="when">Oct – Dic</div><div class="daybar"><span style="width:calc(92/365*100%)"></span></div><div class="days"><span>92 días</span><span>de 183</span></div></div>
+    </div>
+    <p class="punch reveal">Sabe dónde trabaja.<br><span>No sabe dónde tributa.</span></p>
+    <div class="questions reveal">
+      <div><p class="n">01</p><h3>¿Dónde soy residente?</h3><p>Puede acabar siendo residente fiscal en dos países a la vez, o en ninguno. Y en ese caso, Hacienda española suele seguir reclamando.</p></div>
+      <div><p class="n">02</p><h3>¿Cuántos días me quedan?</h3><p>Alarga una estancia, pasa de 183 días en un país y cambia de residencia fiscal sin darse cuenta.</p></div>
+      <div><p class="n">03</p><h3>¿Cómo facturo y cotizo?</h3><p>IVA a clientes extranjeros, Seguridad Social (certificado A1) y visados de nómada digital: cada país, una norma distinta.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="dark" id="producto">
+  <div class="wrap">
+    <p class="eyebrow reveal">Rumbo hace tres cosas</p>
+    <h2 class="reveal">Tus impuestos siguen tu ruta.<br>No al revés.</h2>
+    <div class="features">
+      <article class="feat reveal">
+        <p class="verb">Rastrea</p>
+        <p>Cuenta tus días en cada país con la ubicación del móvil y tus vuelos, y te dice dónde eres residente fiscal este año.</p>
+        <div class="chip"><span>GPS</span><span>Vuelos</span><span>Residencia fiscal</span></div>
+      </article>
+      <article class="feat reveal">
+        <p class="verb">Avisa</p>
+        <p>Te alerta antes de cruzar un umbral: 183 días, obligaciones de IVA, un A1 que caduca o un visado a punto de vencer.</p>
+        <div class="chip"><span>183 días</span><span>IVA</span><span>A1</span><span>Visados</span></div>
+      </article>
+      <article class="feat reveal">
+        <p class="verb">Aparta</p>
+        <p>Con cada factura cobrada, reserva el % de impuestos del país donde vas a tributar, y la factura sale con el IVA correcto.</p>
+        <div class="chip"><span>Reserva automática</span><span>Facturas</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como">
+  <div class="wrap">
+    <p class="eyebrow reveal">Cómo funciona</p>
+    <h2 class="reveal">Reglas fijas para calcular.<br>Voz para explicar.</h2>
+    <ol class="flow reveal">
+      <li><h3>Datos</h3><p>Ubicación, vuelos, facturas y gastos dictados.</p></li>
+      <li><h3>Motor de reglas</h3><p>5 países y sus convenios de doble imposición.</p></li>
+      <li><h3>Reserva y alertas</h3><p>% apartado por factura y avisos de umbral.</p></li>
+      <li><h3>Asesor por voz</h3><p>Agente de ElevenLabs que pregunta y explica.</p></li>
+    </ol>
+    <div class="note reveal"><span aria-hidden="true">🔒</span><p><b>Los cálculos los hace nuestra API, con reglas fijas.</b> El agente de voz solo consulta y explica: no se inventa cifras.</p></div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="dark" id="demo">
+  <div class="wrap">
+    <p class="eyebrow reveal">Demo · pregúntaselo</p>
+    <h2 class="reveal">¿Y si me quedo un poco más?</h2>
+    <p class="lead reveal" style="margin-top:16px">Mueve el control o pulsa el micrófono. Rumbo consulta la API en directo y te responde en tu idioma.</p>
+    <div class="demo-grid">
+      <div class="panel reveal">
+        <div class="chat" id="chat" aria-live="polite">
+          <div class="bubble user"><small>ANA</small>Me han ofrecido quedarme dos meses más en Lisboa. ¿Me afecta?</div>
+          <div class="bubble bot"><small>RUMBO</small>Llevas 140 días en Portugal este año. Con dos meses más pasarías de 183 y serías residente fiscal allí. ¿Quieres que compare cuánto pagarías en cada caso?</div>
+        </div>
+        <div class="mic">
+          <button type="button" id="micBtn" aria-pressed="false" aria-label="Hablar con Rumbo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          </button>
+          <span id="micHint">Pulsa y pregunta. Agente de voz ElevenLabs · más de 70 idiomas</span>
+        </div>
+      </div>
+
+      <form class="panel sim reveal" id="sim" onsubmit="return false">
+        <label for="extra">Días extra en Lisboa</label>
+        <p class="hint">Ana ya lleva <b style="color:var(--niebla)">140 días</b> en Portugal en 2026.</p>
+        <input type="range" id="extra" min="0" max="120" step="1" value="60" aria-describedby="simStatus">
+        <div class="meter" aria-hidden="true"><span id="meterFill"></span></div>
+        <div class="sim-out">
+          <div class="stat"><div class="k">Días en Portugal</div><div class="v" id="totalDays">200</div></div>
+          <div class="stat"><div class="k">Margen hasta 183</div><div class="v" id="margin">—</div></div>
+        </div>
+        <div class="status bad" id="simStatus" role="status"><span class="dot" aria-hidden="true"></span><span id="simText"></span></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- EXTRAS -->
+<section id="extras">
+  <div class="wrap">
+    <p class="eyebrow reveal">Pagar lo justo, no de más</p>
+    <h2 class="reveal">Planifica antes de mudarte.</h2>
+    <div class="extras">
+      <div class="extra reveal"><h3>Simulador</h3><q>¿Me sale mejor el invierno en México o en Tailandia?</q><p>Compara escenarios antes de comprar el billete.</p></div>
+      <div class="extra reveal"><h3>Regímenes especiales</h3><p>Ley Beckham en España, IFICI en Portugal: sabrás si cumples antes de mudarte.</p></div>
+      <div class="extra reveal"><h3>Deducciones por voz</h3><q>Coworking en Medellín, 80 euros.</q><p>Y queda registrado.</p></div>
+      <div class="extra reveal"><h3>Sin pagar dos veces</h3><p>Aplica los convenios de doble imposición y recupera retenciones de otros países.</p></div>
+      <aside class="redline reveal">
+        <p class="eyebrow">Nuestra línea roja</p>
+        <h3>Rumbo planifica con dónde vives de verdad.</h3>
+        <p>No ayuda a fingir una residencia ni a ocultar ingresos.</p>
+        <p>Los casos complejos van a un asesor colaborador.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="precios" style="padding-top:40px">
+  <div class="wrap">
+    <p class="eyebrow reveal">Precios</p>
+    <h2 class="reveal">Empieza gratis. Sube a Pro cuando viajes en serio.</h2>
+    <div class="pricing">
+      <article class="plan reveal">
+        <p class="tier">GRATIS</p>
+        <p class="price">0 €</p>
+        <p class="desc">Para saber siempre dónde estás.</p>
+        <ul><li>Contador de días por país</li><li>Alertas de umbral (183 días, IVA, A1, visados)</li><li>Reserva de impuestos por factura</li></ul>
+        <a class="btn btn-outline" href="#empezar">Crear cuenta</a>
+      </article>
+      <article class="plan pro reveal">
+        <span class="badge">MÁS POPULAR</span>
+        <p class="tier">PRO</p>
+        <p class="price">9,90 € <small>/mes</small></p>
+        <p class="desc">Tu asesor fiscal de bolsillo, por voz.</p>
+        <ul><li>Todo lo de Gratis</li><li>Asesor por voz en más de 70 idiomas</li><li>Simulador de escenarios</li><li>Facturas con el IVA correcto</li><li>Regímenes especiales (Beckham, IFICI)</li></ul>
+        <a class="btn btn-primary" href="#empezar">Probar Pro</a>
+      </article>
+      <article class="plan reveal">
+        <p class="tier">ASESORES</p>
+        <p class="price">% <small>por caso</small></p>
+        <p class="desc">Para despachos que quieren clientes internacionales.</p>
+        <ul><li>Recibe casos complejos ya documentados</li><li>Días, facturas e historial listos</li><li>Comisión solo por caso derivado</li></ul>
+        <a class="btn btn-outline" href="mailto:hola@rumbo.app">Hacerme colaborador</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORS -->
+<section class="sponsors" id="patrocinadores" aria-labelledby="sp-title">
+  <div class="wrap">
+    <div class="sponsors-head">
+      <div>
+        <p class="eyebrow">Hackathon 2026</p>
+        <h2 id="sp-title">Gracias a quienes lo hacen posible</h2>
+      </div>
+      <div class="carousel-ctrl">
+        <button type="button" id="spPrev" aria-label="Patrocinador anterior">←</button>
+        <button type="button" id="spToggle" aria-label="Pausar carrusel" aria-pressed="false">❚❚</button>
+        <button type="button" id="spNext" aria-label="Patrocinador siguiente">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="marquee" id="marquee">
+    <ul class="track" id="track" style="list-style:none"></ul>
+  </div>
+  <p class="organizers wrap">Organiza BEST UC3M · Madrid Engineering Week</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="dark final" id="empezar">
+  <img class="final-globe globe-anim" src="assets/globo.gif" data-still="assets/globo-poster.jpg" alt="" aria-hidden="true" loading="lazy">
+  <div class="wrap" style="position:relative">
+    <p><span class="rumbo-logo" role="img" aria-label="rumbo" style="--logo-size:64px"><span aria-hidden="true">rumb</span><svg viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="18" fill="none" stroke="currentColor" stroke-width="8"/><g transform="rotate(40 23 23)"><polygon points="23,10 27,23 19,23" fill="var(--logo-needle)"/><polygon points="19,23 27,23 23,36" fill="#8A9BB0"/></g></svg></span></p>
+    <h2 style="margin-top:28px">Trabaja desde donde quieras. <span>Tributa sabiendo dónde.</span></h2>
+    <p class="lead">Únete a la beta. Gratis para siempre en el plan básico.</p>
+    <form class="signup" id="signup" novalidate>
+      <label for="email" class="sr-only">Tu correo electrónico</label>
+      <input id="email" type="email" placeholder="tu@correo.com" autocomplete="email" required>
+      <button class="btn btn-primary" type="submit">Quiero acceso</button>
+    </form>
+    <p class="form-msg" id="formMsg" role="status"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:16px"><span class="rumbo-logo" role="img" aria-label="rumbo" style="--logo-size:26px"><span aria-hidden="true">rumb</span><svg viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="18" fill="none" stroke="currentColor" stroke-width="8"/><g transform="rotate(40 23 23)"><polygon points="23,10 27,23 19,23" fill="var(--logo-needle)"/><polygon points="19,23 27,23 23,36" fill="#8A9BB0"/></g></svg></span><span>© 2026 · Proyecto para el Hackathon HackFinance · BEST UC3M</span></span>
+    <span>Rumbo no sustituye a un asesor fiscal. Los casos complejos se derivan a profesionales colaboradores.</span>
+  </div>
+</footer>
+
+<script>
+/* Nav background on scroll */
+const nav=document.getElementById('nav');
+const onScroll=()=>nav.classList.toggle('scrolled',scrollY>40);
+addEventListener('scroll',onScroll,{passive:true});addEventListener('load',onScroll);onScroll();
+
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* GIFs can't be paused: show a still frame when reduced motion is requested */
+if(reduce){document.querySelectorAll('img.globe-anim').forEach(i=>{i.src=i.dataset.still})}
+
+/* Scroll reveal (skipped with ?static or reduced motion) */
+const revs=document.querySelectorAll('.reveal');
+if(reduce||!('IntersectionObserver' in window)||location.search.includes('static')){revs.forEach(el=>el.classList.add('in'))}
+else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -8% 0px'});revs.forEach(el=>io.observe(el))}
+
+/* 183-day simulator (demo only; real numbers come from simulate_stay) */
+const BASE=140,LIMIT=183;
+const extra=document.getElementById('extra'),total=document.getElementById('totalDays'),margin=document.getElementById('margin'),
+      fill=document.getElementById('meterFill'),st=document.getElementById('simStatus'),txt=document.getElementById('simText');
+function sim(){
+  const d=BASE+ +extra.value, left=LIMIT-d;
+  total.textContent=d;
+  margin.textContent=left>0?left+' días':'superado';
+  fill.style.width=Math.min(d/365*100,100)+'%';
+  let cls,msg;
+  if(left>30){cls='ok';msg='Sigues siendo residente fiscal en España. Sin cambios.'}
+  else if(left>0){cls='warn';msg=`Cuidado: a ${left} días de ser residente fiscal en Portugal.`}
+  else{cls='bad';msg='Pasarías a ser residente fiscal en Portugal. ¿Comparamos cuánto pagarías en cada país?'}
+  st.className='status '+cls;txt.textContent=msg;
+  fill.style.background=cls==='bad'?'var(--danger)':cls==='warn'?'var(--lima)':'var(--cian)';
+  extra.setAttribute('aria-valuetext',`${extra.value} días extra, ${d} en total`);
+}
+extra.addEventListener('input',sim);sim();
+
+/* Mic: scripted demo. TODO: replace with @elevenlabs/react agent */
+const micBtn=document.getElementById('micBtn'),chat=document.getElementById('chat'),micHint=document.getElementById('micHint');
+const script=[
+  ['user','¿Me sale mejor el invierno en México o en Tailandia?'],
+  ['bot','En los dos casos seguirías por debajo de 183 días y tu residencia fiscal seguiría en España. Te enseño en pantalla cuánto apartarías por factura en cada escenario. Te recomiendo confirmarlo con un asesor.'],
+  ['user','Coworking en Medellín, 80 euros.'],
+  ['bot','Hecho. Lo he registrado como gasto deducible del 14 de julio en Colombia.']
+];
+let step=0,busy=false;
+function add(who,text){
+  const b=document.createElement('div');b.className='bubble '+who;
+  b.innerHTML=`<small>${who==='user'?'ANA':'RUMBO'}</small>`;b.append(text);
+  chat.append(b);
+}
+micBtn.addEventListener('click',()=>{
+  if(busy)return;busy=true;
+  micBtn.setAttribute('aria-pressed','true');micHint.textContent='Escuchando…';
+  const [u,b]=[script[step%4],script[(step+1)%4]];step+=2;
+  setTimeout(()=>{add(u[0],u[1]);micHint.textContent='Rumbo está consultando la API…';
+    setTimeout(()=>{add(b[0],b[1]);micBtn.setAttribute('aria-pressed','false');micHint.textContent='Pulsa y pregunta otra vez.';busy=false;
+      while(chat.children.length>4)chat.firstElementChild.remove();
+    },reduce?0:1100)
+  },reduce?0:900);
+});
+
+/* Sponsor carousel */
+const sponsors=[
+  {name:'GPTadvisor',img:'assets/sponsors/gptadvisor.png'},
+  {name:'MyInvestor',img:'assets/sponsors/myinvestor.png'},
+  {name:'Claude',img:'assets/sponsors/claude.png'},
+  {name:'ElevenLabs',img:'assets/sponsors/elevenlabs.png'},
+  {name:'HackFinance',img:'assets/sponsors/hackfinance.png'},
+  {name:'BEST Madrid Carlos III',img:'assets/sponsors/best.png'},
+  {name:'Madrid Engineering Week',img:'assets/sponsors/mew.png',wide:true}
+];
+const track=document.getElementById('track');
+const item=(s,hidden)=>`<li class="sponsor${s.wide?' wide':''}"${hidden?' aria-hidden="true"':''}><img src="${s.img}" alt="${hidden?'':s.name}" loading="lazy"></li>`;
+/* List is duplicated for the seamless loop; the copy is hidden from screen readers */
+track.innerHTML=sponsors.map(s=>item(s)).join('')+sponsors.map(s=>item(s,true)).join('')+'';
+
+const marquee=document.getElementById('marquee'),toggle=document.getElementById('spToggle');
+toggle.addEventListener('click',()=>{
+  const p=marquee.classList.toggle('paused');
+  toggle.setAttribute('aria-pressed',p);toggle.setAttribute('aria-label',p?'Reanudar carrusel':'Pausar carrusel');
+  toggle.textContent=p?'▶':'❚❚';
+});
+/* Arrows move the animation one card forward/back */
+function nudge(dir){
+  const anim=track.getAnimations()[0];if(!anim)return;
+  const dur=anim.effect.getTiming().duration;
+  anim.currentTime=((anim.currentTime+dir*dur/sponsors.length)%dur+dur)%dur;
+}
+document.getElementById('spNext').addEventListener('click',()=>nudge(1));
+document.getElementById('spPrev').addEventListener('click',()=>nudge(-1));
+
+/* Beta sign-up (front only, no backend yet) */
+document.getElementById('signup').addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=document.getElementById('email'),m=document.getElementById('formMsg');
+  if(!v.checkValidity()||!v.value){m.textContent='Escribe un correo válido.';v.focus();return}
+  m.textContent='¡Listo! Te avisaremos cuando abramos la beta.';v.value='';
+});
+</script>
+</body>
+</html>
