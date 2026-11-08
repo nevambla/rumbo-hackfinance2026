@@ -1,0 +1,51 @@
+{
+  "profile": {
+    "id": "ana",
+    "name": "Ana García",
+    "occupation": "Diseñadora freelance",
+    "nationality": "ES",
+    "tax_registration": "ES",
+    "vat_id": "ESX1234567L",
+    "vies_registered": true,
+    "spouse_or_children_in": null,
+    "home_owned_in": null,
+    "residency_history": { "2021": "ES", "2022": "ES", "2023": "ES", "2024": "ES", "2025": "ES" },
+    "portfolio_eur_cents": 3500000,
+    "foreign_company": null
+  },
+  "trips": [
+    { "id": "t0", "country": "ES", "city": "Madrid", "start": "2025-01-01", "end": "2025-12-31", "source": "historial" },
+    { "id": "t1", "country": "ES", "city": "Madrid", "start": "2026-01-01", "end": "2026-03-31", "source": "ubicación del móvil" },
+    { "id": "t2", "country": "CO", "city": "Medellín", "start": "2026-04-01", "end": "2026-06-21", "source": "vuelo IB6741" },
+    { "id": "t3", "country": "PT", "city": "Lisboa", "start": "2026-06-22", "end": "2026-11-19", "source": "vuelo TP0158" },
+    { "id": "t4", "country": "TH", "city": "Bangkok", "start": "2026-11-20", "end": "2026-12-31", "source": "vuelo reservado TG0949" }
+  ],
+  "clients": [
+    { "id": "c1", "name": "Studio Kraft GmbH", "country": "DE", "eu": true, "business": true, "vat_id": "DE811907980", "currency": "EUR" },
+    { "id": "c2", "name": "Lisboa Digital, Lda.", "country": "PT", "eu": true, "business": true, "vat_id": "PT503504564", "currency": "EUR" },
+    { "id": "c3", "name": "Acme Labs Inc.", "country": "US", "eu": false, "business": true, "vat_id": null, "currency": "USD" }
+  ],
+  "invoices": [
+    { "id": "F-2026-001", "client_id": "c1", "date": "2026-01-31", "concept": "Identidad visual — fase 1", "net_cents": 320000, "currency": "EUR", "status": "paid", "reserve_rate": 0.22 },
+    { "id": "F-2026-002", "client_id": "c3", "date": "2026-02-28", "concept": "Diseño UI app móvil", "net_cents": 450000, "currency": "USD", "status": "paid", "reserve_rate": 0.22 },
+    { "id": "F-2026-003", "client_id": "c2", "date": "2026-03-31", "concept": "Campaña primavera", "net_cents": 280000, "currency": "EUR", "status": "paid", "reserve_rate": 0.22 },
+    { "id": "F-2026-004", "client_id": "c1", "date": "2026-04-30", "concept": "Identidad visual — fase 2", "net_cents": 350000, "currency": "EUR", "status": "paid", "reserve_rate": 0.20 },
+    { "id": "F-2026-005", "client_id": "c3", "date": "2026-05-31", "concept": "Sistema de diseño", "net_cents": 500000, "currency": "USD", "status": "paid", "reserve_rate": 0.20 },
+    { "id": "F-2026-006", "client_id": "c2", "date": "2026-06-30", "concept": "Web corporativa", "net_cents": 300000, "currency": "EUR", "status": "paid", "reserve_rate": 0.20 },
+    { "id": "F-2026-007", "client_id": "c1", "date": "2026-07-31", "concept": "Packaging", "net_cents": 380000, "currency": "EUR", "status": "paid", "reserve_rate": 0.18 },
+    { "id": "F-2026-008", "client_id": "c3", "date": "2026-08-31", "concept": "Iteración UI v2", "net_cents": 420000, "currency": "USD", "status": "paid", "reserve_rate": 0.18 },
+    { "id": "F-2026-009", "client_id": "c2", "date": "2026-09-30", "concept": "Campaña otoño", "net_cents": 310000, "currency": "EUR", "status": "paid", "reserve_rate": 0.18 },
+    { "id": "F-2026-010", "client_id": "c1", "date": "2026-10-31", "concept": "Ilustraciones", "net_cents": 360000, "currency": "EUR", "status": "paid", "reserve_rate": 0.18 }
+  ],
+  "expenses": [
+    { "id": "g1", "date": "2026-02-03", "concept": "Suscripción Figma", "amount_cents": 1500, "currency": "EUR", "country": "ES", "category": "Software", "deductible": true },
+    { "id": "g2", "date": "2026-04-10", "concept": "Coworking en Medellín", "amount_cents": 32000000, "currency": "COP", "country": "CO", "category": "Oficina y coworking", "deductible": true },
+    { "id": "g3", "date": "2026-07-01", "concept": "Coworking en Lisboa", "amount_cents": 18000, "currency": "EUR", "country": "PT", "category": "Oficina y coworking", "deductible": true },
+    { "id": "g4", "date": "2026-09-15", "concept": "Seguro médico internacional", "amount_cents": 9500, "currency": "EUR", "country": "PT", "category": "Seguro de salud", "deductible": true }
+  ],
+  "documents": [
+    { "id": "d1", "type": "a1", "name": "Certificado A1 (Seguridad Social española en Portugal)", "country": "PT", "valid_from": "2026-06-22", "valid_until": "2026-12-15" },
+    { "id": "d2", "type": "visa", "name": "Visa V nómada digital Colombia", "country": "CO", "valid_from": "2026-04-01", "valid_until": "2026-07-31" },
+    { "id": "d3", "type": "visa", "name": "Destination Thailand Visa (DTV)", "country": "TH", "valid_from": "2026-11-01", "valid_until": "2027-01-10" }
+  ]
+}
