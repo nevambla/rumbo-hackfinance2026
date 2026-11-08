@@ -1,0 +1,57 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/tools/alerts",
+    "body": null
+  },
+  "response": {
+    "as_of": "2026-08-18",
+    "alerts": [
+      {
+        "id": "budget_PT",
+        "level": "warn",
+        "title_es": "Te quedan 43 días en Portugal",
+        "message_es": "Te quedan 43 días en Portugal. Antes de alargar la estancia, simúlalo.",
+        "country": "PT",
+        "rule_id": "PT_183_12M",
+        "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx"
+      },
+      {
+        "id": "missing_certificate",
+        "level": "warn",
+        "title_es": "Te falta el certificado de residencia fiscal",
+        "message_es": "Sin un certificado de residencia fiscal de otro país, España suma tus ausencias como días en España.",
+        "country": "ES",
+        "rule_id": "ES_183_SPORADIC",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764"
+      },
+      {
+        "id": "question_has_habitual_home_in_PT",
+        "level": "info",
+        "title_es": "Pregunta pendiente",
+        "message_es": "¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+        "country": "PT",
+        "rule_id": "PT_HABITUAL_HOME",
+        "source_url": null
+      },
+      {
+        "id": "notice_TH",
+        "level": "info",
+        "title_es": "Tailandia: renta extranjera",
+        "message_es": "Si llegas a ser residente en Tailandia, la renta extranjera tributa cuando la ingresas allí (desde 2024). Pendiente de verificar.",
+        "country": "TH",
+        "rule_id": null,
+        "source_url": null
+      },
+      {
+        "id": "reserve_pending",
+        "level": "info",
+        "title_es": "Reserva de impuestos",
+        "message_es": "Te faltan 3.905 € por apartar para llegar a la estimación anual (11.716 €).",
+        "country": "ES",
+        "rule_id": null,
+        "source_url": null
+      }
+    ]
+  }
+}

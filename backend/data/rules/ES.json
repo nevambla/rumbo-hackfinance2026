@@ -1,0 +1,46 @@
+{
+  "country": "ES",
+  "name_es": "España",
+  "rules": [
+    {
+      "id": "ES_183_SPORADIC",
+      "country": "ES",
+      "type": "sporadic_absences",
+      "params": {
+        "threshold": 183,
+        "comparator": ">",
+        "count_entry_exit": true,
+        "requires_prior_residence": true,
+        "certificate_question_key": "has_foreign_residence_certificate",
+        "certificate_question_es": "¿Tienes un certificado de residencia fiscal de otro país para este año?"
+      },
+      "description_es": "Más de 183 días en España en el año natural. Las ausencias esporádicas cuentan como días en España salvo que acredites tu residencia fiscal en otro país (normalmente con un certificado).",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+      "verified_at": null
+    },
+    {
+      "id": "ES_ECON_CENTER",
+      "country": "ES",
+      "type": "qualitative",
+      "params": {
+        "question_key": "main_economic_interests_in_ES",
+        "question_es": "¿Está en España el núcleo principal de tus actividades o intereses económicos (la mayor parte de tus ingresos, clientes o patrimonio)?",
+        "requires_presence": true,
+        "resident_reason_es": "El núcleo principal de tus actividades o intereses económicos está en España.",
+        "not_resident_reason_es": "Has indicado que tu núcleo de intereses económicos no está en España."
+      },
+      "description_es": "Residente si el núcleo principal o la base de tus actividades o intereses económicos está en España, directa o indirectamente.",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+      "verified_at": null
+    }
+  ],
+  "notices": [
+    {
+      "id": "ES_ART_8_2",
+      "country": "ES",
+      "text_es": "Si tienes nacionalidad española y te trasladas a una jurisdicción no cooperativa (paraíso fiscal), sigues siendo contribuyente en España el año del cambio y los cuatro siguientes (art. 8.2 LIRPF).",
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+      "verified_at": null
+    }
+  ]
+}

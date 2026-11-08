@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/trips/parse",
+    "body": {
+      "text": "Reserva confirmada · Nº 88213904\n\nApartamento con vistas en Sukhumvit, Bangkok, Tailandia\nHuésped: Ana García · 1 adulto\n\nLlegada (check-in): 16 de diciembre de 2026, a partir de las 15:00\nSalida (check-out): 15 de marzo de 2027, antes de las 11:00\n\nTotal: 1.890 € · Pagado\n"
+    }
+  },
+  "response": {
+    "mode": "mock",
+    "trips": [
+      {
+        "country_iso2": "TH",
+        "city": "Bangkok",
+        "start_date": "2026-12-16",
+        "end_date": "2027-03-15",
+        "confidence": 0.9,
+        "evidence_text": "Llegada (check-in): 16 de diciembre de 2026, a partir de las 15:00 · Salida (check-out): 15 de marzo de 2027, antes de las 11:00",
+        "needs_review": false
+      }
+    ],
+    "warnings_es": []
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "Tie-breaker criteria follow art. 4.2 of the OECD Model Tax Convention, which the bilateral treaties of these countries generally reproduce. Each pair must be checked against the treaty text. verified_at null = pending team verification.",
+  "tie_breakers": {
+    "source_url": "https://www.hacienda.gob.es/es-ES/Normativa%20y%20doctrina/Normativa/CDI/Paginas/CDI_Alfa.aspx",
+    "verified_at": null,
+    "criteria": [
+      {"order": 1, "criterion_key": "permanent_home", "criterion_es": "Vivienda permanente", "question_es": "¿En qué país tienes una vivienda permanente a tu disposición: en uno solo, en ambos o en ninguno?"},
+      {"order": 2, "criterion_key": "vital_interests", "criterion_es": "Centro de intereses vitales", "question_es": "¿En qué país están tus relaciones personales y económicas más estrechas (familia, clientes, patrimonio)?"},
+      {"order": 3, "criterion_key": "habitual_abode", "criterion_es": "Residencia habitual", "question_es": "¿En qué país pasas más tiempo de forma habitual?"},
+      {"order": 4, "criterion_key": "nationality", "criterion_es": "Nacionalidad", "question_es": "¿De qué país tienes la nacionalidad: de uno, de ambos o de ninguno?"}
+    ],
+    "fallback_es": "Si ninguno de los criterios decide, las autoridades de ambos países lo resuelven de común acuerdo."
+  }
+}

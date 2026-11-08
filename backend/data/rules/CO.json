@@ -1,0 +1,16 @@
+{
+  "country": "CO",
+  "name_es": "Colombia",
+  "rules": [
+    {
+      "id": "CO_183_365",
+      "country": "CO",
+      "type": "rolling_window_days",
+      "params": {"threshold": 183, "comparator": ">", "window_days": 365, "count_entry_exit": true},
+      "description_es": "Más de 183 días calendario, continuos o discontinuos, incluidos los días de entrada y salida, en cualquier periodo de 365 días consecutivos. La ventana puede repartirse entre dos años.",
+      "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+      "verified_at": null
+    }
+  ],
+  "notices": []
+}

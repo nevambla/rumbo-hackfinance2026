@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/tools/expenses",
+    "body": {
+      "concept": "Coworking en Lisboa",
+      "amount_eur": 80,
+      "country": "PT"
+    }
+  },
+  "response": {
+    "expense": {
+      "id": "exp-c0553fa2",
+      "date": "2026-08-18",
+      "concept": "Coworking en Lisboa",
+      "amount_cents": 8000,
+      "currency": "EUR",
+      "country": "PT",
+      "category": "coworking",
+      "deductible": true
+    },
+    "deductible": true,
+    "message_es": "Registrado: Coworking en Lisboa, 80,00 € en Portugal el 18/08/2026, como gasto deducible de la actividad."
+  }
+}

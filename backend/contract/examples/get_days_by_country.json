@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/tools/days",
+    "body": null
+  },
+  "response": {
+    "year": 2026,
+    "as_of": "2026-08-18",
+    "days": {
+      "ES": 90,
+      "PT": 140
+    },
+    "country_names_es": {
+      "ES": "España",
+      "PT": "Portugal"
+    }
+  }
+}

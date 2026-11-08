@@ -1,0 +1,9 @@
+{
+  "_comment": "Rough DEMO effective rates for a ~50k EUR freelance income. They are NOT legal rates; they only let the simulator show an order of magnitude. Replace with real scales before any real use.",
+  "rates": {
+    "MX": {"rate": "0.20", "estimate": true, "placeholder": true, "source_url": "https://www.sat.gob.mx/", "verified_at": null},
+    "CO": {"rate": "0.19", "estimate": true, "placeholder": true, "source_url": "https://www.dian.gov.co/", "verified_at": null},
+    "TH": {"rate": "0.17", "estimate": true, "placeholder": true, "source_url": "https://www.rd.go.th/english/", "verified_at": null}
+  },
+  "note_es": "Tipo efectivo aproximado de demostración; no es un cálculo por tramos."
+}

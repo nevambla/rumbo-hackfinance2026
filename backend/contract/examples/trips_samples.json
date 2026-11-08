@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/trips/samples",
+    "body": null
+  },
+  "response": [
+    {
+      "id": "airbnb_cdmx",
+      "label": "Alquiler en Ciudad de México",
+      "text": "Your reservation is confirmed!\n\nLoft in Roma Norte, Ciudad de México, Mexico\nCheck-in: Jan 8, 2027\nCheckout: Feb 26, 2027\nGuests: 1\n\nReservation code: HM4K2Z9QXP\n"
+    },
+    {
+      "id": "alojamiento_bangkok",
+      "label": "Alojamiento en Bangkok",
+      "text": "Reserva confirmada · Nº 88213904\n\nApartamento con vistas en Sukhumvit, Bangkok, Tailandia\nHuésped: Ana García · 1 adulto\n\nLlegada (check-in): 16 de diciembre de 2026, a partir de las 15:00\nSalida (check-out): 15 de marzo de 2027, antes de las 11:00\n\nTotal: 1.890 € · Pagado\n"
+    },
+    {
+      "id": "vuelo_lisboa_medellin",
+      "label": "Vuelo Lisboa → Medellín",
+      "text": "Asunto: Confirmación de tu reserva - Localizador QX7R2M\n\nHola Ana,\n\nTu vuelo está confirmado.\n\nPasajera: ANA GARCÍA\nVuelo de ida: Lisboa (LIS) → Medellín (MDE)\nFecha: 15/10/2026 · Salida 10:35 · Llegada 16:20 (hora local)\nEscala en Madrid (MAD)\n\nVuelo de vuelta: no incluido (solo ida).\n\nGracias por volar con Aerolínea Demo.\n"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "country": "ES",
+  "year": 2026,
+  "currency": "EUR",
+  "_comment": "General IRPF scale = state scale (art. 63 LIRPF) + the default (supletoria) autonomous scale. Real regional scales differ. Pending verification.",
+  "brackets": [
+    {"up_to_cents": 1245000, "rate": "0.19"},
+    {"up_to_cents": 2020000, "rate": "0.24"},
+    {"up_to_cents": 3520000, "rate": "0.30"},
+    {"up_to_cents": 6000000, "rate": "0.37"},
+    {"up_to_cents": 30000000, "rate": "0.45"},
+    {"up_to_cents": null, "rate": "0.47"}
+  ],
+  "personal_allowance_cents": 555000,
+  "taxable_share_of_income": "1",
+  "placeholder": false,
+  "is_estimate": true,
+  "note_es": "Escala estatal más la autonómica supletoria; la de tu comunidad puede variar. Se aplica el mínimo personal y los gastos deducibles registrados.",
+  "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+  "verified_at": null
+}

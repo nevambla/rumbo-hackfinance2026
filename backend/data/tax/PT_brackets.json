@@ -1,0 +1,24 @@
+{
+  "country": "PT",
+  "year": 2026,
+  "currency": "EUR",
+  "_comment": "PLACEHOLDER values: structure of the IRS general scale (CIRS art. 68) with approximate brackets. The team must replace them with the scale in force for 2026.",
+  "brackets": [
+    {"up_to_cents": 800000, "rate": "0.13"},
+    {"up_to_cents": 1200000, "rate": "0.165"},
+    {"up_to_cents": 1700000, "rate": "0.22"},
+    {"up_to_cents": 2200000, "rate": "0.25"},
+    {"up_to_cents": 2800000, "rate": "0.32"},
+    {"up_to_cents": 4100000, "rate": "0.355"},
+    {"up_to_cents": 4400000, "rate": "0.435"},
+    {"up_to_cents": 8300000, "rate": "0.45"},
+    {"up_to_cents": null, "rate": "0.48"}
+  ],
+  "personal_allowance_cents": 0,
+  "taxable_share_of_income": "0.75",
+  "placeholder": true,
+  "is_estimate": true,
+  "note_es": "Tramos aproximados (pendientes de verificar) y régimen simplificado con el 75 % de los ingresos de servicios como base. No incluye IFICI.",
+  "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs68.aspx",
+  "verified_at": null
+}

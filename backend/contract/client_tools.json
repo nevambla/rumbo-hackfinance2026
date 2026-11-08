@@ -1,0 +1,227 @@
+{
+  "_comment": "Canonical contract of the voice agent's client tools. Each tool name maps to one API endpoint. The frontend registers a handler with the SAME name that calls the endpoint and returns a compact JSON string to the agent. To create the tools in ElevenLabs, drop the 'endpoint' key (see API.md).",
+  "tools": [
+    {
+      "type": "client",
+      "name": "get_days_by_country",
+      "description": "Días de presencia del usuario en cada país en el año (hasta hoy). Úsala para '¿cuántos días llevo en…?'.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "Año a consultar. Si se omite, el año en curso."
+          }
+        },
+        "required": []
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/tools/days",
+        "params_in": "query"
+      }
+    },
+    {
+      "type": "client",
+      "name": "get_residency_status",
+      "description": "Residencia fiscal estimada del año: países que reclaman residencia con la regla aplicada (rule_id, source_url), preguntas pendientes, doble residencia, criterios de desempate, avisos y nivel de confianza.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "Año a consultar. Si se omite, el año en curso."
+          }
+        },
+        "required": []
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/tools/residency",
+        "params_in": "query"
+      }
+    },
+    {
+      "type": "client",
+      "name": "get_day_budget",
+      "description": "Presupuesto de días por país: días usados, días que quedan antes de cumplir la regla de días, días contando los viajes planificados y fecha prevista de cruce del umbral.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/tools/budget",
+        "params_in": null
+      }
+    },
+    {
+      "type": "client",
+      "name": "simulate_stay",
+      "description": "Simula alargar la estancia actual o pasar X días en un país y devuelve la residencia antes y después, si se cruza el umbral y en qué fecha, la doble residencia y el impuesto estimado. No guarda nada.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "type": "string",
+            "description": "Código ISO 3166-1 alfa-2 del país: ES, PT, MX, CO o TH.",
+            "enum": [
+              "ES",
+              "PT",
+              "MX",
+              "CO",
+              "TH"
+            ]
+          },
+          "extra_days": {
+            "type": "integer",
+            "description": "Días adicionales (un mes = 30 días). Entre 1 y 366."
+          },
+          "start_date": {
+            "type": "string",
+            "description": "Opcional. Fecha de inicio AAAA-MM-DD si es un viaje nuevo y no una prolongación de la estancia actual."
+          }
+        },
+        "required": [
+          "country",
+          "extra_days"
+        ]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/tools/simulate",
+        "params_in": "body"
+      }
+    },
+    {
+      "type": "client",
+      "name": "get_tax_reserve",
+      "description": "Estado de la hucha fiscal (cuenta remunerada MyInvestor simulada): reservado, estimación anual de impuestos, pendiente de apartar e intereses generados.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/tools/reserve",
+        "params_in": null
+      }
+    },
+    {
+      "type": "client",
+      "name": "register_expense",
+      "description": "Registra un gasto deducible de la actividad dictado por el usuario.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "concept": {
+            "type": "string",
+            "description": "Concepto breve, p. ej. 'Coworking en Medellín'."
+          },
+          "amount_eur": {
+            "type": "number",
+            "description": "Importe en euros, p. ej. 80."
+          },
+          "country": {
+            "type": "string",
+            "description": "Código ISO 3166-1 alfa-2 del país: ES, PT, MX, CO o TH.",
+            "enum": [
+              "ES",
+              "PT",
+              "MX",
+              "CO",
+              "TH"
+            ]
+          }
+        },
+        "required": [
+          "concept",
+          "amount_eur",
+          "country"
+        ]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/tools/expenses",
+        "params_in": "body"
+      }
+    },
+    {
+      "type": "client",
+      "name": "answer_question",
+      "description": "Guarda la respuesta del usuario a una pregunta pendiente o a un criterio de desempate y devuelve la residencia recalculada.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "question_key": {
+            "type": "string",
+            "description": "El question_key exacto que devolvió la herramienta anterior."
+          },
+          "value": {
+            "type": "string",
+            "description": "'true' o 'false' para preguntas de sí/no; el código de país (p. ej. 'PT') o 'both' para criterios de desempate."
+          }
+        },
+        "required": [
+          "question_key",
+          "value"
+        ]
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/tools/answers",
+        "params_in": "body"
+      }
+    },
+    {
+      "type": "client",
+      "name": "get_alerts",
+      "description": "Alertas actuales: umbrales cercanos o superados, doble residencia, documentos que faltan, preguntas pendientes y reserva de impuestos.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "method": "GET",
+        "path": "/api/tools/alerts",
+        "params_in": null
+      }
+    },
+    {
+      "type": "client",
+      "name": "generate_dossier",
+      "description": "Genera el expediente de defensa en PDF (días por país, reglas aplicadas con su fuente y documentos que faltan). El enlace se muestra en pantalla.",
+      "expects_response": true,
+      "response_timeout_secs": 10,
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "endpoint": {
+        "method": "POST",
+        "path": "/api/tools/dossier",
+        "params_in": null
+      }
+    }
+  ]
+}

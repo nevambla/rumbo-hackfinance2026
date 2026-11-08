@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/api/clock/advance",
+    "body": {
+      "days": 30
+    }
+  },
+  "response": {
+    "today": "2026-09-17",
+    "base_date": "2026-08-18",
+    "offset_days": 30
+  }
+}

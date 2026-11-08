@@ -1,0 +1,39 @@
+{
+  "country": "MX",
+  "name_es": "México",
+  "rules": [
+    {
+      "id": "MX_HOME",
+      "country": "MX",
+      "type": "qualitative",
+      "params": {
+        "question_key": "has_home_in_MX",
+        "question_es": "¿Has establecido tu casa habitación en México? Una vivienda temporal o con fines turísticos no cuenta.",
+        "requires_presence": true,
+        "resident_reason_es": "Has establecido tu casa habitación en México.",
+        "not_resident_reason_es": "No has establecido tu casa habitación en México (México no usa una regla de días)."
+      },
+      "description_es": "Residente si ha establecido su casa habitación en México. No hay regla de días; una vivienda temporal con fines turísticos no cuenta.",
+      "source_url": "https://mley.mx/CFF/articulo/9o/",
+      "verified_at": null
+    },
+    {
+      "id": "MX_VITAL_INTERESTS",
+      "country": "MX",
+      "type": "qualitative",
+      "params": {
+        "question_key": "vital_interests_in_MX",
+        "question_es": "Si además tienes casa en otro país: ¿está en México tu centro de intereses vitales (por ejemplo, más del 50 % de tus ingresos con fuente en México)?",
+        "requires_presence": true,
+        "requires_answers": {"has_home_in_MX": true},
+        "decisive": true,
+        "resident_reason_es": "Tienes casa en México y tu centro de intereses vitales está allí.",
+        "not_resident_reason_es": "Tienes casa en México, pero también en otro país y tu centro de intereses vitales no está en México."
+      },
+      "description_es": "Si también tiene casa en otro país, residente si su centro de intereses vitales está en México (por ejemplo, más del 50 % de sus ingresos con fuente en México). Desarrollado en el art. 5 del Reglamento del CFF.",
+      "source_url": "https://mley.mx/CFF/articulo/9o/",
+      "verified_at": null
+    }
+  ],
+  "notices": []
+}

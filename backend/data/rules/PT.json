@@ -1,0 +1,31 @@
+{
+  "country": "PT",
+  "name_es": "Portugal",
+  "rules": [
+    {
+      "id": "PT_183_12M",
+      "country": "PT",
+      "type": "rolling_window_days",
+      "params": {"threshold": 183, "comparator": ">", "window_days": 365, "count_entry_exit": true},
+      "description_es": "Más de 183 días, seguidos o no, en cualquier periodo de 12 meses que empiece o termine en el año.",
+      "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+      "verified_at": null
+    },
+    {
+      "id": "PT_HABITUAL_HOME",
+      "country": "PT",
+      "type": "qualitative",
+      "params": {
+        "question_key": "has_habitual_home_in_PT",
+        "question_es": "¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+        "requires_presence": true,
+        "resident_reason_es": "Dispones en Portugal de una vivienda que hace suponer la intención de mantenerla como residencia habitual, aunque no llegues a 183 días.",
+        "not_resident_reason_es": "Has indicado que no tienes en Portugal una vivienda que vayas a mantener como residencia habitual."
+      },
+      "description_es": "Con menos de 183 días, residente si dispones de una vivienda en condiciones que hagan suponer la intención de mantenerla como residencia habitual.",
+      "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+      "verified_at": null
+    }
+  ],
+  "notices": []
+}

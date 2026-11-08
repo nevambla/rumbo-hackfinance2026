@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/clock",
+    "body": null
+  },
+  "response": {
+    "today": "2026-08-18",
+    "base_date": "2026-08-18",
+    "offset_days": 0
+  }
+}

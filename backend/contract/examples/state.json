@@ -1,0 +1,641 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/state",
+    "body": null
+  },
+  "response": {
+    "clock": {
+      "today": "2026-08-18",
+      "base_date": "2026-08-18",
+      "offset_days": 0
+    },
+    "user": {
+      "id": "ana",
+      "name": "Ana García",
+      "occupation_es": "Diseñadora freelance",
+      "nationality": "ES",
+      "prior_tax_residence": {
+        "2025": "ES"
+      }
+    },
+    "trips": [
+      {
+        "id": "trip-mad-2026",
+        "country": "ES",
+        "city": "Madrid",
+        "start_date": "2026-01-01",
+        "end_date": "2026-03-31",
+        "expected_end_date": null,
+        "source": "seed"
+      },
+      {
+        "id": "trip-lis-2026",
+        "country": "PT",
+        "city": "Lisboa",
+        "start_date": "2026-04-01",
+        "end_date": null,
+        "expected_end_date": "2026-08-31",
+        "source": "seed"
+      }
+    ],
+    "planned_trips": [
+      {
+        "id": "plan-mde-2026",
+        "country": "CO",
+        "city": "Medellín",
+        "start_date": "2026-10-15",
+        "end_date": "2026-12-15",
+        "expected_end_date": null,
+        "source": "seed"
+      },
+      {
+        "id": "plan-bkk-2026",
+        "country": "TH",
+        "city": "Bangkok",
+        "start_date": "2026-12-16",
+        "end_date": "2027-03-15",
+        "expected_end_date": null,
+        "source": "seed"
+      }
+    ],
+    "invoices": [
+      {
+        "id": "inv-2026-01-1",
+        "date": "2026-01-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-01-2",
+        "date": "2026-01-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-01-3",
+        "date": "2026-01-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-02-1",
+        "date": "2026-02-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-02-2",
+        "date": "2026-02-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-02-3",
+        "date": "2026-02-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-03-1",
+        "date": "2026-03-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-03-2",
+        "date": "2026-03-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-03-3",
+        "date": "2026-03-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-04-1",
+        "date": "2026-04-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-04-2",
+        "date": "2026-04-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-04-3",
+        "date": "2026-04-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-05-1",
+        "date": "2026-05-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-05-2",
+        "date": "2026-05-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-05-3",
+        "date": "2026-05-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-06-1",
+        "date": "2026-06-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-06-2",
+        "date": "2026-06-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-06-3",
+        "date": "2026-06-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-07-1",
+        "date": "2026-07-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-07-2",
+        "date": "2026-07-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-07-3",
+        "date": "2026-07-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      },
+      {
+        "id": "inv-2026-08-1",
+        "date": "2026-08-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 43938
+      },
+      {
+        "id": "inv-2026-08-2",
+        "date": "2026-08-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 33686
+      },
+      {
+        "id": "inv-2026-08-3",
+        "date": "2026-08-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2441",
+        "reserved_cents": 20016
+      }
+    ],
+    "expenses": [
+      {
+        "id": "exp-1",
+        "date": "2026-02-03",
+        "concept": "Adobe Creative Cloud (anual)",
+        "amount_cents": 72588,
+        "currency": "EUR",
+        "country": "ES",
+        "category": "software",
+        "deductible": true
+      },
+      {
+        "id": "exp-2",
+        "date": "2026-03-01",
+        "concept": "Coworking La Fábrica, Madrid",
+        "amount_cents": 19000,
+        "currency": "EUR",
+        "country": "ES",
+        "category": "coworking",
+        "deductible": true
+      },
+      {
+        "id": "exp-3",
+        "date": "2026-05-02",
+        "concept": "Coworking Second Home, Lisboa",
+        "amount_cents": 22000,
+        "currency": "EUR",
+        "country": "PT",
+        "category": "coworking",
+        "deductible": true
+      },
+      {
+        "id": "exp-4",
+        "date": "2026-06-12",
+        "concept": "Figma Professional",
+        "amount_cents": 14400,
+        "currency": "USD",
+        "country": "PT",
+        "category": "software",
+        "deductible": true
+      },
+      {
+        "id": "exp-5",
+        "date": "2026-07-20",
+        "concept": "Portátil (amortización anual)",
+        "amount_cents": 60000,
+        "currency": "EUR",
+        "country": "PT",
+        "category": "equipo",
+        "deductible": true
+      }
+    ],
+    "answers": {
+      "has_foreign_residence_certificate": false
+    },
+    "days": {
+      "year": 2026,
+      "as_of": "2026-08-18",
+      "days": {
+        "ES": 90,
+        "PT": 140
+      },
+      "country_names_es": {
+        "ES": "España",
+        "PT": "Portugal"
+      }
+    },
+    "residency": {
+      "year": 2026,
+      "as_of": "2026-08-18",
+      "claims": [
+        {
+          "country": "ES",
+          "country_name_es": "España",
+          "rule_id": "ES_183_SPORADIC",
+          "status": "resident",
+          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+          "verified": false
+        }
+      ],
+      "evaluations": [
+        {
+          "country": "CO",
+          "rule_id": "CO_183_365",
+          "status": "not_resident",
+          "reason_es": "Máximo de 0 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
+          "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+          "verified": false,
+          "days": 0,
+          "threshold": 183
+        },
+        {
+          "country": "ES",
+          "rule_id": "ES_183_SPORADIC",
+          "status": "resident",
+          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+          "verified": false,
+          "days": 230,
+          "threshold": 183
+        },
+        {
+          "country": "ES",
+          "rule_id": "ES_ECON_CENTER",
+          "status": "needs_answer",
+          "reason_es": "Falta tu respuesta: ¿Está en España el núcleo principal de tus actividades o intereses económicos (la mayor parte de tus ingresos, clientes o patrimonio)?",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+          "verified": false,
+          "days": null,
+          "threshold": null
+        },
+        {
+          "country": "MX",
+          "rule_id": "MX_HOME",
+          "status": "not_applicable",
+          "reason_es": "Sin presencia en México en 2026.",
+          "source_url": "https://mley.mx/CFF/articulo/9o/",
+          "verified": false,
+          "days": null,
+          "threshold": null
+        },
+        {
+          "country": "MX",
+          "rule_id": "MX_VITAL_INTERESTS",
+          "status": "not_applicable",
+          "reason_es": "Sin presencia en México en 2026.",
+          "source_url": "https://mley.mx/CFF/articulo/9o/",
+          "verified": false,
+          "days": null,
+          "threshold": null
+        },
+        {
+          "country": "PT",
+          "rule_id": "PT_183_12M",
+          "status": "not_resident",
+          "reason_es": "Máximo de 140 días en Portugal en cualquier periodo de 365 días; el umbral es más de 183.",
+          "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+          "verified": false,
+          "days": 140,
+          "threshold": 183
+        },
+        {
+          "country": "PT",
+          "rule_id": "PT_HABITUAL_HOME",
+          "status": "needs_answer",
+          "reason_es": "Falta tu respuesta: ¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+          "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+          "verified": false,
+          "days": null,
+          "threshold": null
+        },
+        {
+          "country": "TH",
+          "rule_id": "TH_180",
+          "status": "not_resident",
+          "reason_es": "0 días en Tailandia en 2026; la regla exige 180 o más.",
+          "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
+          "verified": false,
+          "days": 0,
+          "threshold": 180
+        }
+      ],
+      "pending_questions": [
+        {
+          "question_key": "has_habitual_home_in_PT",
+          "question_es": "¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+          "country": "PT",
+          "rule_id": "PT_HABITUAL_HOME"
+        }
+      ],
+      "dual_residency": false,
+      "tie_breakers": [],
+      "treaty_hint_es": null,
+      "warnings_es": [],
+      "notices_es": [
+        "Si tienes nacionalidad española y te trasladas a una jurisdicción no cooperativa (paraíso fiscal), sigues siendo contribuyente en España el año del cambio y los cuatro siguientes (art. 8.2 LIRPF)."
+      ],
+      "confidence": "baja",
+      "unverified_rule_ids": [
+        "ES_183_SPORADIC",
+        "ES_ECON_CENTER",
+        "PT_HABITUAL_HOME"
+      ],
+      "disclaimer_es": "Estimación orientativa. Confírmalo con un asesor."
+    },
+    "budget": {
+      "year": 2026,
+      "as_of": "2026-08-18",
+      "items": [
+        {
+          "country": "PT",
+          "country_name_es": "Portugal",
+          "rule_id": "PT_183_12M",
+          "threshold": 183,
+          "comparator": ">",
+          "window_days": 365,
+          "days_used": 140,
+          "days_left": 43,
+          "days_used_with_planned": 153,
+          "days_left_with_planned": 30,
+          "projected_cross_date": null,
+          "status": "warn",
+          "message_es": "Te quedan 43 días en Portugal.",
+          "note_es": null,
+          "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+          "verified": false
+        },
+        {
+          "country": "ES",
+          "country_name_es": "España",
+          "rule_id": "ES_183_SPORADIC",
+          "threshold": 183,
+          "comparator": ">",
+          "window_days": null,
+          "days_used": 90,
+          "days_left": 93,
+          "days_used_with_planned": 90,
+          "days_left_with_planned": 93,
+          "projected_cross_date": null,
+          "status": "ok",
+          "message_es": "Te quedan 93 días en España.",
+          "note_es": "Sin certificado de residencia fiscal en otro país, España suma tus ausencias: este contador solo muestra tus días físicos en España.",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+          "verified": false
+        },
+        {
+          "country": "TH",
+          "country_name_es": "Tailandia",
+          "rule_id": "TH_180",
+          "threshold": 180,
+          "comparator": ">=",
+          "window_days": null,
+          "days_used": 0,
+          "days_left": 179,
+          "days_used_with_planned": 16,
+          "days_left_with_planned": 163,
+          "projected_cross_date": null,
+          "status": "ok",
+          "message_es": "Te quedan 179 días en Tailandia.",
+          "note_es": null,
+          "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
+          "verified": false
+        },
+        {
+          "country": "CO",
+          "country_name_es": "Colombia",
+          "rule_id": "CO_183_365",
+          "threshold": 183,
+          "comparator": ">",
+          "window_days": 365,
+          "days_used": 0,
+          "days_left": 183,
+          "days_used_with_planned": 62,
+          "days_left_with_planned": 121,
+          "projected_cross_date": null,
+          "status": "ok",
+          "message_es": "Te quedan 183 días en Colombia.",
+          "note_es": null,
+          "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+          "verified": false
+        }
+      ]
+    },
+    "reserve": {
+      "as_of": "2026-08-18",
+      "tax_country": "ES",
+      "tax_country_name_es": "España",
+      "projected_annual_income_cents": 4800000,
+      "reserved_cents": 781120,
+      "estimated_cents": 1171571,
+      "pending_cents": 390451,
+      "interest_cents": 6191,
+      "balance_cents": 787311,
+      "savings_rate": "0.025",
+      "provider_name": "MyInvestor (simulado)",
+      "provider_note_es": "Cuenta remunerada simulada. El tipo es un valor de demostración, no una oferta real de MyInvestor.",
+      "effective_rate": "0.2441",
+      "is_estimate": true,
+      "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+      "summary_es": "Hucha fiscal (MyInvestor): 7.811 € · +62 € de intereses"
+    },
+    "alerts": {
+      "as_of": "2026-08-18",
+      "alerts": [
+        {
+          "id": "budget_PT",
+          "level": "warn",
+          "title_es": "Te quedan 43 días en Portugal",
+          "message_es": "Te quedan 43 días en Portugal. Antes de alargar la estancia, simúlalo.",
+          "country": "PT",
+          "rule_id": "PT_183_12M",
+          "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx"
+        },
+        {
+          "id": "missing_certificate",
+          "level": "warn",
+          "title_es": "Te falta el certificado de residencia fiscal",
+          "message_es": "Sin un certificado de residencia fiscal de otro país, España suma tus ausencias como días en España.",
+          "country": "ES",
+          "rule_id": "ES_183_SPORADIC",
+          "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764"
+        },
+        {
+          "id": "question_has_habitual_home_in_PT",
+          "level": "info",
+          "title_es": "Pregunta pendiente",
+          "message_es": "¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+          "country": "PT",
+          "rule_id": "PT_HABITUAL_HOME",
+          "source_url": null
+        },
+        {
+          "id": "notice_TH",
+          "level": "info",
+          "title_es": "Tailandia: renta extranjera",
+          "message_es": "Si llegas a ser residente en Tailandia, la renta extranjera tributa cuando la ingresas allí (desde 2024). Pendiente de verificar.",
+          "country": "TH",
+          "rule_id": null,
+          "source_url": null
+        },
+        {
+          "id": "reserve_pending",
+          "level": "info",
+          "title_es": "Reserva de impuestos",
+          "message_es": "Te faltan 3.905 € por apartar para llegar a la estimación anual (11.716 €).",
+          "country": "ES",
+          "rule_id": null,
+          "source_url": null
+        }
+      ]
+    },
+    "modes": {
+      "anthropic": false,
+      "elevenlabs": false
+    }
+  }
+}

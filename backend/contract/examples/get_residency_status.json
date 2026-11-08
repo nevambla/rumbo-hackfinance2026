@@ -1,0 +1,126 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/tools/residency",
+    "body": null
+  },
+  "response": {
+    "year": 2026,
+    "as_of": "2026-08-18",
+    "claims": [
+      {
+        "country": "ES",
+        "country_name_es": "España",
+        "rule_id": "ES_183_SPORADIC",
+        "status": "resident",
+        "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+        "verified": false
+      }
+    ],
+    "evaluations": [
+      {
+        "country": "CO",
+        "rule_id": "CO_183_365",
+        "status": "not_resident",
+        "reason_es": "Máximo de 0 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
+        "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+        "verified": false,
+        "days": 0,
+        "threshold": 183
+      },
+      {
+        "country": "ES",
+        "rule_id": "ES_183_SPORADIC",
+        "status": "resident",
+        "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+        "verified": false,
+        "days": 230,
+        "threshold": 183
+      },
+      {
+        "country": "ES",
+        "rule_id": "ES_ECON_CENTER",
+        "status": "needs_answer",
+        "reason_es": "Falta tu respuesta: ¿Está en España el núcleo principal de tus actividades o intereses económicos (la mayor parte de tus ingresos, clientes o patrimonio)?",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+        "verified": false,
+        "days": null,
+        "threshold": null
+      },
+      {
+        "country": "MX",
+        "rule_id": "MX_HOME",
+        "status": "not_applicable",
+        "reason_es": "Sin presencia en México en 2026.",
+        "source_url": "https://mley.mx/CFF/articulo/9o/",
+        "verified": false,
+        "days": null,
+        "threshold": null
+      },
+      {
+        "country": "MX",
+        "rule_id": "MX_VITAL_INTERESTS",
+        "status": "not_applicable",
+        "reason_es": "Sin presencia en México en 2026.",
+        "source_url": "https://mley.mx/CFF/articulo/9o/",
+        "verified": false,
+        "days": null,
+        "threshold": null
+      },
+      {
+        "country": "PT",
+        "rule_id": "PT_183_12M",
+        "status": "not_resident",
+        "reason_es": "Máximo de 140 días en Portugal en cualquier periodo de 365 días; el umbral es más de 183.",
+        "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+        "verified": false,
+        "days": 140,
+        "threshold": 183
+      },
+      {
+        "country": "PT",
+        "rule_id": "PT_HABITUAL_HOME",
+        "status": "needs_answer",
+        "reason_es": "Falta tu respuesta: ¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+        "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+        "verified": false,
+        "days": null,
+        "threshold": null
+      },
+      {
+        "country": "TH",
+        "rule_id": "TH_180",
+        "status": "not_resident",
+        "reason_es": "0 días en Tailandia en 2026; la regla exige 180 o más.",
+        "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
+        "verified": false,
+        "days": 0,
+        "threshold": 180
+      }
+    ],
+    "pending_questions": [
+      {
+        "question_key": "has_habitual_home_in_PT",
+        "question_es": "¿Tienes en Portugal una vivienda en condiciones que hagan suponer que quieres mantenerla como residencia habitual (por ejemplo, un alquiler de larga duración a tu nombre)?",
+        "country": "PT",
+        "rule_id": "PT_HABITUAL_HOME"
+      }
+    ],
+    "dual_residency": false,
+    "tie_breakers": [],
+    "treaty_hint_es": null,
+    "warnings_es": [],
+    "notices_es": [
+      "Si tienes nacionalidad española y te trasladas a una jurisdicción no cooperativa (paraíso fiscal), sigues siendo contribuyente en España el año del cambio y los cuatro siguientes (art. 8.2 LIRPF)."
+    ],
+    "confidence": "baja",
+    "unverified_rule_ids": [
+      "ES_183_SPORADIC",
+      "ES_ECON_CENTER",
+      "PT_HABITUAL_HOME"
+    ],
+    "disclaimer_es": "Estimación orientativa. Confírmalo con un asesor."
+  }
+}

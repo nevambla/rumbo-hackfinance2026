@@ -1,0 +1,85 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/api/tools/budget",
+    "body": null
+  },
+  "response": {
+    "year": 2026,
+    "as_of": "2026-08-18",
+    "items": [
+      {
+        "country": "PT",
+        "country_name_es": "Portugal",
+        "rule_id": "PT_183_12M",
+        "threshold": 183,
+        "comparator": ">",
+        "window_days": 365,
+        "days_used": 140,
+        "days_left": 43,
+        "days_used_with_planned": 153,
+        "days_left_with_planned": 30,
+        "projected_cross_date": null,
+        "status": "warn",
+        "message_es": "Te quedan 43 días en Portugal.",
+        "note_es": null,
+        "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
+        "verified": false
+      },
+      {
+        "country": "ES",
+        "country_name_es": "España",
+        "rule_id": "ES_183_SPORADIC",
+        "threshold": 183,
+        "comparator": ">",
+        "window_days": null,
+        "days_used": 90,
+        "days_left": 93,
+        "days_used_with_planned": 90,
+        "days_left_with_planned": 93,
+        "projected_cross_date": null,
+        "status": "ok",
+        "message_es": "Te quedan 93 días en España.",
+        "note_es": "Sin certificado de residencia fiscal en otro país, España suma tus ausencias: este contador solo muestra tus días físicos en España.",
+        "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
+        "verified": false
+      },
+      {
+        "country": "TH",
+        "country_name_es": "Tailandia",
+        "rule_id": "TH_180",
+        "threshold": 180,
+        "comparator": ">=",
+        "window_days": null,
+        "days_used": 0,
+        "days_left": 179,
+        "days_used_with_planned": 16,
+        "days_left_with_planned": 163,
+        "projected_cross_date": null,
+        "status": "ok",
+        "message_es": "Te quedan 179 días en Tailandia.",
+        "note_es": null,
+        "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
+        "verified": false
+      },
+      {
+        "country": "CO",
+        "country_name_es": "Colombia",
+        "rule_id": "CO_183_365",
+        "threshold": 183,
+        "comparator": ">",
+        "window_days": 365,
+        "days_used": 0,
+        "days_left": 183,
+        "days_used_with_planned": 62,
+        "days_left_with_planned": 121,
+        "projected_cross_date": null,
+        "status": "ok",
+        "message_es": "Te quedan 183 días en Colombia.",
+        "note_es": null,
+        "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+        "verified": false
+      }
+    ]
+  }
+}

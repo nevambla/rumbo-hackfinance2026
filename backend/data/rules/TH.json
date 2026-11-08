@@ -1,0 +1,24 @@
+{
+  "country": "TH",
+  "name_es": "Tailandia",
+  "rules": [
+    {
+      "id": "TH_180",
+      "country": "TH",
+      "type": "calendar_year_days",
+      "params": {"threshold": 180, "comparator": ">=", "count_entry_exit": true},
+      "description_es": "Residente con 180 días o más en Tailandia en el año natural.",
+      "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
+      "verified_at": null
+    }
+  ],
+  "notices": [
+    {
+      "id": "TH_REMITTANCE_2024",
+      "country": "TH",
+      "text_es": "Desde 2024, si eres residente en Tailandia, la renta obtenida fuera tributa allí cuando la ingresas en Tailandia. Fuente secundaria; pendiente de verificar en rd.go.th.",
+      "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
+      "verified_at": null
+    }
+  ]
+}
