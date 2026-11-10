@@ -40,6 +40,8 @@ git fetch && git switch integracion
 cd backend && make install && make test && make dev
 ```
 
+Si `make install` falla con *requires a different Python: 3.9.x*, es que `python3` apunta a una versión antigua (pasa en macOS). Indica una versión nueva: `make install PY=python3.12`. Si no la tienes, instálala antes con `brew install python@3.12`.
+
 La API queda en http://localhost:8000 y Swagger en http://localhost:8000/docs.
 
 **Claves:** no están en el repo. Cada uno crea `backend/.env` a partir de `.env.example` y rellena `ELEVENLABS_API_KEY` y `ELEVENLABS_AGENT_ID`. Pedidle la clave a Sofía por un canal privado. Para trabajar en la web no hace falta: sin claves, `/api/voice/signed-url` devuelve 404 y el resto de la API funciona igual.
