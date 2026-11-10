@@ -1,0 +1,46 @@
+{
+  "type": "client",
+  "name": "register_expense",
+  "description": "Registra un gasto deducible de la actividad dictado por el usuario.",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": [
+    {
+      "id": "concept",
+      "type": "string",
+      "description": "Concepto breve, p. ej. 'Coworking en Medellín'.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    },
+    {
+      "id": "amount_eur",
+      "type": "number",
+      "description": "Importe en euros, p. ej. 80.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    },
+    {
+      "id": "country",
+      "type": "string",
+      "description": "Código ISO 3166-1 alfa-2 del país: ES, PT, MX, CO o TH.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    }
+  ],
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "response_mocks": []
+}

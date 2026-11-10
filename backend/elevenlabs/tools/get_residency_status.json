@@ -1,0 +1,28 @@
+{
+  "type": "client",
+  "name": "get_residency_status",
+  "description": "Residencia fiscal estimada del año: países que reclaman residencia con la regla aplicada (rule_id, source_url), preguntas pendientes, doble residencia, criterios de desempate, avisos y nivel de confianza.",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": [
+    {
+      "id": "year",
+      "type": "number",
+      "description": "Año a consultar. Si se omite, el año en curso.",
+      "dynamic_variable": "",
+      "required": false,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    }
+  ],
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "response_mocks": []
+}

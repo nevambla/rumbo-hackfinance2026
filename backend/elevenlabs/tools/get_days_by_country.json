@@ -1,0 +1,28 @@
+{
+  "type": "client",
+  "name": "get_days_by_country",
+  "description": "Días de presencia del usuario en cada país en el año (hasta hoy). Úsala para '¿cuántos días llevo en…?'.",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": [
+    {
+      "id": "year",
+      "type": "number",
+      "description": "Año a consultar. Si se omite, el año en curso.",
+      "dynamic_variable": "",
+      "required": false,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    }
+  ],
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "response_mocks": []
+}

@@ -3,7 +3,7 @@
 Lo que necesita un frontend para integrarse con el backend sin leer su código.
 
 - **Tipos y endpoints:** [`contract/openapi.json`](contract/openapi.json). En vivo: `http://localhost:8000/docs` (Swagger) y `/openapi.json`.
-- **Respuestas reales de ejemplo:** [`contract/examples/`](contract/examples/). Cada fichero trae la petición y la respuesta para la usuaria de demo (Ana, a 18/08/2026). Sirven como *fixtures* para maquetar sin backend.
+- **Respuestas reales de ejemplo:** [`contract/examples/`](contract/examples/). Cada fichero trae la petición y la respuesta para la usuaria de demo (Ana, a 12/11/2026; en vivo, las fechas son relativas al día de hoy). Sirven como *fixtures* para maquetar sin backend.
 - **Client tools del agente de voz:** [`contract/client_tools.json`](contract/client_tools.json).
 
 Si cambia la API, ejecuta `make contract` y sube los ficheros de `contract/`. Un test falla si `openapi.json` no está al día.

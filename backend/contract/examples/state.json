@@ -6,8 +6,8 @@
   },
   "response": {
     "clock": {
-      "today": "2026-08-18",
-      "base_date": "2026-08-18",
+      "today": "2026-11-12",
+      "base_date": "2026-11-12",
       "offset_days": 0
     },
     "user": {
@@ -21,7 +21,7 @@
     },
     "trips": [
       {
-        "id": "trip-mad-2026",
+        "id": "trip-mad",
         "country": "ES",
         "city": "Madrid",
         "start_date": "2026-01-01",
@@ -30,31 +30,40 @@
         "source": "seed"
       },
       {
-        "id": "trip-lis-2026",
+        "id": "trip-mde",
+        "country": "CO",
+        "city": "Medellín",
+        "start_date": "2026-04-01",
+        "end_date": "2026-06-25",
+        "expected_end_date": null,
+        "source": "seed"
+      },
+      {
+        "id": "trip-lis",
         "country": "PT",
         "city": "Lisboa",
-        "start_date": "2026-04-01",
+        "start_date": "2026-06-26",
         "end_date": null,
-        "expected_end_date": "2026-08-31",
+        "expected_end_date": "2026-11-25",
         "source": "seed"
       }
     ],
     "planned_trips": [
       {
-        "id": "plan-mde-2026",
-        "country": "CO",
-        "city": "Medellín",
-        "start_date": "2026-10-15",
-        "end_date": "2026-12-15",
+        "id": "plan-cdmx",
+        "country": "MX",
+        "city": "Ciudad de México",
+        "start_date": "2027-01-09",
+        "end_date": "2027-03-11",
         "expected_end_date": null,
         "source": "seed"
       },
       {
-        "id": "plan-bkk-2026",
+        "id": "plan-bkk",
         "country": "TH",
         "city": "Bangkok",
-        "start_date": "2026-12-16",
-        "end_date": "2027-03-15",
+        "start_date": "2027-03-12",
+        "end_date": "2027-06-09",
         "expected_end_date": null,
         "source": "seed"
       }
@@ -67,8 +76,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-01-2",
@@ -77,8 +86,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-01-3",
@@ -87,8 +96,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-02-1",
@@ -97,8 +106,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-02-2",
@@ -107,8 +116,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-02-3",
@@ -117,8 +126,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-03-1",
@@ -127,8 +136,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-03-2",
@@ -137,8 +146,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-03-3",
@@ -147,8 +156,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-04-1",
@@ -157,8 +166,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-04-2",
@@ -167,8 +176,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-04-3",
@@ -177,8 +186,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-05-1",
@@ -187,8 +196,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-05-2",
@@ -197,8 +206,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-05-3",
@@ -207,8 +216,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-06-1",
@@ -217,8 +226,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-06-2",
@@ -227,8 +236,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-06-3",
@@ -237,8 +246,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-07-1",
@@ -247,8 +256,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-07-2",
@@ -257,8 +266,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-07-3",
@@ -267,8 +276,8 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
       },
       {
         "id": "inv-2026-08-1",
@@ -277,8 +286,8 @@
         "client_country": "DE",
         "amount_cents": 180000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 43938
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
       },
       {
         "id": "inv-2026-08-2",
@@ -287,8 +296,8 @@
         "client_country": "US",
         "amount_cents": 150000,
         "currency": "USD",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 33686
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       },
       {
         "id": "inv-2026-08-3",
@@ -297,8 +306,88 @@
         "client_country": "ES",
         "amount_cents": 82000,
         "currency": "EUR",
-        "reserve_rate": "0.2441",
-        "reserved_cents": 20016
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
+      },
+      {
+        "id": "inv-2026-09-1",
+        "date": "2026-09-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
+      },
+      {
+        "id": "inv-2026-09-2",
+        "date": "2026-09-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
+      },
+      {
+        "id": "inv-2026-09-3",
+        "date": "2026-09-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
+      },
+      {
+        "id": "inv-2026-10-1",
+        "date": "2026-10-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
+      },
+      {
+        "id": "inv-2026-10-2",
+        "date": "2026-10-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
+      },
+      {
+        "id": "inv-2026-10-3",
+        "date": "2026-10-15",
+        "client": "Café Lumbre SL",
+        "client_country": "ES",
+        "amount_cents": 82000,
+        "currency": "EUR",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 19819
+      },
+      {
+        "id": "inv-2026-11-1",
+        "date": "2026-11-05",
+        "client": "Studio Kreuzberg GmbH",
+        "client_country": "DE",
+        "amount_cents": 180000,
+        "currency": "EUR",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 43506
+      },
+      {
+        "id": "inv-2026-11-2",
+        "date": "2026-11-10",
+        "client": "Northwind Labs Inc.",
+        "client_country": "US",
+        "amount_cents": 150000,
+        "currency": "USD",
+        "reserve_rate": "0.2417",
+        "reserved_cents": 33355
       }
     ],
     "expenses": [
@@ -324,7 +413,7 @@
       },
       {
         "id": "exp-3",
-        "date": "2026-05-02",
+        "date": "2026-08-04",
         "concept": "Coworking Second Home, Lisboa",
         "amount_cents": 22000,
         "currency": "EUR",
@@ -334,7 +423,7 @@
       },
       {
         "id": "exp-4",
-        "date": "2026-06-12",
+        "date": "2026-09-13",
         "concept": "Figma Professional",
         "amount_cents": 14400,
         "currency": "USD",
@@ -344,7 +433,7 @@
       },
       {
         "id": "exp-5",
-        "date": "2026-07-20",
+        "date": "2026-10-13",
         "concept": "Portátil (amortización anual)",
         "amount_cents": 60000,
         "currency": "EUR",
@@ -358,26 +447,28 @@
     },
     "days": {
       "year": 2026,
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "days": {
+        "CO": 86,
         "ES": 90,
         "PT": 140
       },
       "country_names_es": {
+        "CO": "Colombia",
         "ES": "España",
         "PT": "Portugal"
       }
     },
     "residency": {
       "year": 2026,
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "claims": [
         {
           "country": "ES",
           "country_name_es": "España",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 226 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 316 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false
         }
@@ -387,20 +478,20 @@
           "country": "CO",
           "rule_id": "CO_183_365",
           "status": "not_resident",
-          "reason_es": "Máximo de 0 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
+          "reason_es": "Máximo de 86 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
           "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
           "verified": false,
-          "days": 0,
+          "days": 86,
           "threshold": 183
         },
         {
           "country": "ES",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 226 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 316 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false,
-          "days": 230,
+          "days": 316,
           "threshold": 183
         },
         {
@@ -489,7 +580,7 @@
     },
     "budget": {
       "year": 2026,
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "items": [
         {
           "country": "PT",
@@ -528,6 +619,24 @@
           "verified": false
         },
         {
+          "country": "CO",
+          "country_name_es": "Colombia",
+          "rule_id": "CO_183_365",
+          "threshold": 183,
+          "comparator": ">",
+          "window_days": 365,
+          "days_used": 86,
+          "days_left": 97,
+          "days_used_with_planned": 86,
+          "days_left_with_planned": 97,
+          "projected_cross_date": null,
+          "status": "ok",
+          "message_es": "Te quedan 97 días en Colombia.",
+          "note_es": null,
+          "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+          "verified": false
+        },
+        {
           "country": "TH",
           "country_name_es": "Tailandia",
           "rule_id": "TH_180",
@@ -536,55 +645,37 @@
           "window_days": null,
           "days_used": 0,
           "days_left": 179,
-          "days_used_with_planned": 16,
-          "days_left_with_planned": 163,
+          "days_used_with_planned": 0,
+          "days_left_with_planned": 179,
           "projected_cross_date": null,
           "status": "ok",
           "message_es": "Te quedan 179 días en Tailandia.",
           "note_es": null,
           "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
           "verified": false
-        },
-        {
-          "country": "CO",
-          "country_name_es": "Colombia",
-          "rule_id": "CO_183_365",
-          "threshold": 183,
-          "comparator": ">",
-          "window_days": 365,
-          "days_used": 0,
-          "days_left": 183,
-          "days_used_with_planned": 62,
-          "days_left_with_planned": 121,
-          "projected_cross_date": null,
-          "status": "ok",
-          "message_es": "Te quedan 183 días en Colombia.",
-          "note_es": null,
-          "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
-          "verified": false
         }
       ]
     },
     "reserve": {
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "tax_country": "ES",
       "tax_country_name_es": "España",
-      "projected_annual_income_cents": 4800000,
-      "reserved_cents": 781120,
-      "estimated_cents": 1171571,
-      "pending_cents": 390451,
-      "interest_cents": 6191,
-      "balance_cents": 787311,
+      "projected_annual_income_cents": 4710545,
+      "reserved_cents": 1043661,
+      "estimated_cents": 1138472,
+      "pending_cents": 94811,
+      "interest_cents": 11364,
+      "balance_cents": 1055025,
       "savings_rate": "0.025",
       "provider_name": "MyInvestor (simulado)",
       "provider_note_es": "Cuenta remunerada simulada. El tipo es un valor de demostración, no una oferta real de MyInvestor.",
-      "effective_rate": "0.2441",
+      "effective_rate": "0.2417",
       "is_estimate": true,
       "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
-      "summary_es": "Hucha fiscal (MyInvestor): 7.811 € · +62 € de intereses"
+      "summary_es": "Hucha fiscal (MyInvestor): 10.437 € · +114 € de intereses"
     },
     "alerts": {
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "alerts": [
         {
           "id": "budget_PT",
@@ -626,7 +717,7 @@
           "id": "reserve_pending",
           "level": "info",
           "title_es": "Reserva de impuestos",
-          "message_es": "Te faltan 3.905 € por apartar para llegar a la estimación anual (11.716 €).",
+          "message_es": "Te faltan 948 € por apartar para llegar a la estimación anual (11.385 €).",
           "country": "ES",
           "rule_id": null,
           "source_url": null

@@ -1,7 +1,7 @@
 """Export the API contract to contract/:
 
 - contract/openapi.json         OpenAPI schema (source of truth for types)
-- contract/examples/*.json      real responses for the demo user (Ana, 2026-08-18) so a
+- contract/examples/*.json      real responses for the demo user (Ana, 2026-11-12) so a
                                 frontend can be built against fixtures without the backend
 
 Usage: python scripts/export_contract.py   (or: make contract)
@@ -45,7 +45,7 @@ def render() -> str:
 
 def export_examples() -> None:
     # Isolated, deterministic run in mock mode.
-    os.environ.update(RUNTIME_DIR=tempfile.mkdtemp(prefix="rumbo-contract-"), DEMO_TODAY="2026-08-18",
+    os.environ.update(RUNTIME_DIR=tempfile.mkdtemp(prefix="rumbo-contract-"), DEMO_TODAY="2026-11-12",
                       ANTHROPIC_API_KEY="", ELEVENLABS_API_KEY="")
     from fastapi.testclient import TestClient
 
@@ -65,7 +65,36 @@ def export_examples() -> None:
     client.post("/api/demo/reset")
 
 
+def elevenlabs_panel_tool(t: dict) -> dict:
+    """A client tool in the JSON format of the ElevenLabs panel editor (parameters as a list).
+
+    Enums are left out (the allowed values are in the description and the API validates them),
+    and integers are sent as "number", the type the panel accepts for numeric parameters.
+    """
+    schema = t["parameters"]
+    params = [{"id": name, "type": "number" if p["type"] == "integer" else p["type"],
+               "description": p["description"], "dynamic_variable": "", "required": name in schema["required"],
+               "constant_value": "", "value_type": "llm_prompt"}
+              for name, p in schema["properties"].items()]
+    return {"type": "client", "name": t["name"], "description": t["description"], "expects_response": True,
+            "response_timeout_secs": t["response_timeout_secs"], "parameters": params,
+            "dynamic_variables": {"dynamic_variable_placeholders": {}}, "assignments": [],
+            "interruption_mode": "allow", "pre_tool_speech": "auto", "tool_call_sound": None,
+            "tool_call_sound_behavior": "auto", "execution_mode": "immediate", "response_mocks": []}
+
+
+def export_elevenlabs_tools() -> None:
+    """One file per client tool, ready to paste in the ElevenLabs panel (Tools → client → JSON)."""
+    tools = json.loads((CONTRACT / "client_tools.json").read_text(encoding="utf-8"))["tools"]
+    out = ROOT / "elevenlabs" / "tools"
+    out.mkdir(parents=True, exist_ok=True)
+    for t in tools:
+        doc = json.dumps(elevenlabs_panel_tool(t), ensure_ascii=False, indent=2) + "\n"
+        (out / f"{t['name']}.json").write_text(doc, encoding="utf-8")
+
+
 if __name__ == "__main__":
     export_examples()
+    export_elevenlabs_tools()
     (CONTRACT / "openapi.json").write_text(render(), encoding="utf-8")
-    print(f"Wrote contract/openapi.json and {len(EXAMPLES)} examples in contract/examples/")
+    print(f"Wrote contract/openapi.json, {len(EXAMPLES)} examples in contract/examples/ and elevenlabs/tools/")

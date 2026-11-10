@@ -1,5 +1,12 @@
-"""The three demo scenes for Ana (section 5) plus the certificate case."""
-from datetime import date
+"""The three demo scenes for Ana (section 5) plus the certificate case.
+
+The seed is relative to today, so expected dates are computed from the demo clock.
+"""
+from datetime import date, timedelta
+
+
+def today(client) -> date:
+    return date.fromisoformat(client.get("/api/clock").json()["today"])
 
 
 def claims(res):
@@ -11,7 +18,8 @@ def test_scene1_spain_claims_by_sporadic_absences(client):
     assert claims(res) == {"ES": "ES_183_SPORADIC"}
     assert res["dual_residency"] is False
     days = client.get("/api/tools/days").json()["days"]
-    assert days == {"ES": 90, "PT": 140}
+    assert days["ES"] == 90 and days["PT"] == 140
+    assert set(days) == {"ES", "CO", "PT"}
 
 
 def test_certificate_stops_spain_adding_absences(client):
@@ -22,10 +30,10 @@ def test_certificate_stops_spain_adding_absences(client):
     assert es["status"] == "not_resident"
 
 
-def test_scene2_simulate_pt_60_days_crosses_on_oct_1_with_dual_residency(client):
+def test_scene2_simulate_pt_60_days_crosses_in_44_days_with_dual_residency(client):
     sim = client.post("/api/tools/simulate", json={"country": "PT", "extra_days": 60}).json()
     assert sim["crosses_threshold"] is True
-    assert sim["cross_date"] == "2026-10-01"
+    assert sim["cross_date"] == (today(client) + timedelta(days=44)).isoformat()
     assert sim["days_before"] == 140 and sim["days_after"] == 200
     assert sim["after"]["dual_residency"] is True
     assert set(claims(sim["after"])) == {"ES", "PT"}
@@ -53,7 +61,8 @@ def test_simulation_does_not_mutate_state(client):
 
 
 def test_advance_clock_moves_today(client):
+    base = today(client)
     r = client.post("/api/clock/advance", json={"days": 30}).json()
-    assert r["today"] == "2026-09-17"
+    assert r["today"] == (base + timedelta(days=30)).isoformat()
     assert client.get("/api/tools/days").json()["days"]["PT"] == 170
-    assert client.post("/api/demo/reset").json()["clock"]["today"] == str(date(2026, 8, 18))
+    assert client.post("/api/demo/reset").json()["clock"]["today"] == base.isoformat()

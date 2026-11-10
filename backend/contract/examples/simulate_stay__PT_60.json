@@ -10,18 +10,18 @@
   "response": {
     "country": "PT",
     "extra_days": 60,
-    "start_date": "2026-08-19",
-    "end_date": "2026-10-17",
+    "start_date": "2026-11-13",
+    "end_date": "2027-01-11",
     "before": {
       "year": 2026,
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "claims": [
         {
           "country": "ES",
           "country_name_es": "España",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 226 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 316 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false
         }
@@ -31,20 +31,20 @@
           "country": "CO",
           "rule_id": "CO_183_365",
           "status": "not_resident",
-          "reason_es": "Máximo de 0 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
+          "reason_es": "Máximo de 86 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
           "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
           "verified": false,
-          "days": 0,
+          "days": 86,
           "threshold": 183
         },
         {
           "country": "ES",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 226 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 316 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false,
-          "days": 230,
+          "days": 316,
           "threshold": 183
         },
         {
@@ -133,14 +133,14 @@
     },
     "after": {
       "year": 2026,
-      "as_of": "2026-10-17",
+      "as_of": "2026-12-31",
       "claims": [
         {
           "country": "ES",
           "country_name_es": "España",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 200 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 290 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 275 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 365 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false
         },
@@ -149,7 +149,7 @@
           "country_name_es": "Portugal",
           "rule_id": "PT_183_12M",
           "status": "resident",
-          "reason_es": "200 días en Portugal en un periodo de 365 días: supera el umbral de más de 183.",
+          "reason_es": "189 días en Portugal en un periodo de 365 días: supera el umbral de más de 183.",
           "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
           "verified": false
         }
@@ -159,20 +159,20 @@
           "country": "CO",
           "rule_id": "CO_183_365",
           "status": "not_resident",
-          "reason_es": "Máximo de 0 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
+          "reason_es": "Máximo de 86 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
           "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
           "verified": false,
-          "days": 0,
+          "days": 86,
           "threshold": 183
         },
         {
           "country": "ES",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 200 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 290 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 275 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 365 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false,
-          "days": 290,
+          "days": 365,
           "threshold": 183
         },
         {
@@ -209,10 +209,10 @@
           "country": "PT",
           "rule_id": "PT_183_12M",
           "status": "resident",
-          "reason_es": "200 días en Portugal en un periodo de 365 días: supera el umbral de más de 183.",
+          "reason_es": "189 días en Portugal en un periodo de 365 días: supera el umbral de más de 183.",
           "source_url": "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs16.aspx",
           "verified": false,
-          "days": 200,
+          "days": 189,
           "threshold": 183
         },
         {
@@ -297,23 +297,23 @@
       "disclaimer_es": "Estimación orientativa. Confírmalo con un asesor."
     },
     "crosses_threshold": true,
-    "cross_date": "2026-10-01",
+    "cross_date": "2026-12-26",
     "days_before": 140,
     "days_after": 200,
     "threshold": 183,
     "tax_country_before": "ES",
     "tax_country_after": "ES",
-    "tax_before_cents": 1171571,
-    "tax_after_cents": 1171571,
+    "tax_before_cents": 1138472,
+    "tax_after_cents": 1138472,
     "tax_delta_cents": 0,
     "tax_by_country_after_cents": {
-      "ES": 1171571,
-      "PT": 881000
+      "ES": 1138472,
+      "PT": 857183
     },
     "tax_is_estimate": true,
     "overlaps_planned_es": [
-      "Medellín (15/10/2026)"
+      "Ciudad de México (09/01/2027)"
     ],
-    "explanation_es": "Con 60 días más en Portugal llegarías a 200 días. Superarías el umbral de 183 días el 01/10/2026 y Portugal te consideraría residente fiscal. Tendrías doble residencia (España, Portugal): decide el convenio, empezando por dónde tienes vivienda permanente. Ojo: se solapa con tu viaje planificado a Medellín (15/10/2026). Es una estimación; confírmalo con un asesor."
+    "explanation_es": "Con 60 días más en Portugal llegarías a 200 días. Superarías el umbral de 183 días el 26/12/2026 y Portugal te consideraría residente fiscal. Tendrías doble residencia (España, Portugal): decide el convenio, empezando por dónde tienes vivienda permanente. Ojo: se solapa con tu viaje planificado a Ciudad de México (09/01/2027). Es una estimación; confírmalo con un asesor."
   }
 }

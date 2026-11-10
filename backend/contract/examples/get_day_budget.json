@@ -6,7 +6,7 @@
   },
   "response": {
     "year": 2026,
-    "as_of": "2026-08-18",
+    "as_of": "2026-11-12",
     "items": [
       {
         "country": "PT",
@@ -45,6 +45,24 @@
         "verified": false
       },
       {
+        "country": "CO",
+        "country_name_es": "Colombia",
+        "rule_id": "CO_183_365",
+        "threshold": 183,
+        "comparator": ">",
+        "window_days": 365,
+        "days_used": 86,
+        "days_left": 97,
+        "days_used_with_planned": 86,
+        "days_left_with_planned": 97,
+        "projected_cross_date": null,
+        "status": "ok",
+        "message_es": "Te quedan 97 días en Colombia.",
+        "note_es": null,
+        "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
+        "verified": false
+      },
+      {
         "country": "TH",
         "country_name_es": "Tailandia",
         "rule_id": "TH_180",
@@ -53,31 +71,13 @@
         "window_days": null,
         "days_used": 0,
         "days_left": 179,
-        "days_used_with_planned": 16,
-        "days_left_with_planned": 163,
+        "days_used_with_planned": 0,
+        "days_left_with_planned": 179,
         "projected_cross_date": null,
         "status": "ok",
         "message_es": "Te quedan 179 días en Tailandia.",
         "note_es": null,
         "source_url": "https://www.forvismazars.com/th/en/insights/doing-business-in-thailand/tax/tax-rules-on-foreign-sourced-income",
-        "verified": false
-      },
-      {
-        "country": "CO",
-        "country_name_es": "Colombia",
-        "rule_id": "CO_183_365",
-        "threshold": 183,
-        "comparator": ">",
-        "window_days": 365,
-        "days_used": 0,
-        "days_left": 183,
-        "days_used_with_planned": 62,
-        "days_left_with_planned": 121,
-        "projected_cross_date": null,
-        "status": "ok",
-        "message_es": "Te quedan 183 días en Colombia.",
-        "note_es": null,
-        "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
         "verified": false
       }
     ]

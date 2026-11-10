@@ -1,0 +1,18 @@
+{
+  "type": "client",
+  "name": "get_day_budget",
+  "description": "Presupuesto de días por país: días usados, días que quedan antes de cumplir la regla de días, días contando los viajes planificados y fecha prevista de cruce del umbral.",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": [],
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "response_mocks": []
+}

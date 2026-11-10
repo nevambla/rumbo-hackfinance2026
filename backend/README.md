@@ -29,7 +29,7 @@ Configuración en `.env` (ver [.env.example](.env.example)). Todo es opcional:
 |---|---|---|
 | `ANTHROPIC_API_KEY` | `/api/trips/parse` usa un extractor local | Extracción con Claude (`ANTHROPIC_MODEL`, por defecto `claude-sonnet-5-5`) |
 | `ELEVENLABS_API_KEY` + `ELEVENLABS_AGENT_ID` | `/api/voice/signed-url` devuelve 404 y el frontend usa la voz simulada | Devuelve la URL firmada del agente |
-| `DEMO_TODAY` | Fecha real | Reloj de demo (por defecto `2026-08-18`) |
+| `DEMO_TODAY` | Fecha real (por defecto) | Fija el día de la demo (`AAAA-MM-DD`) |
 | `CORS_ORIGINS` | Puertos 5173 y 3000 de localhost | Lista separada por comas, o `*` |
 | `PUBLIC_BASE_URL` | `http://localhost:8000` | URL pública para los enlaces a los PDF |
 
@@ -67,9 +67,13 @@ scripts/export_contract.py    regenera contract/
 tests/                        escenas de Ana, reglas, dinero, latencia y contrato
 ```
 
-## Datos de la demo (Ana, a 18/08/2026)
+## Datos de la demo (Ana, relativos a hoy)
+Las fechas de `data/demo_user_ana.json` son relativas: `today`, `today-139`, `today+13`, `{Y}-01-01` (año en curso) y `{Y-1}`. La historia es la misma cualquier día: Madrid de enero a marzo (90 días), Medellín desde abril y Lisboa desde hace 139 días (hoy incluido, 140). Las facturas y gastos futuros no se cargan. Si el estado guardado en `data/runtime/` se sembró otro día, se vuelve a sembrar al arrancar.
+
+La historia encaja **del 19/08 al 17/11** de cada año. Antes no caben Madrid, Medellín y 140 días en Lisboa; después, dos meses más en Lisboa cruzan los 183 días ya en el año siguiente. Los tests fijan el 12/11/2026 (`tests/conftest.py`) y prueban varias fechas (`tests/test_seed_dates.py`).
+
 - **Estado actual:** España reclama la residencia porque Ana no tiene certificado de residencia fiscal en otro país y se suman sus ausencias (`ES_183_SPORADIC`). Lleva 140 días en Portugal y le quedan 43.
-- **`simulate_stay(PT, 60)`:** 200 días; cruza el umbral el **01/10/2026** y tiene **doble residencia** con España.
+- **`simulate_stay(PT, 60)`:** 200 días; cruza el umbral **dentro de 44 días** (el 26/12/2026 si hoy es 12/11/2026) y tiene **doble residencia** con España.
 - **`answer_question(has_habitual_home_in_PT, true)`:** Portugal reclama la residencia por vivienda habitual.
 
 ## Limitaciones

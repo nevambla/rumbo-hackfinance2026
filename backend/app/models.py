@@ -84,6 +84,7 @@ class UserState(BaseModel):
     answers: dict[str, AnswerValue] = Field(default_factory=dict)
     piggy: list[PiggyMovement] = Field(default_factory=list)
     clock_offset_days: int = 0
+    seed_date: date | None = None  # day the relative seed dates were resolved against
 
 
 # ---------------------------------------------------------------------- rules

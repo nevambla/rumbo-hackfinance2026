@@ -5,234 +5,338 @@
     "occupation_es": "Diseñadora freelance",
     "nationality": "ES",
     "prior_tax_residence": {
-      "2025": "ES"
+      "{Y-1}": "ES"
     }
   },
   "trips": [
     {
-      "id": "trip-mad-2026",
+      "id": "trip-mad",
       "country": "ES",
       "city": "Madrid",
-      "start_date": "2026-01-01",
-      "end_date": "2026-03-31",
+      "start_date": "{Y}-01-01",
+      "end_date": "{Y}-03-31",
       "source": "seed"
     },
     {
-      "id": "trip-lis-2026",
+      "id": "trip-mde",
+      "country": "CO",
+      "city": "Medellín",
+      "start_date": "{Y}-04-01",
+      "end_date": "today-140",
+      "source": "seed"
+    },
+    {
+      "id": "trip-lis",
       "country": "PT",
       "city": "Lisboa",
-      "start_date": "2026-04-01",
+      "start_date": "today-139",
       "end_date": null,
-      "expected_end_date": "2026-08-31",
+      "expected_end_date": "today+13",
       "source": "seed"
     }
   ],
   "planned_trips": [
     {
-      "id": "plan-mde-2026",
-      "country": "CO",
-      "city": "Medellín",
-      "start_date": "2026-10-15",
-      "end_date": "2026-12-15",
+      "id": "plan-cdmx",
+      "country": "MX",
+      "city": "Ciudad de México",
+      "start_date": "today+58",
+      "end_date": "today+119",
       "source": "seed"
     },
     {
-      "id": "plan-bkk-2026",
+      "id": "plan-bkk",
       "country": "TH",
       "city": "Bangkok",
-      "start_date": "2026-12-16",
-      "end_date": "2027-03-15",
+      "start_date": "today+120",
+      "end_date": "today+209",
       "source": "seed"
     }
   ],
   "invoices": [
     {
-      "id": "inv-2026-01-1",
-      "date": "2026-01-05",
+      "id": "inv-{Y}-01-1",
+      "date": "{Y}-01-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-01-2",
-      "date": "2026-01-10",
+      "id": "inv-{Y}-01-2",
+      "date": "{Y}-01-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-01-3",
-      "date": "2026-01-15",
+      "id": "inv-{Y}-01-3",
+      "date": "{Y}-01-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-02-1",
-      "date": "2026-02-05",
+      "id": "inv-{Y}-02-1",
+      "date": "{Y}-02-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-02-2",
-      "date": "2026-02-10",
+      "id": "inv-{Y}-02-2",
+      "date": "{Y}-02-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-02-3",
-      "date": "2026-02-15",
+      "id": "inv-{Y}-02-3",
+      "date": "{Y}-02-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-03-1",
-      "date": "2026-03-05",
+      "id": "inv-{Y}-03-1",
+      "date": "{Y}-03-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-03-2",
-      "date": "2026-03-10",
+      "id": "inv-{Y}-03-2",
+      "date": "{Y}-03-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-03-3",
-      "date": "2026-03-15",
+      "id": "inv-{Y}-03-3",
+      "date": "{Y}-03-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-04-1",
-      "date": "2026-04-05",
+      "id": "inv-{Y}-04-1",
+      "date": "{Y}-04-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-04-2",
-      "date": "2026-04-10",
+      "id": "inv-{Y}-04-2",
+      "date": "{Y}-04-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-04-3",
-      "date": "2026-04-15",
+      "id": "inv-{Y}-04-3",
+      "date": "{Y}-04-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-05-1",
-      "date": "2026-05-05",
+      "id": "inv-{Y}-05-1",
+      "date": "{Y}-05-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-05-2",
-      "date": "2026-05-10",
+      "id": "inv-{Y}-05-2",
+      "date": "{Y}-05-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-05-3",
-      "date": "2026-05-15",
+      "id": "inv-{Y}-05-3",
+      "date": "{Y}-05-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-06-1",
-      "date": "2026-06-05",
+      "id": "inv-{Y}-06-1",
+      "date": "{Y}-06-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-06-2",
-      "date": "2026-06-10",
+      "id": "inv-{Y}-06-2",
+      "date": "{Y}-06-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-06-3",
-      "date": "2026-06-15",
+      "id": "inv-{Y}-06-3",
+      "date": "{Y}-06-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-07-1",
-      "date": "2026-07-05",
+      "id": "inv-{Y}-07-1",
+      "date": "{Y}-07-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-07-2",
-      "date": "2026-07-10",
+      "id": "inv-{Y}-07-2",
+      "date": "{Y}-07-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-07-3",
-      "date": "2026-07-15",
+      "id": "inv-{Y}-07-3",
+      "date": "{Y}-07-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-08-1",
-      "date": "2026-08-05",
+      "id": "inv-{Y}-08-1",
+      "date": "{Y}-08-05",
       "client": "Studio Kreuzberg GmbH",
       "client_country": "DE",
       "amount_cents": 180000,
       "currency": "EUR"
     },
     {
-      "id": "inv-2026-08-2",
-      "date": "2026-08-10",
+      "id": "inv-{Y}-08-2",
+      "date": "{Y}-08-10",
       "client": "Northwind Labs Inc.",
       "client_country": "US",
       "amount_cents": 150000,
       "currency": "USD"
     },
     {
-      "id": "inv-2026-08-3",
-      "date": "2026-08-15",
+      "id": "inv-{Y}-08-3",
+      "date": "{Y}-08-15",
+      "client": "Café Lumbre SL",
+      "client_country": "ES",
+      "amount_cents": 82000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-09-1",
+      "date": "{Y}-09-05",
+      "client": "Studio Kreuzberg GmbH",
+      "client_country": "DE",
+      "amount_cents": 180000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-09-2",
+      "date": "{Y}-09-10",
+      "client": "Northwind Labs Inc.",
+      "client_country": "US",
+      "amount_cents": 150000,
+      "currency": "USD"
+    },
+    {
+      "id": "inv-{Y}-09-3",
+      "date": "{Y}-09-15",
+      "client": "Café Lumbre SL",
+      "client_country": "ES",
+      "amount_cents": 82000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-10-1",
+      "date": "{Y}-10-05",
+      "client": "Studio Kreuzberg GmbH",
+      "client_country": "DE",
+      "amount_cents": 180000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-10-2",
+      "date": "{Y}-10-10",
+      "client": "Northwind Labs Inc.",
+      "client_country": "US",
+      "amount_cents": 150000,
+      "currency": "USD"
+    },
+    {
+      "id": "inv-{Y}-10-3",
+      "date": "{Y}-10-15",
+      "client": "Café Lumbre SL",
+      "client_country": "ES",
+      "amount_cents": 82000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-11-1",
+      "date": "{Y}-11-05",
+      "client": "Studio Kreuzberg GmbH",
+      "client_country": "DE",
+      "amount_cents": 180000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-11-2",
+      "date": "{Y}-11-10",
+      "client": "Northwind Labs Inc.",
+      "client_country": "US",
+      "amount_cents": 150000,
+      "currency": "USD"
+    },
+    {
+      "id": "inv-{Y}-11-3",
+      "date": "{Y}-11-15",
+      "client": "Café Lumbre SL",
+      "client_country": "ES",
+      "amount_cents": 82000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-12-1",
+      "date": "{Y}-12-05",
+      "client": "Studio Kreuzberg GmbH",
+      "client_country": "DE",
+      "amount_cents": 180000,
+      "currency": "EUR"
+    },
+    {
+      "id": "inv-{Y}-12-2",
+      "date": "{Y}-12-10",
+      "client": "Northwind Labs Inc.",
+      "client_country": "US",
+      "amount_cents": 150000,
+      "currency": "USD"
+    },
+    {
+      "id": "inv-{Y}-12-3",
+      "date": "{Y}-12-15",
       "client": "Café Lumbre SL",
       "client_country": "ES",
       "amount_cents": 82000,
@@ -242,7 +346,7 @@
   "expenses": [
     {
       "id": "exp-1",
-      "date": "2026-02-03",
+      "date": "{Y}-02-03",
       "concept": "Adobe Creative Cloud (anual)",
       "amount_cents": 72588,
       "currency": "EUR",
@@ -251,7 +355,7 @@
     },
     {
       "id": "exp-2",
-      "date": "2026-03-01",
+      "date": "{Y}-03-01",
       "concept": "Coworking La Fábrica, Madrid",
       "amount_cents": 19000,
       "currency": "EUR",
@@ -260,7 +364,7 @@
     },
     {
       "id": "exp-3",
-      "date": "2026-05-02",
+      "date": "today-100",
       "concept": "Coworking Second Home, Lisboa",
       "amount_cents": 22000,
       "currency": "EUR",
@@ -269,7 +373,7 @@
     },
     {
       "id": "exp-4",
-      "date": "2026-06-12",
+      "date": "today-60",
       "concept": "Figma Professional",
       "amount_cents": 14400,
       "currency": "USD",
@@ -278,7 +382,7 @@
     },
     {
       "id": "exp-5",
-      "date": "2026-07-20",
+      "date": "today-30",
       "concept": "Portátil (amortización anual)",
       "amount_cents": 60000,
       "currency": "EUR",

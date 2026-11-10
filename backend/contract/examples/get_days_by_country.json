@@ -6,12 +6,14 @@
   },
   "response": {
     "year": 2026,
-    "as_of": "2026-08-18",
+    "as_of": "2026-11-12",
     "days": {
+      "CO": 86,
       "ES": 90,
       "PT": 140
     },
     "country_names_es": {
+      "CO": "Colombia",
       "ES": "España",
       "PT": "Portugal"
     }

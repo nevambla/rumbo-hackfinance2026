@@ -1,0 +1,46 @@
+{
+  "type": "client",
+  "name": "simulate_stay",
+  "description": "Simula alargar la estancia actual o pasar X días en un país y devuelve la residencia antes y después, si se cruza el umbral y en qué fecha, la doble residencia y el impuesto estimado. No guarda nada.",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": [
+    {
+      "id": "country",
+      "type": "string",
+      "description": "Código ISO 3166-1 alfa-2 del país: ES, PT, MX, CO o TH.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    },
+    {
+      "id": "extra_days",
+      "type": "number",
+      "description": "Días adicionales (un mes = 30 días). Entre 1 y 366.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    },
+    {
+      "id": "start_date",
+      "type": "string",
+      "description": "Opcional. Fecha de inicio AAAA-MM-DD si es un viaje nuevo y no una prolongación de la estancia actual.",
+      "dynamic_variable": "",
+      "required": false,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    }
+  ],
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "response_mocks": []
+}

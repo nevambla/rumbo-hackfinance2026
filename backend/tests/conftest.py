@@ -3,7 +3,7 @@ import tempfile
 
 # Isolate runtime state and pin the demo date before the app reads settings.
 os.environ["RUNTIME_DIR"] = tempfile.mkdtemp(prefix="rumbo-test-")
-os.environ["DEMO_TODAY"] = "2026-08-18"
+os.environ["DEMO_TODAY"] = "2026-11-12"
 os.environ["ANTHROPIC_API_KEY"] = ""
 os.environ["ELEVENLABS_API_KEY"] = ""
 

@@ -21,7 +21,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    demo_today: str = "2026-08-18"
+    demo_today: str = ""  # empty = real date; set to pin a day (YYYY-MM-DD)
     data_dir: Path = BACKEND_DIR / "data"
     runtime_dir: Path = BACKEND_DIR / "data" / "runtime"
     # Comma-separated list of allowed frontend origins, or "*" to allow any origin.

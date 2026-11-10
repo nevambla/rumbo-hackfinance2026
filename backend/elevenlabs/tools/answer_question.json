@@ -1,0 +1,37 @@
+{
+  "type": "client",
+  "name": "answer_question",
+  "description": "Guarda la respuesta del usuario a una pregunta pendiente o a un criterio de desempate y devuelve la residencia recalculada.",
+  "expects_response": true,
+  "response_timeout_secs": 10,
+  "parameters": [
+    {
+      "id": "question_key",
+      "type": "string",
+      "description": "El question_key exacto que devolvió la herramienta anterior.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    },
+    {
+      "id": "value",
+      "type": "string",
+      "description": "'true' o 'false' para preguntas de sí/no; el código de país (p. ej. 'PT') o 'both' para criterios de desempate.",
+      "dynamic_variable": "",
+      "required": true,
+      "constant_value": "",
+      "value_type": "llm_prompt"
+    }
+  ],
+  "dynamic_variables": {
+    "dynamic_variable_placeholders": {}
+  },
+  "assignments": [],
+  "interruption_mode": "allow",
+  "pre_tool_speech": "auto",
+  "tool_call_sound": null,
+  "tool_call_sound_behavior": "auto",
+  "execution_mode": "immediate",
+  "response_mocks": []
+}

@@ -5,7 +5,7 @@
     "body": null
   },
   "response": {
-    "as_of": "2026-08-18",
+    "as_of": "2026-11-12",
     "alerts": [
       {
         "id": "budget_PT",
@@ -47,7 +47,7 @@
         "id": "reserve_pending",
         "level": "info",
         "title_es": "Reserva de impuestos",
-        "message_es": "Te faltan 3.905 € por apartar para llegar a la estimación anual (11.716 €).",
+        "message_es": "Te faltan 948 € por apartar para llegar a la estimación anual (11.385 €).",
         "country": "ES",
         "rule_id": null,
         "source_url": null

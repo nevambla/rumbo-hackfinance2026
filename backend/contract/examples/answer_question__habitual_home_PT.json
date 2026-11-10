@@ -12,14 +12,14 @@
     "value": true,
     "residency": {
       "year": 2026,
-      "as_of": "2026-08-18",
+      "as_of": "2026-11-12",
       "claims": [
         {
           "country": "ES",
           "country_name_es": "España",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 226 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 316 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false
         },
@@ -38,20 +38,20 @@
           "country": "CO",
           "rule_id": "CO_183_365",
           "status": "not_resident",
-          "reason_es": "Máximo de 0 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
+          "reason_es": "Máximo de 86 días en Colombia en cualquier periodo de 365 días; el umbral es más de 183.",
           "source_url": "https://actualicese.com/archivo/concepto-612-del-26-05-2020/",
           "verified": false,
-          "days": 0,
+          "days": 86,
           "threshold": 183
         },
         {
           "country": "ES",
           "rule_id": "ES_183_SPORADIC",
           "status": "resident",
-          "reason_es": "Llevas 90 días en España y 140 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 230 días, más de 183.",
+          "reason_es": "Llevas 90 días en España y 226 fuera sin certificado de residencia fiscal en otro país. España suma esas ausencias: 316 días, más de 183.",
           "source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-20764",
           "verified": false,
-          "days": 230,
+          "days": 316,
           "threshold": 183
         },
         {
