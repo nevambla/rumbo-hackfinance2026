@@ -191,7 +191,7 @@ async function toggleCall() {
       clientTools,
       onConnect: () => { mic.classList.add('live'); mic.textContent = '📞'; setStatus('Te escucho. Pulsa para colgar.'); addMsg('sys', 'Llamada iniciada'); },
       onDisconnect: () => { conversation = null; mic.classList.remove('live', 'speaking'); mic.textContent = '🎙️'; setStatus('Llamada terminada. Pulsa para volver a llamar.'); addMsg('sys', 'Llamada terminada'); },
-      onMessage: (m) => addMsg((m.role || m.source) === 'user' ? 'user' : 'ai', m.message),
+      onMessage: (m) => addMsg((m.role || m.source) === 'user' ? 'user' : 'ai', ElevenLabsClient.stripAudioTags(m.message)),
       onModeChange: ({ mode }) => { mic.classList.toggle('speaking', mode === 'speaking'); if (conversation) setStatus(mode === 'speaking' ? 'Rumbo está hablando' : 'Te escucho. Pulsa para colgar.'); },
       onError: (msg) => addMsg('err', 'Error: ' + msg),
       onUnhandledClientToolCall: (c) => addMsg('err', `El agente pidió una tool que no está registrada: ${c?.tool_name}`),
