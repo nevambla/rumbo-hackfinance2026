@@ -49,6 +49,20 @@ Todas las conclusiones son estimaciones: el agente debe cerrar con "confírmalo 
 - Web en http://localhost:5173, pantalla del asesor, micrófono permitido.
 - Los gastos que registres en los ensayos quedan en los datos de Ana (`backend/data/runtime/`, ignorado por git).
 
-## Pendiente de ensayar por voz
+## Resultado del ensayo por voz (11/11/2026)
 
-Los pasos 1 a 6 están contrastados con la API, no con la voz del agente. Falta ensayarlos hablando y anotar aquí dónde el agente se desvía de "Debe decir".
+Los 6 pasos funcionan: herramientas y cifras coinciden con la API.
+
+- **Paso 1:** dice "doble residencia" y pregunta por la vivienda permanente. Al contestar, llama a `answer_question`.
+- **Paso 2:** 11.385 € en España y 8.572 € en Portugal; cierra con "confírmalo con un asesor".
+- **Paso 3:** España, confianza baja.
+- **Paso 4:** `register_expense(Coworking en Lisboa, 80, PT)`.
+- **Paso 5:** `get_alerts` y `get_tax_reserve` con las cifras del motor.
+- **Paso 6:** se niega y no llama a ninguna herramienta.
+
+Detalles a tener en cuenta:
+
+- **Reiniciar antes de la demo** (`POST /api/demo/reset` o el botón "Reiniciar demo"). Contestar la vivienda en el paso 1 guarda la respuesta y el agente ya no la vuelve a preguntar. El gasto del paso 4 también queda guardado.
+- **Tras el paso 4 las cifras de la hucha bajan un poco** (unos 919 € por apartar sobre una estimación de 11.355 €, en vez de 948 € y 11.385 €), porque el gasto es deducible. Ambas son correctas.
+- **Paso 6:** el agente dijo "la renta extranjera que ya vimos" sin haberla tratado antes en la conversación, y citó el umbral de 180 días sin consultar ninguna herramienta. La cifra es correcta (regla `TH_180`), pero el prompt pide no dar datos sin consultarlos. Retoque opcional del prompt (lo hace quien tenga acceso al agente en ElevenLabs).
+- **Paso 5:** dijo "cuatro avisos" y comentó tres (omitió el informativo de Tailandia).

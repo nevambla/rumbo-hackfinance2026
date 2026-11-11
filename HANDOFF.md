@@ -27,7 +27,7 @@ En resumen: la rama de Lucas aporta la web y el código del navegador que habla 
 2. ~~**Asesor por voz:** URL firmada + las 9 client tools.~~ Hecho en `frontend/src/components/Advisor.jsx` (usa `@elevenlabs/client`).
 3. ~~**Pantallas:** días y residencia, avisos, hucha y simulador.~~ Hechas, todas con `GET /api/state`. Además: preguntas pendientes y desempate, "Pega tu reserva", expediente PDF, avanzar reloj.
 4. ~~**Landing:** recuperar la de `main`. La de esta rama es la versión antigua.~~ Hecho: `main` fusionada en `integracion`.
-5. **Ensayar el guion completo por voz** y ajustarlo a lo que diga el motor.
+5. ~~**Ensayar el guion completo por voz** y ajustarlo a lo que diga el motor.~~ Hecho el 11/11: los 6 pasos de [`GUION.md`](GUION.md) funcionan por voz. Antes de la demo, reiniciar con `POST /api/demo/reset`.
 
 Quitado respecto a la web de Lucas (no hay backend en Python): regímenes especiales, IVA y vista de factura, fotos de facturas, resumen semanal en audio, comparador de escenarios por tramos (ahora compara dos estancias con `simulate_stay`).
 
