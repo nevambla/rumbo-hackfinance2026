@@ -23,7 +23,7 @@ En resumen: la rama de Lucas aporta la web y el código del navegador que habla 
 
 ## Pendiente, por orden
 
-1. ~~**Web:** traer `web/` de `lucas/motor-fiscal` y conectarla a la API de Python.~~ Hecho en `frontend/` (rama `integracion-web`).
+1. ~~**Web:** traer `web/` de `lucas/motor-fiscal` y conectarla a la API de Python.~~ Hecho en `frontend/`.
 2. ~~**Asesor por voz:** URL firmada + las 9 client tools.~~ Hecho en `frontend/src/components/Advisor.jsx` (usa `@elevenlabs/client`).
 3. ~~**Pantallas:** días y residencia, avisos, hucha y simulador.~~ Hechas, todas con `GET /api/state`. Además: preguntas pendientes y desempate, "Pega tu reserva", expediente PDF, avanzar reloj.
 4. **Landing:** recuperar la de `main`. La de esta rama es la versión antigua.
