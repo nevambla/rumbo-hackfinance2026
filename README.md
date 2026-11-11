@@ -175,10 +175,9 @@ El guion completo, con la herramienta que debe usar el agente en cada paso y lo 
 │   └── README.md         detalle del backend
 ├── frontend/             app web (React + Vite) conectada a la API y al agente
 ├── landing/              landing de venta (HTML estático, sin build)
-├── voz-prueba/           página mínima para probar el agente sin la app
+├── docs/                 capturas y diagrama de arquitectura (fuente TikZ)
 ├── contexto.md           especificación del producto
-├── GUION.md              guion de la demo por voz
-└── HANDOFF.md            estado del proyecto y siguientes pasos
+└── GUION.md              guion de la demo por voz
 ```
 
 ## Limitaciones conocidas

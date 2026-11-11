@@ -3,9 +3,7 @@
 > Copiloto fiscal por voz para nómadas digitales.
 > **Trabaja desde donde quieras. Tributa sabiendo dónde.**
 
-Proyecto de hackathon (noviembre 2026). Este documento resume qué construimos, por qué y con qué límites. Si eres una persona del equipo o un asistente de código, lee esto antes de tocar nada.
-
-> "Rumbo" es un nombre provisional.
+Especificación de producto con la que arrancamos el proyecto en HackFinance 2026: qué problema resolvemos, por qué y con qué límites. Lo que está construido, cómo se instala y cómo se prueba está en el [README](README.md).
 
 ---
 
@@ -81,12 +79,12 @@ gastos dictados     →   convenios (5 países)   →   simulaciones
 
 **Principio clave:** los cálculos fiscales los hace **nuestra API con reglas deterministas**. El agente de voz solo consulta la API y explica el resultado. Nunca calcula ni se inventa cifras.
 
-### Stack propuesto (por cerrar con el equipo)
+### Stack
 
-- **Frontend:** React con `@elevenlabs/react` (botón "Habla con tu asesor").
-- **Backend:** API REST sencilla (Node/Express o Python/FastAPI).
-- **Datos:** JSON/SQLite con el historial de Ana y las reglas de los 5 países.
-- **Voz:** ElevenLabs Agents (agente conversacional + Scribe para dictar gastos).
+- **Frontend:** React + Vite, con `@elevenlabs/client` para el asesor por voz.
+- **Backend:** Python con FastAPI; motor de reglas determinista.
+- **Datos:** ficheros JSON con el historial de Ana y las reglas de los 5 países, cada una con su fuente.
+- **Voz:** agente conversacional de ElevenLabs con Claude como modelo y *client tools* conectadas a la API.
 
 ---
 
@@ -96,7 +94,7 @@ gastos dictados     →   convenios (5 países)   →   simulaciones
 
 - **Prompt de sistema:** asistente fiscal para nómadas. Responde en el idioma del usuario. Siempre usa herramientas para obtener datos y nunca da cifras sin consultarlas. Cuando un caso no está claro, termina con "te recomiendo confirmarlo con un asesor".
 - **Base de conocimiento (RAG):** resumen de las reglas de residencia, IVA, Seguridad Social y regímenes especiales de los 5 países, y de los convenios entre ellos.
-- **Herramientas de servidor** (webhooks a nuestra API):
+- **Herramientas** (*client tools*: el agente las pide y el navegador las ejecuta contra nuestra API):
 
 | Tool | Descripción | Respuesta (ejemplo) |
 |---|---|---|
@@ -141,16 +139,5 @@ Para que esta conversación funcione, el dataset de demo debe poner a Ana con **
 | Plan | Precio | Incluye |
 |---|---|---|
 | Gratis | 0 € | Contador de días, alertas de umbral, reserva de impuestos |
-| Pro | [€__]/mes | Asesor por voz, simulador, facturas con IVA correcto, regímenes especiales |
-| Asesores | [__] % de comisión | Derivación de casos complejos a asesores colaboradores |
-
----
-
-## 8. Pendiente
-
-- [ ] Nombre definitivo del producto y del equipo
-- [ ] Precio Pro y % de comisión
-- [ ] Cifras de mercado con fuente: nº de nómadas digitales y nº de países con visado de nómada
-- [ ] Verificar las reglas de los 5 países con fuentes oficiales
-- [ ] URL pública de la demo
-- [ ] Pitch deck: https://claude.ai/artifact/2VV74vcgomPm5SL6uCatam
+| Pro | Por definir | Asesor por voz, simulador, facturas con IVA correcto, regímenes especiales |
+| Asesores | Comisión por definir | Derivación de casos complejos a asesores colaboradores |
