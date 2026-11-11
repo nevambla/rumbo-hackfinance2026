@@ -101,7 +101,6 @@ export default function Advisor({ state, refresh, notify }) {
   const [waiting, setWaiting] = useState(false); // user spoke/wrote, agent has not answered yet
   const [pendingTools, setPendingTools] = useState(0);
   const [flash, setFlash] = useState(null); // short-lived mascot reaction: { mood, bubble }
-  const [caption, setCaption] = useState(null); // live subtitle: last thing said, { role, text }
   const flashTimer = useRef(null);
   const stageRef = useRef(null);
   const conv = useRef(null);
@@ -153,7 +152,7 @@ export default function Advisor({ state, refresh, notify }) {
           const text = stripAudioTags(m.message || '');
           const isUser = (m.role || m.source) === 'user';
           setWaiting(isUser);
-          if (text) { add({ role: isUser ? 'user' : 'ai', text }); setCaption({ role: isUser ? 'user' : 'ai', text }); }
+          if (text) add({ role: isUser ? 'user' : 'ai', text });
         },
         onModeChange: ({ mode }) => { setSpeaking(mode === 'speaking'); if (mode === 'speaking') setWaiting(false); },
         onError: (msg) => { setErr(String(msg)); react({ mood: 'aviso', bubble: 'Algo ha fallado' }); },
@@ -237,11 +236,6 @@ export default function Advisor({ state, refresh, notify }) {
           <Mascot state={mood} size={170} className="voice-mascot" />
           {flash?.bubble && <div key={flash.bubble} className={`mascot-bubble ${flash.mood || ''}`} role="status">{flash.bubble}</div>}
         </div>
-        {live && caption && (
-          <p key={caption.text} className={`voice-caption ${caption.role}`} aria-live="polite">
-            {caption.role === 'user' && <span className="small muted">Tú: </span>}{caption.text}
-          </p>
-        )}
         <button className={`mic-xl ${live ? (speaking ? 'speaking' : 'live') : ''}`} onClick={toggle} disabled={status === 'connecting'} aria-label={live ? 'Colgar' : 'Hablar con el asesor'}>
           {status === 'connecting' ? <span className="spinner" style={{ width: 28, height: 28 }} /> : <Icon name={live ? 'phoneOff' : 'mic'} size={40} />}
         </button>

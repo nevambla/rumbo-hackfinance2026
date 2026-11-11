@@ -640,6 +640,9 @@ a.brand { display: block; color: inherit; text-decoration: none; }
 .advisor-chat .chat { flex: 1; min-height: 0; max-height: none; }
 .advisor-voice { position: sticky; top: 120px; }
 .advisor-voice .voice-caption { font-size: var(--t-lg); }
+/* Narrow side panel: the bubble goes under the mascot instead of beside it, so it is never clipped */
+.advisor-voice .mascot-stage { flex-direction: column; align-items: center; }
+.advisor-voice .mascot-bubble { position: static; margin-top: var(--s-2); max-width: 100%; width: auto; border-radius: 14px; text-align: center; }
 @media (max-width: 1000px) {
   .advisor-layout { grid-template-columns: minmax(0, 1fr); }
   .advisor-voice { position: static; order: -1; }
