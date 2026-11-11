@@ -7,6 +7,8 @@ Proyecto presentado a **HackFinance 2026** (BEST UC3M, Madrid Engineering Week).
 
 Rumbo cuenta los días que pasas en cada país, te dice dónde eres residente fiscal este año, te avisa antes de cruzar un umbral y aparta los impuestos de cada factura. Y puedes preguntarle en voz alta: *"Me han ofrecido quedarme dos meses más en Lisboa. ¿Me afecta?"*
 
+![Landing de Rumbo: «Trabaja desde donde quieras. Tributa sabiendo dónde.»](docs/img/landing.jpg)
+
 ---
 
 ## Índice
@@ -51,6 +53,10 @@ Además:
 - **Simulador:** "¿Qué pasa si me quedo 60 días más en Portugal?" Devuelve la nueva residencia, cuándo cruzas el umbral y la estimación por país.
 - **Pega tu reserva:** pegas el email de un vuelo o un alojamiento y Rumbo extrae el viaje.
 - **Expediente en PDF:** días por país, reglas aplicadas con su fuente y documentos que faltan, listo para llevar a un asesor.
+
+| Días y residencia | Simulador |
+|---|---|
+| ![Pantalla de días y residencia: 140 días en Portugal, te quedan 43; residencia estimada en España con confianza baja](docs/img/app-residencia.jpg) | ![Simulador: 60 días más en Portugal llevan a doble residencia con España; decide el convenio](docs/img/app-simulador.jpg) |
 
 Alcance del MVP: **5 países** (España, Portugal, México, Colombia y Tailandia) y una usuaria de demo, **Ana**, diseñadora freelance.
 
