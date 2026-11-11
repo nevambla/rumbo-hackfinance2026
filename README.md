@@ -54,18 +54,6 @@ Además:
 
 Alcance del MVP: **5 países** (España, Portugal, México, Colombia y Tailandia) y una usuaria de demo, **Ana**, diseñadora freelance.
 
-## Para el jurado: dónde mirar
-
-| Criterio | Qué hay en el proyecto | Dónde verlo |
-|---|---|---|
-| **Innovación y viabilidad** (30 %) | Un problema real y creciente, sin una herramienta pensada para él. Modelo freemium: gratis el contador y los avisos; de pago el asesor por voz, el simulador y el expediente; comisión por derivar casos complejos a asesores. | Landing (`/landing/`), pantalla **Planes** de la app |
-| **IA de frontera** (15 %) | Agente conversacional de **ElevenLabs** con **Claude** como modelo, 9 *client tools* conectadas a nuestro motor y salvaguardas en el prompt. **Claude** también extrae viajes de emails de reserva. | Pantalla **Asesor por voz**, [`backend/elevenlabs/agent.md`](backend/elevenlabs/agent.md) |
-| **UX y accesibilidad** (15 %) | Voz y texto en el mismo chat, mascota que reacciona a la conversación, subtítulos en directo y avisos que se pueden escuchar. Foco de teclado visible, etiquetas ARIA, `prefers-reduced-motion` y contraste AA. | Toda la app; landing |
-| **Implementación técnica** (30 %) | Motor de reglas **determinista** en Python. Cada conclusión trae la regla aplicada y su fuente. Contrato OpenAPI, 53 tests y datos de demo relativos a la fecha real. | [`backend/`](backend/), [`backend/API.md`](backend/API.md) |
-| **Presentación** (10 %) | Guion de demo ensayado por voz, paso a paso. | [`GUION.md`](GUION.md) |
-
-**La decisión de diseño más importante:** el agente de voz **nunca calcula**. Todas las cifras salen de nuestra API con reglas deterministas; el modelo solo las consulta y las explica. Así una respuesta fiscal no depende de lo que "recuerde" un LLM, y cada dato se puede rastrear hasta su regla.
-
 ## Arquitectura
 
 ```
