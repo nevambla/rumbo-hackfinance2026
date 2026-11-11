@@ -1,0 +1,76 @@
+% Rumbo architecture diagram for the README.
+% Build (from this folder):
+%   lualatex arquitectura.tex && pdftoppm -png -r 200 -singlefile arquitectura.pdf ../img/arquitectura
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\setmainfont{Space Grotesk}
+\setmonofont{Menlo}
+\usetikzlibrary{arrows.meta,backgrounds,calc}
+
+% Brand tokens
+\definecolor{abismo}{HTML}{040B18}
+\definecolor{pasaporte}{HTML}{0F1E36}
+\definecolor{lima}{HTML}{C6F432}
+\definecolor{cian}{HTML}{4FC3D9}
+\definecolor{pizarra}{HTML}{8A9BB0}
+\definecolor{niebla}{HTML}{F4F6F8}
+
+\tikzset{
+  box/.style={draw=pizarra!55, fill=pasaporte, rounded corners=6pt, text=niebla,
+              align=left, inner xsep=10pt, inner ysep=9pt, font=\small, anchor=north west},
+  group/.style={draw=pizarra!70, rounded corners=10pt, line width=0.6pt},
+  title/.style={font=\bfseries, text=lima, anchor=north west},
+  flow/.style={-{Stealth[length=7pt]}, line width=1.1pt, color=cian},
+  both/.style={{Stealth[length=7pt]}-{Stealth[length=7pt]}, line width=1.1pt, color=cian},
+  lbl/.style={font=\footnotesize, text=niebla, anchor=west, inner sep=2pt},
+}
+\newcommand{\sub}[1]{{\footnotesize\color{pizarra}#1}}
+\newcommand{\dir}[1]{{\ttfamily\color{lima}#1}}
+
+\begin{document}
+\hyphenpenalty=10000 \exhyphenpenalty=10000
+\begin{tikzpicture}[x=1mm, y=1mm]
+
+  % --- Browser (y 0 .. -44) ----------------------------------------------
+  \node[title] at (4,-3) {Navegador};
+  \node[box, text width=40mm] (app) at (4,-12)
+        {\textbf{App web}\\\sub{React + Vite}\\[3pt]Días y residencia, avisos,\\hucha, simulador, gastos};
+  \node[box, text width=40mm, draw=lima, line width=0.9pt] (voz) at (60,-12)
+        {\textbf{Asesor por voz}\\\sub{@elevenlabs/client}\\[3pt]Chat y micrófono;\\ejecuta las client tools};
+  \node[box, text width=36mm] (land) at (116,-12)
+        {\textbf{Landing}\\\sub{HTML estático}\\[3pt]Enlazada con la app\\en \texttt{/landing/}};
+  \draw[group] (0,0) rectangle (172,-44);
+
+  % --- API (x 0 .. 98) -----------------------------------------------------
+  \node[title] at (4,-71) {API Rumbo · FastAPI};
+  \node[box, text width=82mm] (api) at (4,-80) {%
+    \begin{tabular}{@{}l@{\hspace{8pt}}l@{}}
+      \dir{engine/}  & Días, residencia, umbrales, impuestos \\
+                     & y simulación. Funciones puras. \\[5pt]
+      \dir{data/}    & Reglas de 5 países con su fuente \\
+                     & y convenios de doble imposición \\[5pt]
+      \dir{banking/} & Hucha fiscal remunerada (MyInvestor) \\[3pt]
+      \dir{booking/} & «Pega tu reserva» con Claude \\[3pt]
+      \dir{dossier/} & Expediente en PDF \\[3pt]
+      \dir{voice/}   & URL firmada del agente y texto a voz
+    \end{tabular}};
+  \draw[group] (0,-68) rectangle (97,-134);
+
+  % --- ElevenLabs agent (x 106 .. 172) ----------------------------------------
+  \node[title] at (107,-71) {Voz · ElevenLabs};
+  \node[box, text width=46mm, draw=lima, line width=0.9pt] (agent) at (107,-80)
+        {\textbf{Agente conversacional}\\[3pt]LLM: Claude\\Voz y transcripción\\9 client tools};
+  \draw[group, draw=lima!80] (103,-68) rectangle (172,-108);
+  \node[font=\footnotesize, text=pizarra, align=left, anchor=north west, text width=60mm] at (105,-113)
+       {El agente nunca calcula: pide una tool,\\el navegador llama a la API y le\\devuelve el resultado.};
+
+  % --- Flows (all straight, between the groups) ------------------------------
+  \draw[flow] (24,-44) -- (24,-68)  node[lbl, midway, xshift=2mm] {\texttt{/api}};
+  \draw[flow] (72,-44) -- (72,-68)  node[lbl, midway, xshift=2mm] {ejecuta la tool};
+  \draw[both] (104,-44) -- (104,-68) node[lbl, midway, xshift=2mm] {WebRTC / WebSocket};
+
+  \begin{scope}[on background layer]
+    \fill[abismo] (-8,8) rectangle (180,-142);
+  \end{scope}
+\end{tikzpicture}
+\end{document}

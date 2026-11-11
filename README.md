@@ -62,24 +62,9 @@ Alcance del MVP: **5 países** (España, Portugal, México, Colombia y Tailandia
 
 ## Arquitectura
 
-```
-                 ┌──────────────────────── Navegador ────────────────────────┐
-                 │  App web (React + Vite)          Landing (HTML estático)  │
-                 │   ├─ Días y residencia, avisos, hucha, simulador…         │
-                 │   └─ Asesor por voz ──── @elevenlabs/client ──────────┐   │
-                 └──────────────┬────────────────────────────────────────┼───┘
-                                │ /api (proxy de Vite)                   │ WebRTC / WebSocket
-                                ▼                                        ▼
-  ┌─────────────────── API Rumbo (FastAPI) ───────────────────┐   ┌─ ElevenLabs Agent ─┐
-  │ engine/   días · reglas · residencia · umbrales ·         │   │  LLM: Claude       │
-  │           impuestos · simulación   (funciones puras)      │   │  voz + transcripción│
-  │ data/     reglas por país con source_url, convenios       │   │  9 client tools ───┼──┐
-  │ banking/  hucha remunerada (MyInvestor)           │   └────────────────────┘  │
-  │ booking/  "pega tu reserva" (Claude o extractor local)    │                           │
-  │ dossier/  expediente PDF                                  │◄──────────────────────────┘
-  │ voice/    URL firmada del agente · texto a voz            │  el navegador ejecuta la tool
-  └───────────────────────────────────────────────────────────┘  y llama a la API
-```
+![Arquitectura de Rumbo: el navegador (app web, asesor por voz y landing) llama a la API Rumbo en FastAPI y habla con el agente de ElevenLabs; el agente pide tools, el navegador las ejecuta contra la API](docs/img/arquitectura.png)
+
+<sub>Fuente del diagrama: [`docs/diagramas/arquitectura.tex`](docs/diagramas/arquitectura.tex) (TikZ).</sub>
 
 - **Client tools:** el agente pide al navegador que ejecute una herramienta (`simulate_stay`, `get_residency_status`, `register_expense`…). El navegador llama a la API, pinta el resultado en el chat y le devuelve el JSON al agente.
 - **Agente privado:** la clave de ElevenLabs no sale del backend. El navegador recibe una URL firmada de un solo uso (`GET /api/voice/signed-url`).
