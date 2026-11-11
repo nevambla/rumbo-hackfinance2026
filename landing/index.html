@@ -171,10 +171,12 @@ section{padding:128px 0;position:relative}
 .barriers{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--white)}
 .barrier{padding:36px 32px 32px;display:flex;flex-direction:column;min-height:400px}
 .barrier+.barrier{border-left:1px solid var(--line)}
-.barrier .ico{width:88px;height:88px;margin-bottom:auto}
+.barrier .ico{width:88px;height:88px;flex-shrink:0}
 .barrier .n{font-family:var(--font-head);color:var(--accent-ink);font-size:.9rem;margin:40px 0 10px}
 .barrier h3{font-size:1.6rem;margin-bottom:12px;font-weight:400;letter-spacing:-.03em}
 .barrier p{color:var(--ink-soft);font-size:.96rem;margin-bottom:22px}
+/* Text starts at the same height in every card; the spare room goes above the link so the links line up too */
+.barrier .link{margin-top:auto;align-self:flex-start}
 @media (max-width:900px){.barriers{grid-template-columns:1fr}.barrier+.barrier{border-left:none;border-top:1px solid var(--line)}.barrier{min-height:0}}
 
 /* Product pillars */
