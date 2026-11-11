@@ -631,3 +631,4 @@ button.thumb:hover { transform: translateY(-2px); border-color: var(--niebla); }
 }
 .talk-banner .grow { flex: 1; min-width: 0; }
 @media (max-width: 640px) { .talk-banner { flex-wrap: wrap; } .talk-banner .btn { width: 100%; justify-content: center; } }
+a.brand { display: block; color: inherit; text-decoration: none; }

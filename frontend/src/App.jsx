@@ -140,9 +140,9 @@ export default function App() {
   return (
     <div className="layout">
       <aside className={`sidebar ${menuOpen ? 'open' : ''}`}>
-        <div className="brand">
+        <a className="brand" href="/landing/" title="Ir a la web de Rumbo">
           <RumboLogo size={28} />
-        </div>
+        </a>
         <nav>
           {SECTIONS.map((s) => (
             <button key={s.id} className={`nav-item ${section === s.id ? 'active' : ''}`} onClick={() => go(s.id)} aria-current={section === s.id ? 'page' : undefined}>
@@ -160,6 +160,7 @@ export default function App() {
               <small>{state.user.occupation_es}</small>
             </div>
           </div>
+          <a className="btn ghost small" href="/landing/"><Icon name="external" size={16} />Web de Rumbo</a>
           <Button variant="ghost small" icon="chevronRight" busy={advancing} onClick={advance}>Avanzar 30 días</Button>
           <Button variant="ghost small" icon="refresh" busy={resetting} onClick={reset}>Reiniciar demo</Button>
         </div>

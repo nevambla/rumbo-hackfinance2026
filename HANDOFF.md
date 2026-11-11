@@ -52,6 +52,6 @@ Web (otra terminal, requiere Node: `brew install node`):
 cd frontend && npm install && npm run dev
 ```
 
-Abre http://localhost:5173 (Vite hace proxy de `/api` al puerto 8000). Para probar solo el agente de voz sin la web: `python3 -m http.server 5173 -d voz-prueba`.
+Abre http://localhost:5173 (Vite hace proxy de `/api` al puerto 8000). La landing se sirve desde el mismo servidor en http://localhost:5173/landing/: su botón «Abrir la app» lleva a la app y el logo de la app lleva a la landing. `npm run build` copia la landing a `dist/landing`. Para probar solo el agente de voz sin la web: `python3 -m http.server 5173 -d voz-prueba`.
 
 **Claves:** no están en el repo. Cada uno crea `backend/.env` a partir de `.env.example` y rellena `ELEVENLABS_API_KEY` y `ELEVENLABS_AGENT_ID`. Pedidle la clave a Sofía por un canal privado. Para trabajar en la web no hace falta: sin claves, `/api/voice/signed-url` devuelve 404 y el resto de la API funciona igual.
