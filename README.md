@@ -68,7 +68,7 @@ Alcance del MVP: **5 países** (España, Portugal, México, Colombia y Tailandia
   │ engine/   días · reglas · residencia · umbrales ·         │   │  LLM: Claude       │
   │           impuestos · simulación   (funciones puras)      │   │  voz + transcripción│
   │ data/     reglas por país con source_url, convenios       │   │  9 client tools ───┼──┐
-  │ banking/  hucha remunerada (mock de MyInvestor)           │   └────────────────────┘  │
+  │ banking/  hucha remunerada (MyInvestor)           │   └────────────────────┘  │
   │ booking/  "pega tu reserva" (Claude o extractor local)    │                           │
   │ dossier/  expediente PDF                                  │◄──────────────────────────┘
   │ voice/    URL firmada del agente · texto a voz            │  el navegador ejecuta la tool
@@ -219,4 +219,4 @@ Preferimos decirlas antes de que alguien las encuentre:
 
 ---
 
-Hecho por JustBuildIt en HackFinance 2026 con ElevenLabs, Claude y MyInvestor (simulado).
+Hecho por JustBuildIt en HackFinance 2026 con ElevenLabs, Claude y MyInvestor.
