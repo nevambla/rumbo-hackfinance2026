@@ -10,6 +10,7 @@ Configuración del agente conversacional. Se crea a mano en el panel de ElevenLa
 4. **First message:** `Hola, Ana. Soy Rumbo. ¿Qué plan tienes en mente?`
 5. **Herramientas → Añadir herramienta → Cliente → vista JSON**, una por cada fichero de [`tools/`](tools/) (9 en total). Pega el fichero entero (`pbcopy < tools/<nombre>.json`). Ya va en el formato del editor del panel: parámetros en lista, `expects_response: true` y timeout de 10 s. **No cambies los nombres**: el frontend registra un handler con el mismo nombre.
 6. **Security / Authentication:** activa la autenticación (agente privado). El navegador nunca ve la API key: el backend pide una URL firmada en `GET /api/voice/signed-url`.
+   En **Security → Overrides**, permite sobrescribir el **First message**. Cuando la conversación empieza con una pregunta escrita o una sugerencia, la web quita el saludo para que el agente conteste directamente.
 7. Copia el **Agent ID** y pon en `backend/.env`:
 
    ```

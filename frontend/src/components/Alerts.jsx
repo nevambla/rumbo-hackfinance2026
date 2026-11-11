@@ -58,7 +58,7 @@ export default function Alerts({ state, notify }) {
             <div className="alert-actions">
               {playing === a.id
                 ? <Button variant="small" icon="stop" onClick={stop}>Parar</Button>
-                : <Button variant="small" icon="volume" onClick={() => play(a.id, `${a.title_es}. ${a.message_es}`)}>Escuchar</Button>}
+                : <Button variant="small" icon="volume" onClick={() => play(a.id, a.message_es)}>Escuchar</Button>}
             </div>
           </article>
         ))}

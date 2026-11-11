@@ -16,7 +16,8 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=BACKEND_DIR / ".env",
+        # Later files win: the repo-root .env.local (written by `elevenlabs onboard`) overrides backend/.env.
+        env_file=(BACKEND_DIR / ".env", BACKEND_DIR.parent / ".env.local"),
         env_file_encoding="utf-8",
         extra="ignore",
     )

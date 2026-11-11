@@ -140,13 +140,14 @@ export default function Advisor({ state, refresh, notify }) {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       const { signed_url } = await api.get('/api/voice/signed-url');
+      // Started from a typed/suggested question: skip the greeting so the agent answers it straight away.
+      // Needs "first message" overrides allowed in the agent's Security settings.
+      const startedByText = Boolean(queued.current);
       conv.current = await Conversation.startSession({
         signedUrl: signed_url,
         clientTools,
-        onConnect: () => {
-          setStatus('live');
-          if (queued.current) { conv.current?.sendUserMessage(queued.current); queued.current = null; }
-        },
+        ...(startedByText && { overrides: { agent: { firstMessage: '' } } }),
+        onConnect: () => setStatus('live'),
         onDisconnect: () => { conv.current = null; setStatus('idle'); setSpeaking(false); setWaiting(false); setPendingTools(0); },
         onMessage: (m) => {
           const text = stripAudioTags(m.message || '');
@@ -158,6 +159,8 @@ export default function Advisor({ state, refresh, notify }) {
         onError: (msg) => { setErr(String(msg)); react({ mood: 'aviso', bubble: 'Algo ha fallado' }); },
         onUnhandledClientToolCall: (c) => setErr(`El agente pidió una herramienta desconocida: ${c?.tool_name}`),
       });
+      // onConnect fires before startSession resolves, so conv.current only exists from here on.
+      if (queued.current) { conv.current.sendUserMessage(queued.current); queued.current = null; }
     } catch (e) {
       setStatus('idle');
       react({ mood: 'aviso', bubble: e.status === 404 ? 'Falta configurar la voz' : 'No he podido conectar' }, 8000);
@@ -205,29 +208,8 @@ export default function Advisor({ state, refresh, notify }) {
           : pendingTools > 0 || waiting ? 'pensando'
             : 'escuchando');
   return (
-    <div className="stack">
-      <section className="card voice-hero">
-        <div className={`mascot-stage ${live ? 'live' : 'idle'}`} ref={stageRef}>
-          <Mascot state={mood} size={170} className="voice-mascot" />
-          {flash?.bubble && <div key={flash.bubble} className={`mascot-bubble ${flash.mood || ''}`} role="status">{flash.bubble}</div>}
-        </div>
-        {live && caption && (
-          <p key={caption.text} className={`voice-caption ${caption.role}`} aria-live="polite">
-            {caption.role === 'user' && <span className="small muted">Tú: </span>}{caption.text}
-          </p>
-        )}
-        <button className={`mic-xl ${live ? (speaking ? 'speaking' : 'live') : ''}`} onClick={toggle} disabled={status === 'connecting'} aria-label={live ? 'Colgar' : 'Hablar con el asesor'}>
-          {status === 'connecting' ? <span className="spinner" style={{ width: 28, height: 28 }} /> : <Icon name={live ? 'phoneOff' : 'mic'} size={40} />}
-        </button>
-        <p className="voice-status" aria-live="polite">
-          {err ? <span className="danger-text">{err}</span>
-            : live ? (speaking ? 'Rumbo está hablando' : pendingTools > 0 ? 'Rumbo está consultando tus datos…' : 'Te escucho. Pulsa para colgar.')
-              : status === 'connecting' ? 'Conectando…' : 'Pulsa y pregunta en voz alta'}
-        </p>
-        <p className="small">Las cifras salen siempre de las reglas de Rumbo; el asistente solo las explica.</p>
-      </section>
-
-      <section className="card">
+    <div className="advisor-layout">
+      <section className="card advisor-chat">
         <div className="group-head">
           <h2>Conversación</h2>
           {!state.modes.elevenlabs && <span className="small warn-text">Sin claves de ElevenLabs</span>}
@@ -248,6 +230,27 @@ export default function Advisor({ state, refresh, notify }) {
           <Button variant="primary" icon="send" disabled={status === 'connecting'}>Enviar</Button>
         </form>
         <p className="small muted">Las preguntas escritas se envían al mismo agente; la respuesta llega por voz y por escrito.</p>
+      </section>
+
+      <section className="card voice-hero advisor-voice">
+        <div className={`mascot-stage ${live ? 'live' : 'idle'}`} ref={stageRef}>
+          <Mascot state={mood} size={170} className="voice-mascot" />
+          {flash?.bubble && <div key={flash.bubble} className={`mascot-bubble ${flash.mood || ''}`} role="status">{flash.bubble}</div>}
+        </div>
+        {live && caption && (
+          <p key={caption.text} className={`voice-caption ${caption.role}`} aria-live="polite">
+            {caption.role === 'user' && <span className="small muted">Tú: </span>}{caption.text}
+          </p>
+        )}
+        <button className={`mic-xl ${live ? (speaking ? 'speaking' : 'live') : ''}`} onClick={toggle} disabled={status === 'connecting'} aria-label={live ? 'Colgar' : 'Hablar con el asesor'}>
+          {status === 'connecting' ? <span className="spinner" style={{ width: 28, height: 28 }} /> : <Icon name={live ? 'phoneOff' : 'mic'} size={40} />}
+        </button>
+        <p className="voice-status" aria-live="polite">
+          {err ? <span className="danger-text">{err}</span>
+            : live ? (speaking ? 'Rumbo está hablando' : pendingTools > 0 ? 'Rumbo está consultando tus datos…' : 'Te escucho. Pulsa para colgar.')
+              : status === 'connecting' ? 'Conectando…' : 'Pulsa y pregunta en voz alta'}
+        </p>
+        <p className="small">Las cifras salen siempre de las reglas de Rumbo; el asistente solo las explica.</p>
       </section>
     </div>
   );
