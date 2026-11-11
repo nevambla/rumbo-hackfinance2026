@@ -23,11 +23,13 @@ En resumen: la rama de Lucas aporta la web y el código del navegador que habla 
 
 ## Pendiente, por orden
 
-1. **Web:** traer `web/` de `lucas/motor-fiscal` a `integracion` y conectarla a la API de Python (puerto 8000). Los formatos de respuesta son distintos: `claims[]` en vez de `country`, importes en `*_cents` y `GET /api/state` para todo el panel.
-2. **Asesor por voz, antes que el resto:** en `Advisor.jsx`, iniciar la sesión con `GET /api/voice/signed-url` y registrar las 9 tools con los **mismos nombres** que en [`backend/contract/client_tools.json`](backend/contract/client_tools.json). Cada tool llama a su endpoint y devuelve el JSON al agente.
-3. **Pantallas:** días y residencia, avisos, hucha y simulador. Todos los datos salen de `GET /api/state`.
+1. ~~**Web:** traer `web/` de `lucas/motor-fiscal` y conectarla a la API de Python.~~ Hecho en `frontend/` (rama `integracion-web`).
+2. ~~**Asesor por voz:** URL firmada + las 9 client tools.~~ Hecho en `frontend/src/components/Advisor.jsx` (usa `@elevenlabs/client`).
+3. ~~**Pantallas:** días y residencia, avisos, hucha y simulador.~~ Hechas, todas con `GET /api/state`. Además: preguntas pendientes y desempate, "Pega tu reserva", expediente PDF, avanzar reloj.
 4. **Landing:** recuperar la de `main`. La de esta rama es la versión antigua.
 5. **Ensayar el guion completo por voz** y ajustarlo a lo que diga el motor.
+
+Quitado respecto a la web de Lucas (no hay backend en Python): regímenes especiales, IVA y vista de factura, fotos de facturas, resumen semanal en audio, comparador de escenarios por tramos (ahora compara dos estancias con `simulate_stay`).
 
 Integración del frontend: [`backend/API.md`](backend/API.md). Respuestas de ejemplo: [`backend/contract/examples/`](backend/contract/examples/).
 
@@ -43,5 +45,13 @@ cd backend && make install && make test && make dev
 Si `make install` falla con *requires a different Python: 3.9.x*, es que `python3` apunta a una versión antigua (pasa en macOS). Indica una versión nueva: `make install PY=python3.12`. Si no la tienes, instálala antes con `brew install python@3.12`.
 
 La API queda en http://localhost:8000 y Swagger en http://localhost:8000/docs.
+
+Web (otra terminal, requiere Node: `brew install node`):
+
+```bash
+cd frontend && npm install && npm run dev
+```
+
+Abre http://localhost:5173 (Vite hace proxy de `/api` al puerto 8000). Para probar solo el agente de voz sin la web: `python3 -m http.server 5173 -d voz-prueba`.
 
 **Claves:** no están en el repo. Cada uno crea `backend/.env` a partir de `.env.example` y rellena `ELEVENLABS_API_KEY` y `ELEVENLABS_AGENT_ID`. Pedidle la clave a Sofía por un canal privado. Para trabajar en la web no hace falta: sin claves, `/api/voice/signed-url` devuelve 404 y el resto de la API funciona igual.
