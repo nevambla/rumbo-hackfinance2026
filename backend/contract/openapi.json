@@ -1246,6 +1246,21 @@
         "title": "SimulationResult",
         "type": "object"
       },
+      "TTSRequest": {
+        "properties": {
+          "text": {
+            "maxLength": 1200,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "TTSRequest",
+        "type": "object"
+      },
       "TaxReserve": {
         "properties": {
           "as_of": {
@@ -2238,6 +2253,46 @@
           }
         },
         "summary": "Signed Url",
+        "tags": [
+          "voice"
+        ]
+      }
+    },
+    "/api/voice/tts": {
+      "post": {
+        "operationId": "tts_api_voice_tts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TTSRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "audio/mpeg": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Speak a text with the agent's voice (audio/mpeg)",
         "tags": [
           "voice"
         ]

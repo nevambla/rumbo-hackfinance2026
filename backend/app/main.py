@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .config import get_settings
 from .routers import clock, dossier, invoices, state, tools, trips
-from .voice import signed_url
+from .voice import signed_url, tts
 
 settings = get_settings()
 app = FastAPI(title="Rumbo API", version="0.1.0",
@@ -15,7 +15,7 @@ app = FastAPI(title="Rumbo API", version="0.1.0",
 app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origin_list,
                    allow_methods=["GET", "POST", "OPTIONS"], allow_headers=["*"])
 
-for r in (tools.router, state.router, trips.router, invoices.router, clock.router, dossier.router, signed_url.router):
+for r in (tools.router, state.router, trips.router, invoices.router, clock.router, dossier.router, signed_url.router, tts.router):
     app.include_router(r)
 
 

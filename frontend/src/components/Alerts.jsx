@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../lib/api.js';
-import { speak, stopSpeaking } from '../lib/speech.js';
+import { speak, stopSpeaking, ttsFallbackReason } from '../lib/speech.js';
 import Icon from './Icon.jsx';
 import { Button, Country, SourceLink } from './ui.jsx';
 import Mascot from './Mascot.jsx';
@@ -12,10 +12,12 @@ export default function Alerts({ state, notify }) {
   const [dossier, setDossier] = useState(null);
   const [generating, setGenerating] = useState(false);
 
+  const [fallback, setFallback] = useState(ttsFallbackReason());
   const play = async (id, text) => {
     setPlaying(id);
     await speak(text);
-    setTimeout(() => setPlaying((p) => (p === id ? null : p)), 2500);
+    setFallback(ttsFallbackReason());
+    setPlaying((p) => (p === id ? null : p));
   };
   const stop = () => { stopSpeaking(); setPlaying(null); };
 
@@ -39,6 +41,7 @@ export default function Alerts({ state, notify }) {
           <p className="small muted">{urgent.length ? urgent.map((a) => a.title_es).join(' · ') : 'No tienes avisos urgentes. Te avisaré antes de que cruces un umbral.'}</p>
         </div>
       </section>
+      {fallback && <p className="note small">Sonando con la voz del navegador: {fallback}</p>}
       <section className="alerts">
         {alerts.length === 0 && <p className="muted">Sin avisos.</p>}
         {alerts.map((a, i) => (

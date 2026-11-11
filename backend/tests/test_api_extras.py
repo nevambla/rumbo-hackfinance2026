@@ -72,3 +72,8 @@ def test_invalid_trip_dates_rejected(client):
 
 def test_signed_url_unavailable_without_key(client):
     assert client.get("/api/voice/signed-url").status_code == 404
+
+
+def test_tts_without_elevenlabs_keys_is_404(client):
+    r = client.post("/api/voice/tts", json={"text": "Te quedan 43 días en Portugal."})
+    assert r.status_code == 404
