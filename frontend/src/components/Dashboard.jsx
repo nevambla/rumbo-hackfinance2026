@@ -5,7 +5,12 @@ import Icon from './Icon.jsx';
 import { Button, Country, SourceLink } from './ui.jsx';
 import Mascot from './Mascot.jsx';
 
-const CONF = { alta: 'ok', media: 'warning', baja: 'danger' };
+// Low confidence is an honest caveat, not an alarm: neutral tag plus the reason. Red stays for dual residency.
+function ConfidenceTag({ residency }) {
+  const pending = residency.pending_questions?.length > 0;
+  const cls = residency.confidence === 'alta' ? 'ok' : '';
+  return <span className={`tag ${cls}`}>Confianza {residency.confidence}{pending ? ' · faltan respuestas' : ''}</span>;
+}
 const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 const SOURCE = { seed: 'Historial', manual: 'Manual', booking: 'Reserva', parsed: 'Reserva pegada' };
 
@@ -108,10 +113,7 @@ function ResidencyCard({ residency, go, refresh, notify }) {
       <div className="big row wrap">
         {claims.length ? claims.map((c) => <Country key={c.country} code={c.country} />) : <span className="muted">Ningún país</span>}
       </div>
-      <div className="row wrap">
-        <span className={`tag ${CONF[residency.confidence]}`}>Confianza {residency.confidence}</span>
-        {residency.dual_residency && <span className="tag danger">Doble residencia</span>}
-      </div>
+      {residency.dual_residency && <div className="row wrap"><span className="tag danger">Doble residencia</span></div>}
       {claims.map((c) => (
         <p key={c.country} className="small muted">
           {c.reason_es} <SourceLink href={c.source_url}>Fuente</SourceLink>
@@ -121,9 +123,12 @@ function ResidencyCard({ residency, go, refresh, notify }) {
       {residency.treaty_hint_es && <p className="small">{residency.treaty_hint_es}</p>}
       {residency.warnings_es.map((w, i) => <p key={i} className="small warn-text">{w}</p>)}
       <Questions residency={residency} refresh={refresh} notify={notify} />
-      {residency.confidence !== 'alta' && (
-        <button className="link small" onClick={() => go('planes')}>Confirmarlo con un asesor <Icon name="arrowRight" size={14} /></button>
-      )}
+      <div className="row wrap">
+        <ConfidenceTag residency={residency} />
+        {residency.confidence !== 'alta' && (
+          <button className="link small" onClick={() => go('planes')}>Confirmarlo con un asesor <Icon name="arrowRight" size={14} /></button>
+        )}
+      </div>
     </div>
   );
 }
