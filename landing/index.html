@@ -226,6 +226,15 @@ section{padding:128px 0;position:relative}
 .bubble.bot{align-self:flex-end;background:var(--abismo);border-bottom-right-radius:4px}
 .bubble.bot small{color:var(--lima);opacity:1}
 .mic{margin-top:22px;display:flex;align-items:center;gap:14px;color:var(--pizarra);font-size:.9rem}
+/* Rumbo, la mascota: poses apiladas con fundido (assets/mascota, lienzo 240x280) */
+.rumbo-avatar{width:96px;aspect-ratio:240/280;position:relative;flex:none;margin:-18px 0 -6px -6px}
+.rumbo-avatar img{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .18s ease}
+.rumbo-avatar img.is-active{opacity:1}
+.rumbo-avatar.idle{animation:rumbo-breathe 3.6s ease-in-out infinite}
+.rumbo-avatar.talking{animation:rumbo-talk .32s ease-in-out infinite alternate}
+@keyframes rumbo-breathe{50%{transform:translateY(-3px)}}
+@keyframes rumbo-talk{to{transform:translateY(-4px) rotate(-1.5deg)}}
+.bubble.bot small{padding-left:20px;background:url(assets/mascota/rumbo-icono.svg) left center/15px 15px no-repeat}
 .mic button{width:56px;height:56px;border-radius:50%;border:none;background:var(--lima);color:var(--abismo);cursor:pointer;display:grid;place-items:center;flex:none;position:relative}
 .mic button[aria-pressed="true"]::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--lima);animation:pulse 1.2s ease-out infinite}
 @keyframes pulse{from{opacity:1;transform:scale(.9)}to{opacity:0;transform:scale(1.35)}}
@@ -351,7 +360,8 @@ footer{background:var(--abismo);color:var(--pizarra);padding:72px 0 40px;border-
   .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;row-gap:16px}
   .track [aria-hidden="true"]{display:none}
   .marquee{-webkit-mask-image:none;mask-image:none}
-  .live::before,.mic button::after{animation:none}
+  .live::before,.mic button::after,.rumbo-avatar{animation:none!important}
+  .rumbo-avatar img{transition:none}
 }
 </style>
 </head>
@@ -545,6 +555,13 @@ footer{background:var(--abismo);color:var(--pizarra);padding:72px 0 40px;border-
           <div class="bubble bot"><small>RUMBO</small>Llevas 140 días en Portugal este año. Con dos meses más pasarías de 183 y serías residente fiscal allí. ¿Quieres que compare cuánto pagarías en cada caso?</div>
         </div>
         <div class="mic">
+          <div class="rumbo-avatar idle" id="rumbo" role="img" aria-label="Rumbo saludando">
+            <img src="assets/mascota/rumbo-saludando.svg" data-state="saludando" class="is-active" alt="">
+            <img src="assets/mascota/rumbo-escuchando.svg" data-state="escuchando" alt="">
+            <img src="assets/mascota/rumbo-pensando.svg" data-state="pensando" alt="">
+            <img src="assets/mascota/rumbo-hablando.svg" data-state="hablando" alt="">
+            <img src="assets/mascota/rumbo-celebrando.svg" data-state="celebrando" alt="">
+          </div>
           <button type="button" id="micBtn" aria-pressed="false" aria-label="Hablar con Rumbo">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
           </button>
@@ -834,14 +851,23 @@ const script=[
   ['bot','Hecho. Lo he registrado como gasto deducible del 14 de julio en Colombia.']
 ];
 let step=0,busy=false;
+const rumbo=document.getElementById('rumbo');
+const RUMBO_LABEL={saludando:'saludando',escuchando:'escuchando',pensando:'pensando',hablando:'hablando',celebrando:'celebrando'};
+function setRumbo(state){
+  rumbo.querySelectorAll('img').forEach(i=>i.classList.toggle('is-active',i.dataset.state===state));
+  rumbo.classList.toggle('idle',state==='saludando');rumbo.classList.toggle('talking',state==='hablando');
+  rumbo.setAttribute('aria-label','Rumbo '+RUMBO_LABEL[state]);
+}
 function add(who,text){const b=document.createElement('div');b.className='bubble '+who;b.innerHTML=`<small>${who==='user'?'ANA':'RUMBO'}</small>`;b.append(text);chat.append(b)}
 micBtn.addEventListener('click',()=>{
   if(busy)return;busy=true;
-  micBtn.setAttribute('aria-pressed','true');micHint.textContent='Escuchando…';
+  micBtn.setAttribute('aria-pressed','true');micHint.textContent='Escuchando…';setRumbo('escuchando');
   const [u,b]=[script[step%4],script[(step+1)%4]];step+=2;
-  setTimeout(()=>{add(u[0],u[1]);micHint.textContent='Rumbo está consultando la API…';
-    setTimeout(()=>{add(b[0],b[1]);micBtn.setAttribute('aria-pressed','false');micHint.textContent='Pulsa y pregunta otra vez.';busy=false;
+  const saved=/registrado/i.test(b[1]);
+  setTimeout(()=>{add(u[0],u[1]);micHint.textContent='Rumbo está consultando la API…';setRumbo('pensando');
+    setTimeout(()=>{add(b[0],b[1]);micBtn.setAttribute('aria-pressed','false');micHint.textContent='Pulsa y pregunta otra vez.';busy=false;setRumbo('hablando');
       while(chat.children.length>4)chat.firstElementChild.remove();
+      setTimeout(()=>{if(busy)return;setRumbo(saved?'celebrando':'saludando');if(saved)setTimeout(()=>{if(!busy)setRumbo('saludando')},2200)},reduce?0:2400);
     },reduce?0:1100)
   },reduce?0:900);
 });
