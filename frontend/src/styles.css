@@ -591,7 +591,7 @@ button.thumb:hover { transform: translateY(-2px); border-color: var(--niebla); }
 .rumbo-avatar img.is-active { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .rumbo-avatar img { transition: none; } }
 .voice-hero .voice-mascot { margin-bottom: calc(var(--s-2) * -1); }
-.voice-hero .voice-mascot + .mic-xl { width: 84px; height: 84px; }
+.voice-hero .mascot-stage ~ .mic-xl { width: 84px; height: 84px; }
 /* Icono de Rumbo junto a la etiqueta de sus mensajes */
 .msg.ai::before { padding-left: 22px; line-height: 16px; background: url('/mascota/rumbo-icono.svg') left center / 16px 16px no-repeat; }
 /* Cabecera con mascota (avisos, carga) */
@@ -600,3 +600,34 @@ button.thumb:hover { transform: translateY(-2px); border-color: var(--niebla); }
 .mascot-banner p { margin: 0; }
 .boot .rumbo-avatar { margin: 0 auto; }
 @media (max-width: 480px) { .mascot-banner { gap: var(--s-3); } .mascot-banner .rumbo-avatar { width: 72px !important; } }
+
+/* Escenario de la mascota: se mueve con la voz del agente (--vol, 0..1) y respira en reposo */
+.mascot-stage { position: relative; display: flex; justify-content: center; --vol: 0; }
+.mascot-stage .rumbo-avatar { transform-origin: 50% 92%; transition: transform 90ms linear; }
+.mascot-stage.live .rumbo-avatar { transform: translateY(calc(var(--vol) * -10px)) scale(calc(1 + var(--vol) * .05)) rotate(calc(var(--vol) * -2deg)); }
+.mascot-stage.idle .rumbo-avatar { animation: rumbo-breathe 3.6s ease-in-out infinite; }
+@keyframes rumbo-breathe { 50% { transform: translateY(-3px) scale(1.012); } }
+/* Bocadillo con la cifra clave */
+.mascot-bubble {
+  position: absolute; left: calc(50% + 70px); top: 6px; max-width: 230px; width: max-content;
+  padding: 9px 13px; border-radius: 14px 14px 14px 4px; text-align: left;
+  background: var(--niebla); color: var(--abismo); font-family: var(--font-head); font-weight: 500; font-size: var(--t-sm); line-height: 1.3;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35); animation: bubble-in .28s var(--ease-out) both;
+}
+.mascot-bubble.aviso { background: #E0A526; color: var(--abismo); }
+.mascot-bubble.celebrando { background: var(--lima); color: var(--abismo); }
+@keyframes bubble-in { from { opacity: 0; transform: translateY(6px) scale(.92); } }
+/* Subtítulos grandes: se entienden aunque el audio de la sala sea malo */
+.voice-hero .voice-caption { max-width: 58ch; margin: 0; font-family: var(--font-head); font-size: var(--t-xl); line-height: 1.3; letter-spacing: -.01em; color: var(--niebla); animation: enter .3s var(--ease-out) both; }
+.voice-hero .voice-caption.user { font-size: var(--t-lg); color: var(--text-2); }
+@media (max-width: 640px) {
+  .mascot-bubble { position: static; margin-top: var(--s-2); max-width: 90%; border-radius: 14px; }
+  .mascot-stage { flex-direction: column; align-items: center; }
+  .voice-hero .voice-caption { font-size: var(--t-lg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-stage .rumbo-avatar { animation: none !important; transform: none !important; }
+  .mascot-bubble, .voice-caption { animation: none; }
+}
+.talk-banner .grow { flex: 1; min-width: 0; }
+@media (max-width: 640px) { .talk-banner { flex-wrap: wrap; } .talk-banner .btn { width: 100%; justify-content: center; } }

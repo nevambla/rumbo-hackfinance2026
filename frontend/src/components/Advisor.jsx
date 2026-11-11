@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Conversation, stripAudioTags } from '@elevenlabs/client';
 import { api } from '../lib/api.js';
+import { date, eur } from '../lib/format.js';
 import Icon from './Icon.jsx';
 import Mascot from './Mascot.jsx';
 import { Button } from './ui.jsx';
@@ -53,14 +54,30 @@ function toolSummary(name, r) {
   }
 }
 
-/** Mascot reaction to a tool result: a warning when a threshold is crossed, a celebration when something is saved. */
-function toolMood(name, r) {
-  if (r?.error) return 'aviso';
-  if (name === 'simulate_stay' && (r.crosses_threshold || r.after?.dual_residency)) return 'aviso';
-  if (name === 'get_alerts' && r.alerts?.some((a) => a.level !== 'info')) return 'aviso';
-  if (name === 'get_residency_status' && r.dual_residency) return 'aviso';
-  if (['register_expense', 'answer_question', 'generate_dossier'].includes(name)) return 'celebrando';
-  return null;
+/**
+ * Mascot reaction to a tool result, with the key figure for the speech bubble:
+ * a warning when a threshold is crossed, a celebration when something is saved.
+ */
+function toolReaction(name, r) {
+  if (r?.error) return { mood: 'aviso', bubble: 'No he podido consultarlo' };
+  switch (name) {
+    case 'simulate_stay':
+      if (r.crosses_threshold && r.cross_date) return { mood: 'aviso', bubble: `Cruzarías los ${r.threshold} días el ${date(r.cross_date)}` };
+      if (r.after?.dual_residency) return { mood: 'aviso', bubble: 'Tendrías doble residencia' };
+      return { mood: 'celebrando', bubble: `Sigues por debajo de ${r.threshold} días` };
+    case 'get_alerts': {
+      const urgent = r.alerts?.filter((a) => a.level !== 'info') || [];
+      return urgent.length ? { mood: 'aviso', bubble: urgent[0].title_es } : { mood: 'celebrando', bubble: 'Sin avisos urgentes' };
+    }
+    case 'get_residency_status':
+      return r.dual_residency ? { mood: 'aviso', bubble: 'Doble residencia' } : null;
+    case 'register_expense':
+      return { mood: 'celebrando', bubble: `Gasto guardado: ${eur(r.expense?.amount_cents ?? 0)}` };
+    case 'answer_question': return { mood: 'celebrando', bubble: 'Respuesta guardada' };
+    case 'generate_dossier': return { mood: 'celebrando', bubble: 'Expediente listo' };
+    case 'get_tax_reserve': return { mood: null, bubble: `${eur(r.reserved_cents)} apartados` };
+    default: return null;
+  }
 }
 
 function ToolCall({ t }) {
@@ -83,8 +100,10 @@ export default function Advisor({ state, refresh, notify }) {
   const [input, setInput] = useState('');
   const [waiting, setWaiting] = useState(false); // user spoke/wrote, agent has not answered yet
   const [pendingTools, setPendingTools] = useState(0);
-  const [flash, setFlash] = useState(null); // short-lived mascot reaction (aviso / celebrando)
+  const [flash, setFlash] = useState(null); // short-lived mascot reaction: { mood, bubble }
+  const [caption, setCaption] = useState(null); // live subtitle: last thing said, { role, text }
   const flashTimer = useRef(null);
+  const stageRef = useRef(null);
   const conv = useRef(null);
   const queued = useRef(null);
   const chatRef = useRef(null);
@@ -94,10 +113,10 @@ export default function Advisor({ state, refresh, notify }) {
   // Hang up when leaving the screen.
   useEffect(() => () => { conv.current?.endSession(); conv.current = null; clearTimeout(flashTimer.current); }, []);
 
-  const react = (mood, ms = 4000) => {
-    if (!mood) return;
+  const react = (reaction, ms = 6000) => {
+    if (!reaction) return;
     clearTimeout(flashTimer.current);
-    setFlash(mood);
+    setFlash(reaction);
     flashTimer.current = setTimeout(() => setFlash(null), ms);
   };
 
@@ -107,7 +126,7 @@ export default function Advisor({ state, refresh, notify }) {
     let result;
     try { result = await runTool(name, params); } catch (e) { result = { error: e.message }; }
     setPendingTools((n) => Math.max(0, n - 1));
-    react(toolMood(name, result));
+    react(toolReaction(name, result));
     const ms = Math.round(performance.now() - t0);
     add({ role: 'tool', text: toolSummary(name, result), tool: { name, args: params, result, ms } });
     if (TOOLS[name].writes && !result.error) refresh();
@@ -133,15 +152,15 @@ export default function Advisor({ state, refresh, notify }) {
           const text = stripAudioTags(m.message || '');
           const isUser = (m.role || m.source) === 'user';
           setWaiting(isUser);
-          if (text) add({ role: isUser ? 'user' : 'ai', text });
+          if (text) { add({ role: isUser ? 'user' : 'ai', text }); setCaption({ role: isUser ? 'user' : 'ai', text }); }
         },
         onModeChange: ({ mode }) => { setSpeaking(mode === 'speaking'); if (mode === 'speaking') setWaiting(false); },
-        onError: (msg) => { setErr(String(msg)); react('aviso'); },
+        onError: (msg) => { setErr(String(msg)); react({ mood: 'aviso', bubble: 'Algo ha fallado' }); },
         onUnhandledClientToolCall: (c) => setErr(`El agente pidió una herramienta desconocida: ${c?.tool_name}`),
       });
     } catch (e) {
       setStatus('idle');
-      react('aviso', 6000);
+      react({ mood: 'aviso', bubble: e.status === 404 ? 'Falta configurar la voz' : 'No he podido conectar' }, 8000);
       setErr(e.status === 404
         ? 'El asesor por voz no está configurado: faltan ELEVENLABS_API_KEY y ELEVENLABS_AGENT_ID en backend/.env.'
         : e.name === 'NotAllowedError' ? 'Permiso de micrófono denegado. Actívalo en el navegador.' : e.message);
@@ -161,8 +180,25 @@ export default function Advisor({ state, refresh, notify }) {
   };
 
   const live = status === 'live';
+
+  // Rumbo moves with the agent's voice: output volume -> CSS variable (no React re-render per frame).
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!live || !el) return undefined;
+    let raf;
+    let level = 0;
+    const tick = () => {
+      const raw = conv.current?.getOutputVolume?.() ?? 0;
+      level = level * 0.6 + Math.min(1, raw * 2.5) * 0.4;
+      el.style.setProperty('--vol', level.toFixed(3));
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => { cancelAnimationFrame(raf); el.style.setProperty('--vol', '0'); };
+  }, [live]);
+
   // Mascot state follows the conversation: reaction > speaking > thinking > listening > greeting.
-  const mood = flash
+  const mood = flash?.mood
     || (status === 'connecting' ? 'pensando'
       : !live ? 'saludando'
         : speaking ? 'hablando'
@@ -171,7 +207,15 @@ export default function Advisor({ state, refresh, notify }) {
   return (
     <div className="stack">
       <section className="card voice-hero">
-        <Mascot state={mood} size={170} className="voice-mascot" />
+        <div className={`mascot-stage ${live ? 'live' : 'idle'}`} ref={stageRef}>
+          <Mascot state={mood} size={170} className="voice-mascot" />
+          {flash?.bubble && <div key={flash.bubble} className={`mascot-bubble ${flash.mood || ''}`} role="status">{flash.bubble}</div>}
+        </div>
+        {live && caption && (
+          <p key={caption.text} className={`voice-caption ${caption.role}`} aria-live="polite">
+            {caption.role === 'user' && <span className="small muted">Tú: </span>}{caption.text}
+          </p>
+        )}
         <button className={`mic-xl ${live ? (speaking ? 'speaking' : 'live') : ''}`} onClick={toggle} disabled={status === 'connecting'} aria-label={live ? 'Colgar' : 'Hablar con el asesor'}>
           {status === 'connecting' ? <span className="spinner" style={{ width: 28, height: 28 }} /> : <Icon name={live ? 'phoneOff' : 'mic'} size={40} />}
         </button>

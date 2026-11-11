@@ -3,6 +3,7 @@ import { api } from '../lib/api.js';
 import { COUNTRY_COLORS, eur, date, countryName, currentTrip, residentClaims } from '../lib/format.js';
 import Icon from './Icon.jsx';
 import { Button, Country, SourceLink } from './ui.jsx';
+import Mascot from './Mascot.jsx';
 
 const CONF = { alta: 'ok', media: 'warning', baja: 'danger' };
 const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -239,6 +240,15 @@ export default function Dashboard({ state, go, refresh, notify }) {
           </div>
         )}
         <ResidencyCard residency={residency} go={go} refresh={refresh} notify={notify} />
+      </section>
+
+      <section className="card mascot-banner talk-banner">
+        <Mascot state="saludando" size={92} />
+        <div className="grow">
+          <h2>{here ? `¿Te han ofrecido quedarte más en ${trip.city || here.country_name_es}?` : '¿Tienes un viaje en mente?'}</h2>
+          <p className="small muted">Pregúntame antes de decidir. Consulto tus días y las reglas de cada país, y te lo explico en voz alta.</p>
+        </div>
+        <button className="btn primary" onClick={() => go('asesor')}><Icon name="mic" size={16} /> Habla con Rumbo</button>
       </section>
 
       <section className="grid-2">
