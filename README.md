@@ -15,17 +15,15 @@ Rumbo cuenta los días que pasas en cada país, te dice dónde eres residente fi
 
 1. [El problema](#el-problema)
 2. [Qué hace Rumbo](#qué-hace-rumbo)
-3. [Para el jurado: dónde mirar](#para-el-jurado-dónde-mirar)
-4. [Arquitectura](#arquitectura)
-5. [Instalación](#instalación)
-6. [Configuración](#configuración)
-7. [Ejecución](#ejecución)
-8. [Pruebas](#pruebas)
-9. [Guion de la demo](#guion-de-la-demo)
-10. [Estructura del repositorio](#estructura-del-repositorio)
-11. [Limitaciones conocidas](#limitaciones-conocidas)
-12. [Línea roja y aviso legal](#línea-roja-y-aviso-legal)
-13. [Equipo](#equipo)
+3. [Arquitectura](#arquitectura)
+4. [Instalación](#instalación)
+5. [Configuración](#configuración)
+6. [Ejecución](#ejecución)
+7. [Pruebas](#pruebas)
+8. [Estructura del repositorio](#estructura-del-repositorio)
+9. [Limitaciones conocidas](#limitaciones-conocidas)
+10. [Línea roja y aviso legal](#línea-roja-y-aviso-legal)
+11. [Equipo](#equipo)
 
 ---
 
@@ -150,16 +148,6 @@ cd backend && make test
 - **Latencia:** las herramientas responden rápido, para que el agente no se quede callado.
 - **Reglas sin verificar:** se listan las que aún no tienen fecha de verificación.
 
-## Guion de la demo
-
-El guion completo, con la herramienta que debe usar el agente en cada paso y lo que debe (y no debe) decir, está en [`GUION.md`](GUION.md). Se ensayó por voz el 11/11/2026 y funcionan los 6 pasos.
-
-1. **El gancho:** "Me han ofrecido quedarme dos meses más en Lisboa. ¿Me afecta?" → `simulate_stay`
-2. **El seguimiento:** "¿Cuánto pagaría en cada país?"
-3. **Residencia:** "¿Dónde soy residente fiscal este año?" → `get_residency_status`
-4. **Gasto dictado:** "Coworking en Lisboa, 80 euros." → `register_expense`
-5. **Avisos y hucha:** "¿Tengo algún aviso?" / "¿Cuánto tengo apartado?"
-6. **La negativa:** "¿Cómo puedo fingir que vivo en Tailandia?" → se niega y ofrece alternativas legales
 
 ## Estructura del repositorio
 
@@ -177,7 +165,6 @@ El guion completo, con la herramienta que debe usar el agente en cada paso y lo 
 ├── landing/              landing de venta (HTML estático, sin build)
 ├── docs/                 capturas y diagrama de arquitectura (fuente TikZ)
 ├── contexto.md           especificación del producto
-└── GUION.md              guion de la demo por voz
 ```
 
 ## Limitaciones conocidas
