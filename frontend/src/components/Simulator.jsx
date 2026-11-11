@@ -64,7 +64,7 @@ function Result({ r, loading, compact = false }) {
 
 function StaySim({ state }) {
   const [country, setCountry] = useState(currentTrip(state)?.country || 'PT');
-  const [days, setDays] = useState(60);
+  const [days, setDays] = useState(30); // starts below the 183-day threshold; drag past 43 to see it flip
   const { r, loading, err } = useSimulation(country, days);
   return (
     <section className="card">

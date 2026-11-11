@@ -5,8 +5,8 @@ import { Button } from './ui.jsx';
 
 const PLANS = [
   { id: 'free', name: 'Gratis', price: '0 €', features: ['Contador de días por país', 'Alertas de umbral de días', 'Reserva de impuestos por factura'] },
-  { id: 'pro', name: 'Pro', price: '[€__] / mes', highlight: true, features: ['Todo lo de Gratis', 'Asesor por voz', 'Simulador de escenarios', 'Expediente de residencia en PDF', 'Gastos dictados'] },
-  { id: 'advisors', name: 'Asesores', price: '[__] % de comisión', features: ['Derivación de casos complejos', 'Asesores colaboradores verificados', 'Doble residencia, sociedades, impuesto de salida'] },
+  { id: 'pro', name: 'Pro', price: '9,90 € / mes', highlight: true, features: ['Todo lo de Gratis', 'Asesor por voz', 'Simulador de escenarios', 'Desempate de convenios', 'Expediente de residencia en PDF', 'Gastos dictados'] },
+  { id: 'advisors', name: 'Asesores', price: '15 % del primer año', features: ['Por cada cliente derivado', 'Casos complejos ya documentados', 'Doble residencia, sociedades, impuesto de salida'] },
 ];
 
 export default function Plans({ state, notify }) {
