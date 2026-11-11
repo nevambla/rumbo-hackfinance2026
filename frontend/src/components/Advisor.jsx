@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Conversation, stripAudioTags } from '@elevenlabs/client';
 import { api } from '../lib/api.js';
 import Icon from './Icon.jsx';
+import Mascot from './Mascot.jsx';
 import { Button } from './ui.jsx';
 
 const PROMPTS = [
@@ -52,6 +53,16 @@ function toolSummary(name, r) {
   }
 }
 
+/** Mascot reaction to a tool result: a warning when a threshold is crossed, a celebration when something is saved. */
+function toolMood(name, r) {
+  if (r?.error) return 'aviso';
+  if (name === 'simulate_stay' && (r.crosses_threshold || r.after?.dual_residency)) return 'aviso';
+  if (name === 'get_alerts' && r.alerts?.some((a) => a.level !== 'info')) return 'aviso';
+  if (name === 'get_residency_status' && r.dual_residency) return 'aviso';
+  if (['register_expense', 'answer_question', 'generate_dossier'].includes(name)) return 'celebrando';
+  return null;
+}
+
 function ToolCall({ t }) {
   return (
     <details className="tools">
@@ -70,6 +81,10 @@ export default function Advisor({ state, refresh, notify }) {
     { role: 'ai', text: `Hola, ${firstName}. Pulsa el micrófono y pregúntame si te afecta alargar una estancia, cuántos días llevas o dicta un gasto.` },
   ]);
   const [input, setInput] = useState('');
+  const [waiting, setWaiting] = useState(false); // user spoke/wrote, agent has not answered yet
+  const [pendingTools, setPendingTools] = useState(0);
+  const [flash, setFlash] = useState(null); // short-lived mascot reaction (aviso / celebrando)
+  const flashTimer = useRef(null);
   const conv = useRef(null);
   const queued = useRef(null);
   const chatRef = useRef(null);
@@ -77,12 +92,22 @@ export default function Advisor({ state, refresh, notify }) {
   const add = (m) => setMessages((xs) => [...xs, m]);
   useEffect(() => { chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: 'smooth' }); }, [messages]);
   // Hang up when leaving the screen.
-  useEffect(() => () => { conv.current?.endSession(); conv.current = null; }, []);
+  useEffect(() => () => { conv.current?.endSession(); conv.current = null; clearTimeout(flashTimer.current); }, []);
+
+  const react = (mood, ms = 4000) => {
+    if (!mood) return;
+    clearTimeout(flashTimer.current);
+    setFlash(mood);
+    flashTimer.current = setTimeout(() => setFlash(null), ms);
+  };
 
   const clientTools = Object.fromEntries(Object.keys(TOOLS).map((name) => [name, async (params) => {
     const t0 = performance.now();
+    setPendingTools((n) => n + 1);
     let result;
     try { result = await runTool(name, params); } catch (e) { result = { error: e.message }; }
+    setPendingTools((n) => Math.max(0, n - 1));
+    react(toolMood(name, result));
     const ms = Math.round(performance.now() - t0);
     add({ role: 'tool', text: toolSummary(name, result), tool: { name, args: params, result, ms } });
     if (TOOLS[name].writes && !result.error) refresh();
@@ -103,17 +128,20 @@ export default function Advisor({ state, refresh, notify }) {
           setStatus('live');
           if (queued.current) { conv.current?.sendUserMessage(queued.current); queued.current = null; }
         },
-        onDisconnect: () => { conv.current = null; setStatus('idle'); setSpeaking(false); },
+        onDisconnect: () => { conv.current = null; setStatus('idle'); setSpeaking(false); setWaiting(false); setPendingTools(0); },
         onMessage: (m) => {
           const text = stripAudioTags(m.message || '');
-          if (text) add({ role: (m.role || m.source) === 'user' ? 'user' : 'ai', text });
+          const isUser = (m.role || m.source) === 'user';
+          setWaiting(isUser);
+          if (text) add({ role: isUser ? 'user' : 'ai', text });
         },
-        onModeChange: ({ mode }) => setSpeaking(mode === 'speaking'),
-        onError: (msg) => setErr(String(msg)),
+        onModeChange: ({ mode }) => { setSpeaking(mode === 'speaking'); if (mode === 'speaking') setWaiting(false); },
+        onError: (msg) => { setErr(String(msg)); react('aviso'); },
         onUnhandledClientToolCall: (c) => setErr(`El agente pidió una herramienta desconocida: ${c?.tool_name}`),
       });
     } catch (e) {
       setStatus('idle');
+      react('aviso', 6000);
       setErr(e.status === 404
         ? 'El asesor por voz no está configurado: faltan ELEVENLABS_API_KEY y ELEVENLABS_AGENT_ID en backend/.env.'
         : e.name === 'NotAllowedError' ? 'Permiso de micrófono denegado. Actívalo en el navegador.' : e.message);
@@ -127,20 +155,29 @@ export default function Advisor({ state, refresh, notify }) {
     if (!q) return;
     setInput('');
     add({ role: 'user', text: q });
+    setWaiting(true);
     if (conv.current && status === 'live') conv.current.sendUserMessage(q);
     else { queued.current = q; if (status === 'idle') start(); }
   };
 
   const live = status === 'live';
+  // Mascot state follows the conversation: reaction > speaking > thinking > listening > greeting.
+  const mood = flash
+    || (status === 'connecting' ? 'pensando'
+      : !live ? 'saludando'
+        : speaking ? 'hablando'
+          : pendingTools > 0 || waiting ? 'pensando'
+            : 'escuchando');
   return (
     <div className="stack">
       <section className="card voice-hero">
+        <Mascot state={mood} size={170} className="voice-mascot" />
         <button className={`mic-xl ${live ? (speaking ? 'speaking' : 'live') : ''}`} onClick={toggle} disabled={status === 'connecting'} aria-label={live ? 'Colgar' : 'Hablar con el asesor'}>
           {status === 'connecting' ? <span className="spinner" style={{ width: 28, height: 28 }} /> : <Icon name={live ? 'phoneOff' : 'mic'} size={40} />}
         </button>
         <p className="voice-status" aria-live="polite">
           {err ? <span className="danger-text">{err}</span>
-            : live ? (speaking ? 'Rumbo está hablando' : 'Te escucho. Pulsa para colgar.')
+            : live ? (speaking ? 'Rumbo está hablando' : pendingTools > 0 ? 'Rumbo está consultando tus datos…' : 'Te escucho. Pulsa para colgar.')
               : status === 'connecting' ? 'Conectando…' : 'Pulsa y pregunta en voz alta'}
         </p>
         <p className="small">Las cifras salen siempre de las reglas de Rumbo; el asistente solo las explica.</p>

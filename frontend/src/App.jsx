@@ -11,6 +11,7 @@ import Expenses from './components/Expenses.jsx';
 import Simulator from './components/Simulator.jsx';
 import Rules from './components/Rules.jsx';
 import Plans from './components/Plans.jsx';
+import Mascot from './components/Mascot.jsx';
 
 const SECTIONS = [
   { id: 'rastrea', label: 'Días y residencia', icon: 'pin' },
@@ -113,6 +114,7 @@ export default function App() {
   if (error && !data) {
     return (
       <div className="boot">
+        <Mascot state="aviso" size={120} />
         <h1>No puedo conectar con la API</h1>
         <p className="muted">{error}. Arranca el backend: cd backend && make dev (puerto 8000).</p>
         <div><Button onClick={refresh} icon="refresh">Reintentar</Button></div>
@@ -122,6 +124,7 @@ export default function App() {
   if (!data) {
     return (
       <div className="boot">
+        <Mascot state="pensando" size={110} />
         <Skeleton lines={1} height={28} />
         <div className="hero"><div className="card"><Skeleton lines={5} /></div><div className="card"><Skeleton lines={4} /></div></div>
         <div className="card"><Skeleton lines={6} /></div>

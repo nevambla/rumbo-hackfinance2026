@@ -3,6 +3,7 @@ import { api } from '../lib/api.js';
 import { speak, stopSpeaking } from '../lib/speech.js';
 import Icon from './Icon.jsx';
 import { Button, Country, SourceLink } from './ui.jsx';
+import Mascot from './Mascot.jsx';
 
 export default function Alerts({ state, notify }) {
   const { alerts } = state.alerts;
@@ -28,8 +29,16 @@ export default function Alerts({ state, notify }) {
     setGenerating(false);
   };
 
+  const urgent = alerts.filter((a) => a.level !== 'info');
   return (
     <div className="stack">
+      <section className="card mascot-banner">
+        <Mascot state={urgent.length ? 'aviso' : 'celebrando'} size={96} />
+        <div>
+          <h2>{urgent.length ? `Ojo, ${state.user.name.split(' ')[0]}: ${urgent.length === 1 ? 'hay algo' : 'hay cosas'} que revisar` : 'Todo en orden'}</h2>
+          <p className="small muted">{urgent.length ? urgent.map((a) => a.title_es).join(' · ') : 'No tienes avisos urgentes. Te avisaré antes de que cruces un umbral.'}</p>
+        </div>
+      </section>
       <section className="alerts">
         {alerts.length === 0 && <p className="muted">Sin avisos.</p>}
         {alerts.map((a, i) => (
